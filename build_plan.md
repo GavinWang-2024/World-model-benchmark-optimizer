@@ -25,11 +25,14 @@
 
 **Goal:** your own abstraction exists and one real model implements it.
 
-- [ ] `worldoptbench/models/base.py` — the `WorldModelInterface` abstract class (`generate()`, `get_info()`)
-- [ ] `worldoptbench/models/cosmos_predict.py` — `CosmosPredict2B` and `CosmosPredict7B`, wrapping HF Diffusers, implementing the interface
-- [ ] Sanity check: call `.generate()` through *your* interface (not their example script) and get frames out
+- [x] `worldoptbench/models/base.py` — the `WorldModelInterface` abstract class (`generate()`, `get_info()`), with `prompt`/`init_frame`/`init_video`/`actions` conditioning (item G resolved: built in from the start)
+- [x] `worldoptbench/models/cosmos_predict.py` — `CosmosPredict2B`/`CosmosPredict7B` wrapping the native `cosmos_predict2` package's `Text2World`/`Video2World` pipelines — **written against NVIDIA's documented API but UNTESTED** (no GPU/package access yet); the `Text2WorldPipeline` class name specifically is inferred by analogy to the confirmed `Video2WorldPipeline` pattern, not confirmed directly — see module docstring
+- [x] Contract tests (`tests/test_base.py`) — exercise the interface with a fake implementation, no torch/GPU needed, run in CI now
+- [ ] Sanity check: call `.generate()` through *your* interface (not their example script) and get frames out — **blocked on Phase 0** (HF token + compute + confirming the real `cosmos_predict2` package layout)
 
-**Done when:** `CosmosPredict7B().generate(prompt, actions, horizon)` returns frames, called generically through the interface.
+**⚠️ Also found while writing this:** NVIDIA's own docs show Cosmos-Predict2 model sizes as **2B and 14B**, not 7B — the outline's "Cosmos-Predict 7B" (§3.1) may be the wrong size name. Confirm the actual available checkpoint during Phase 0 and fix `CosmosPredict7B`'s `_SIZE`/class name (and the outline's model table) accordingly.
+
+**Done when:** `CosmosPredict2B().generate(prompt=..., horizon=...)` returns real frames, called generically through the interface, on actual hardware.
 
 **Skip for now:** Open-Sora, Genie 3, V-JEPA 2 — one model is enough to build everything else against. Add the second model only once the benchmark runner (Phase 2) exists, as a test that your abstraction is actually architecture-agnostic and not secretly Cosmos-shaped.
 

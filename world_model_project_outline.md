@@ -77,8 +77,10 @@ class WorldModelInterface:
 **v1 implementations:**
 | Model | Architecture | Interface Implemented |
 |-------|-------------|----------------------|
-| Cosmos-Predict 7B | Diffusion (DiT) | ✅ Primary target |
+| Cosmos-Predict 7B ⚠️ | Diffusion (DiT) | ✅ Primary target |
 | Cosmos-Predict 2.5-2B | Diffusion (DiT) | ✅ Lightweight experiments |
+
+> ⚠️ **Unconfirmed (2026-09-12):** NVIDIA's own docs list Cosmos-Predict2 checkpoint sizes as **2B and 14B**, not 7B. Confirm the real available size during `build_plan.md` Phase 0 and fix this table + `CosmosPredict7B`'s class name/`_SIZE` in `worldoptbench/models/cosmos_predict.py` accordingly if it's actually 14B.
 | Open-Sora | Diffusion (DiT) | ✅ Secondary target |
 | Genie 3 | Autoregressive | ⏳ Future (API closed) |
 | V-JEPA 2 | JEPA latent | ⏳ Future work |
