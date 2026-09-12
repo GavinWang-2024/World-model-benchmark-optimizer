@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Env / secrets (HF tokens etc.)
+.env
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ML artifacts — weights and results are big and shouldn't hit git
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+checkpoints/
+weights/
+results/*.json
+wandb/
+.cache/
+
+# OS
+.DS_Store

@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "worldoptbench"
+version = "0.0.1"
+description = "Architecture-agnostic benchmarking and optimization framework for world model inference"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Gavin" }]
+
+# Kept deliberately light. Torch/CUDA builds are hardware-specific (H100 vs
+# 4090 vs Apple silicon) so install that yourself per your rented/HPC box's
+# CUDA version rather than relying on this default. See build_plan.md Phase 0.
+dependencies = [
+    "numpy",
+    "pandas",
+    "pydantic",
+    "huggingface_hub",
+]
+
+[project.optional-dependencies]
+# Phase 1+: model loading and inference
+ml = [
+    "torch",
+    "diffusers",
+    "transformers",
+    "accelerate",
+    "torchmetrics",
+    "torchao",
+]
+# Phase 8: worldserve
+serve = [
+    "fastapi",
+    "uvicorn[standard]",
+]
+# Phase 2/7: Pareto plots, drift curves
+plot = [
+    "matplotlib",
+    "seaborn",
+]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["worldoptbench"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

@@ -183,6 +183,12 @@ Runs on top of WorldCache as a composable module. No retraining. No new weights.
 
 **Fallback:** If this doesn't pan out, the benchmark + PAES metric + architecture-agnostic framework is already a publishable contribution on its own.
 
+> **⚠️ Needs re-scoping (found 2026-09-12):** WorldCache's own mechanism already does curvature-guided drift detection + selective recompute of "bottleneck tokens" — the core loop described above. WorldForge (optical-flow trajectory drift correction) and Polestar (drift-aware cache calibration) cover overlapping ground too. Building this exactly as written risks re-deriving an existing technique. See §5 for the three overlapping papers. Candidate pivots, not yet decided:
+> 1. **Make it composable across optimization backends** — a drift-correction layer that plugs onto *any* caching method (WorldCache, AdaCache, or future ones) rather than one paper's fixed technique baked in. The novelty shifts from "a drift correction algorithm" to "drift correction as a portable safety net any optimization module can sit under" — genuinely framework-level, not a single fixed method.
+> 2. **Target quantization-induced drift, not caching-induced drift** — the quantization empirical study (`2602.02110`, §5) shows quantization degrades temporal/physics metrics first, but only measures it, doesn't correct it. Nobody's built an active correction mechanism for *quantization*-caused physics drift specifically (as opposed to caching-caused drift, which is now crowded).
+> 3. **Extend drift correction to autoregressive models** — every existing drift-correction paper found is diffusion-specific. An AR-model equivalent (correcting drift introduced by KV-cache-based skipping) is still open.
+> Recommend deciding this before Phase 7 (build_plan.md) — doesn't block Phases 0-6.
+
 ---
 
 ### 3.6 `worldserve` Serving Layer
@@ -237,14 +243,25 @@ Things explicitly out of scope for v1 but natural extensions:
 
 ## 5. Related Work & How We Differ
 
+*(Verified against current literature 2026-09-12 — see note below the table.)*
+
 | Project | What It Does | Gap |
 |---------|-------------|-----|
-| WorldCache | Diffusion caching, 2.3x speedup | Diffusion only, no physics eval |
+| WorldCache (`2603.06331`, `2603.22286`) | Diffusion caching via curvature-guided token prediction; **built-in drift detection + selective recompute of "bottleneck tokens"** — 2.3–3.7x speedup | Diffusion only, no physics eval. ⚠️ Its own drift-detection mechanism overlaps with our planned §3.5 — see caveat below |
 | AdaCache | Step-skipping, 4.7x speedup | Diffusion only, no physics eval |
-| OpenWorldLib | Unified inference codebase | No optimization, no physics eval, not arch-agnostic |
-| WorldRoamBench | Long-horizon benchmark | Benchmark only, no optimization |
-| PAI-Bench | Physics plausibility eval | No speed component, no arch comparison |
-| **WorldOptBench (ours)** | **Architecture-agnostic framework: joint optimization + benchmarking across all three axes** | — |
+| WorldForge | Optical-flow-based motion/appearance decoupling + "Dual-Path Self-Corrective Guidance" to correct trajectory drift | Diffusion only, single fixed technique, no benchmark suite, no physics score, not composable with other optimizations |
+| Polestar | Drift-aware cache calibration + token commitment (diffusion **LLMs**, not video) | Different modality; same core idea (drift-aware caching) already applied elsewhere |
+| OpenWorldLib (`2604.04707`) | Unified inference codebase across video gen / 3D gen / VLA tasks; **does have a real benchmark pipeline** (FVD/FID/SSIM/LPIPS) | Visual-quality metrics only — no physics axis, no speed axis reported, no optimization modules |
+| WorldLens (`2512.10958`) | Driving-domain benchmark across 5 dims incl. physics + geometry + control, human-annotated (WorldLens-26K) | Evaluation-only, driving-specific, **no speed/inference-cost axis at all** |
+| WorldBench | Isolates physics concepts for diagnostic eval | Evaluation-only, no speed, no optimization |
+| DISK | Dynamic inference skipping preserving physics/stability, for AV world models | Single technique, domain-specific (driving), not a general framework |
+| Inferix | Inference engine spanning AR + diffusion via semi-autoregressive decoding | Serving/decoding engine, not a benchmark; no physics axis |
+| WorldRoamBench | Long-horizon stability benchmark | Benchmark only, no optimization |
+| PAI-Bench (`2512.01989`) | Physics plausibility eval, 2,808 real-world cases across AV/robotics/industry/ego-centric | No speed component, no cross-architecture comparison |
+| An Empirical Study of World Model Quantization (`2602.02110`) | Shows quantization error propagates differently depending on where it's introduced (representation vs. predictor), and shows up first in temporal/motion metrics before visual ones | Empirical study only — measures the problem, doesn't correct for it, no unified framework |
+| **WorldOptBench (ours)** | **Architecture-agnostic framework: joint optimization + benchmarking across all three axes, single PAES metric** | — |
+
+**Caveat (2026-09-12):** No single existing project combines all three — architecture-agnostic + joint speed/visual/physics scoring + a pluggable optimization stack — so the framework-level thesis still holds. But this space is moving fast, and OpenWorldLib (missing physics) and WorldLens (missing speed) are each one axis away from closing part of the gap. The originally-planned drift-correction module (§3.5) needs re-scoping — see the note there.
 
 ---
 
@@ -585,9 +602,41 @@ Month 5 — Ship
 - Fei-Fei Li taxonomy paper (Jun 3 2026)
 - V-JEPA 2 technical report (Meta, 2025)
 
+**Added 2026-09-12 (from competitive-landscape check — see §5 and §12):**
+- WorldForge — optical-flow trajectory drift correction, `arxiv:2509.15130`
+- Polestar — drift-aware cache calibration for diffusion LLMs, `arxiv:2607.14107`
+- WorldLens — driving-domain 5-axis benchmark incl. physics, `arxiv:2512.10958`
+- PAI-Bench full paper — `arxiv:2512.01989`
+- An Empirical Study of World Model Quantization — `arxiv:2602.02110` (relevant to Phase 6 quantization module and the §3.5 pivot options)
+- DISK (Dynamic Inference SKipping, AV world models)
+- Inferix — semi-autoregressive inference engine spanning AR + diffusion
+
 **Videos:**
 - Inference: https://www.youtube.com/watch?v=B18zBnjZKmc
 - Optimizing inference: https://www.youtube.com/watch?v=hMs8VNRy5Ys
 - Quantization: https://www.youtube.com/watch?v=qoQJq5UwV1c
 - Inference engines: https://www.youtube.com/watch?v=uqUZ_H_m2Yg
 - World models: https://www.youtube.com/watch?v=MqjvfJTCuqw
+
+---
+
+## 12. Open Research Directions (Not Yet Decided)
+
+Everything here is a live option, not a commitment — captured so nothing from the 2026-09-12 competitive-landscape review gets lost before we're actually at the decision point (Phase 7 in `build_plan.md`, after Phases 0-6 are stable). Revisit this section then, pick one, and prune the rest.
+
+**A. Drift correction pivot (see full caveat in §3.5).** Original plan overlaps with WorldCache/WorldForge/Polestar. Three candidate replacements, not mutually exclusive to consider together:
+  1. Portable drift correction — a correction layer that sits on top of *any* caching backend (WorldCache, AdaCache, future ones), not one fixed algorithm. Framework-level novelty; harder to execute convincingly in the time available.
+  2. Quantization-induced drift correction — actively correct the temporal/physics degradation that `2602.02110` shows quantization causes, rather than just measuring it (which is all that paper does). Reuses the Phase 6 quantization module directly. Currently the front-runner — cleanest gap, least crowded.
+  3. Autoregressive-model drift correction — every existing drift-correction paper found is diffusion-only. Blocked until an AR world model is actually in v1 (Genie's API is closed; would need a different AR model or to wait).
+
+**B. Cross-architecture "first" claim.** JEPA is being benchmarked against other approaches, but only in embodied/RL-probing setups (CALVIN, MetaWorld) — not as a generative world model scored on the same speed/visual/physics harness as diffusion and AR models. Getting even a rough V-JEPA 2 wrapper (already listed as future work in §4) onto the WorldOptBench benchmark would let us claim to be first to put diffusion, AR, and JEPA on one joint scale for generation. Worth flagging explicitly as a paper-strength goal, not just a "future model implementation" checkbox — the value is in the comparison being apples-to-apples, not just in supporting a third architecture.
+
+**C. The framework claim itself remains the primary defensible position** (per §5 caveat) regardless of what happens with A and B — no existing project combines architecture-agnostic + joint 3-axis scoring + pluggable optimization. Keep this as the fallback thesis if A and B both stall.
+
+**D. Functional-utility preservation — a possible 4th axis (found 2026-09-12, strongest new candidate).** A separate research line (WorldArena `2602.08971`, WorldEval, dWorldEval, WMBench) already checks whether a world model is useful as a policy evaluator / synthetic-data engine — i.e. whether its scores correlate with real downstream robot task success. Nobody checks whether *optimizing* a world model (caching, quantization) preserves that usefulness, as opposed to just preserving FVD/PSNR/physics scores while silently breaking what a robotics customer actually cares about. Concretely: take a lightweight policy-ranking task (borrow WorldEval/dWorldEval's or RoboTwin's setup) and check whether optimized-vs-baseline world models still rank policies the same way. This doesn't compete with WorldCache/WorldForge/Polestar's territory the way drift correction does — it's a genuinely open intersection. Candidate 4th axis alongside speed/visual/physics, or a standalone add-on metric.
+
+**E. Cost-aware Pareto + hardware recommender (found 2026-09-12).** LLM inference has mature $/token Pareto frontiers (OpenRouter etc.); nothing equivalent exists for world models. Cheap to build on top of what Phase 2 already produces — wrap benchmark throughput numbers with known RunPod/Lambda $/hr rates to answer "given my physics/speed budget, which model+optimization+hardware combo is cheapest." Directly matches how the target customers (§10: robotics/AV/game studios) actually think — in dollars, not relative speedup.
+
+**F. Public leaderboard (found 2026-09-12).** No public world-model-optimization leaderboard exists (InferenceBench is LLM-serving-specific, not world models). A living WorldOptBench leaderboard would be a first, and it's the literal mechanism §10's startup path already assumes ("open-source → GitHub stars → community credibility") but doesn't yet name as a concrete deliverable.
+
+**G. Interface completeness gap (not a new idea, a real hole):** `WorldModelInterface.generate()` (§3.1) only accepts `prompt` + `actions`. Cosmos and most WFMs also support Image2World/Video2World conditioning — starting from a real camera frame, which is how most actual robotics/AV use cases work, not from a pure text description. This should probably be fixed at the interface-definition stage (Phase 1) rather than deferred, since every downstream model wrapper and the benchmark runner build on top of this signature.
