@@ -42,13 +42,16 @@
 
 **Goal:** a script that takes any `WorldModelInterface` and produces a results JSON. No physics yet — that's Phase 3.
 
-- [ ] `prompts/standard_set.json` — fixed prompts + action sequences at 4s/16s/60s/120s horizons
-- [ ] `runner.py` — calls `.generate()`, wraps with PyTorch profiler for wall-clock + VRAM
-- [ ] `metrics/speed.py` — latency, throughput, VRAM peak
-- [ ] `metrics/visual.py` — FVD, PSNR, SSIM via `torchmetrics`
-- [ ] Results → JSON; a basic comparison/plotting script for multiple JSONs
+- [x] `prompts/standard_set.json` — 6 prompts (robotics/AV/indoor + 3 physics-stress prompts: fluid, rigid collision, wind) at 4s/16s/60s/120s horizons
+- [x] `runner.py` — calls `.generate()`, times it + tracks VRAM via `metrics/speed.py`, computes visual metrics, writes JSON. Also opportunistically calls Phase 3/4 metrics if they're wired up, degrading gracefully (`NotImplementedError` caught) if not — so this same runner keeps working as later phases land
+- [x] `metrics/speed.py` — latency, throughput, VRAM peak (VRAM degrades to `None` without CUDA, e.g. this dev laptop)
+- [x] `metrics/visual.py` — temporal consistency (no reference needed, always computed); PSNR/SSIM via `torchmetrics` **only if `reference_frames` is supplied** — pure Text2World prompts have no ground truth to compare against, so these are `None` by default (see caveat added to outline §3.2)
+- [x] `reporting.py` — `load_results`/`compare`/`summarize` (no extra deps) + `plot_pareto` (needs the `plot` extra)
+- [x] Tests: `test_speed.py`, `test_visual.py`, `test_runner.py`, `test_reporting.py` — all pass without GPU/torch (33 passed, 1 skipped for the torchmetrics-only test)
 
-**Done when:** you have a real baseline number for Cosmos-Predict 7B on your hardware across all four horizons, in a JSON you can diff later.
+**Not done — real number still pending Phase 0:** everything above is boilerplate verified against a `FakeWorldModel`, not against Cosmos-Predict on real hardware. That's still the actual "done" condition.
+
+**Done when:** you have a real baseline number for Cosmos-Predict on your hardware across all four horizons, in a JSON you can diff later.
 
 ---
 
@@ -56,9 +59,10 @@
 
 **Goal:** the axis that makes this project different from every other benchmark gets wired in.
 
+- [x] `metrics/physics.py` scaffolded: `PhysicsScore`/`DriftCurve` dataclasses, and `compute_drift_curve` — real, tested, pure-numpy curve fitting over scores-by-horizon (doesn't depend on either external repo)
+- [ ] `compute_pai_bench_score` / `compute_worldroambench_score` — left as explicit `NotImplementedError` stubs. Checked: **neither PAI-Bench (`SHI-Labs/physical-ai-bench`) nor WorldRoamBench has a documented standalone Python API** as of 2026-09-12 — no point guessing function names that'd silently do the wrong thing. Clone both, find their real entrypoints, fill these in for real
+- [x] Runner already wired to call these opportunistically (Phase 2) — filling in the two stubs above is the only thing needed to make full profiles start flowing, no runner changes required
 - [ ] Clone PAI-Bench and WorldRoamBench, get each running standalone first (expect rough research-code edges — don't debug your integration and their bugs at the same time)
-- [ ] `metrics/physics.py` — clean wrapper, frames → score dict
-- [ ] Plug into the Phase 2 runner so every run outputs speed + visual + physics together
 
 **Done when:** a single runner invocation prints all three axes for one model/horizon.
 
@@ -70,8 +74,9 @@
 
 **Goal:** turn the three axes into one comparable number.
 
-- [ ] Implement `compute_paes(speedup, physics_score, drift_rate, horizon_t)` in `metrics/paes.py`
-- [ ] Run it on the real baseline numbers from Phase 2/3 — no optimization applied yet, so this is just wiring, not tuning
+- [x] `compute_paes(speedup, physics_score, drift_rate, horizon_t)` in `metrics/paes.py` — implemented, tested (4 tests: no-drift baseline, speedup increases score, drift penalizes score, sign of drift_rate doesn't matter)
+- [x] Runner already calls it automatically once `physics.pai_bench_score` is available (Phase 3) — nothing left to wire
+- [ ] Run it on the real baseline numbers from Phase 2/3 — no optimization applied yet, so this is just wiring, not tuning. **Blocked on Phase 0/3 real data**
 - [ ] Sanity-check the formula against intuition once you have a second data point (Phase 5)
 
 **Done when:** every benchmark run auto-reports a PAES score.

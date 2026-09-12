@@ -102,6 +102,8 @@ A single eval harness that runs any optimization technique against any world mod
 - PSNR / SSIM per frame
 - Temporal consistency (frame-to-frame delta)
 
+> **Implementation note (2026-09-12):** PSNR/SSIM need a ground-truth reference to compare against — natural for Video2World rollouts where you hold out the true continuation, but there's no reference for pure Text2World generation. In `metrics/visual.py`, temporal consistency is always computed; PSNR/SSIM/FVD are `None` unless a reference is supplied. FVD itself is normally a distributional comparison (many generated vs. many real videos via a feature extractor), not a single-pair number — treated as a TODO until Phase 2 has enough samples to do that properly.
+
 **Axis 3 — Physics Consistency** ← the new one
 - PAI-Bench score (physical plausibility + controllability)
 - WorldRoamBench physics subscore

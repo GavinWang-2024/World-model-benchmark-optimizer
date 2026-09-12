@@ -2,7 +2,7 @@
 
 from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface
 
-__all__ = ["WorldModelInterface", "ModelInfo", "Rollout"]
+__all__ = ["ModelInfo", "Rollout", "WorldModelInterface"]
 
 # CosmosPredict2B/7B are deliberately not re-exported here: importing them
 # eagerly would require torch/cosmos_predict2 installed just to import this

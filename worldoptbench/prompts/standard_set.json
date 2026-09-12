@@ -1,0 +1,36 @@
+{
+  "_comment": "v0 starter set (outline §3.2, build_plan.md Phase 2). Deliberately small and diverse across the target domains (§10: robotics, AV, indoor/embodied) plus two prompts chosen to stress specific physics phenomena (fluids, rigid contact) rather than just look visually plausible. Expand once real runs surface which prompts are actually informative.",
+  "horizons_seconds": [4, 16, 60, 120],
+  "prompts": [
+    {
+      "id": "robot_pick_place",
+      "domain": "robotics",
+      "prompt": "A robot arm picks up a red cube from a table and places it into a bin."
+    },
+    {
+      "id": "av_intersection",
+      "domain": "autonomous_driving",
+      "prompt": "A car approaches a busy four-way intersection with pedestrians crossing."
+    },
+    {
+      "id": "indoor_walk",
+      "domain": "embodied_indoor",
+      "prompt": "A first-person view walking through a cluttered living room, avoiding furniture."
+    },
+    {
+      "id": "fluid_pour",
+      "domain": "physics_stress",
+      "prompt": "Water is poured from a pitcher into a glass on a kitchen counter."
+    },
+    {
+      "id": "rigid_collision",
+      "domain": "physics_stress",
+      "prompt": "A bowling ball rolls down a lane and strikes a set of pins, scattering them."
+    },
+    {
+      "id": "outdoor_wind",
+      "domain": "physics_stress",
+      "prompt": "A flag and nearby trees sway in strong wind on a hilltop."
+    }
+  ]
+}

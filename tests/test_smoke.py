@@ -12,6 +12,6 @@ def test_version_is_set():
 
 
 def test_subpackages_importable():
-    import worldoptbench.metrics  # noqa: F401
-    import worldoptbench.models  # noqa: F401
+    import worldoptbench.metrics
+    import worldoptbench.models
     import worldoptbench.optimizations  # noqa: F401

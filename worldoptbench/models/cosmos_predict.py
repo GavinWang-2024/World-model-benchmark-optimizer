@@ -61,7 +61,6 @@ class CosmosPredict(WorldModelInterface):
             get_cosmos_predict2_text2world_pipeline,
         )
         from cosmos_predict2.pipelines.text2world import Text2WorldPipeline
-
         from imaginaire.constants import get_cosmos_predict2_text2world_checkpoint
 
         self._text2world_pipe = Text2WorldPipeline.from_config(
@@ -80,7 +79,6 @@ class CosmosPredict(WorldModelInterface):
             get_cosmos_predict2_video2world_pipeline,
         )
         from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
-
         from imaginaire.constants import get_cosmos_predict2_video2world_checkpoint
 
         self._video2world_pipe = Video2WorldPipeline.from_config(
