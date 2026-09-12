@@ -236,6 +236,7 @@ frames = server.generate(
 Things explicitly out of scope for v1 but natural extensions:
 
 - **More model implementations:** Genie 3 (API closed currently), V-JEPA 2, WAN2.1, custom fine-tunes
+- **Fine-tuning / SFT support:** Let users fine-tune a wrapped world model on their own domain-specific data (e.g. LoRA for lightweight on-device tuning, or distributed full fine-tuning across multiple GPUs via DeepSpeed/FSDP) rather than only benchmarking/optimizing a frozen checkpoint. Carried over from an earlier draft's "v2 product feature for robotics companies" note. **Scope caveat (2026-09-12):** this is a real category shift, not just another module — v1's whole positioning (see §5) is "training-free, no new weights," matching WorldCache/AdaCache/OpenWorldLib's niche. Adding fine-tuning moves part of the product toward the separate "World-Action Model" family (Cosmos+action-head fine-tuning, RL/distillation-based approaches) that §5's competitive check found is a *different* category of project from ours. Doable as a v2 addition, but shouldn't quietly blur into v1's training-free framing.
 - **AR-specific optimization modules:** KV caching for autoregressive world models, speculative decoding (SDVG)
 - **JEPA-specific modules:** Latent space optimization for JEPA-style architectures
 - **Autoscaling:** Multi-GPU scheduling, disaggregated prefill/decode
