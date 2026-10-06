@@ -1,0 +1,200 @@
+{
+  "_comment": "Wan2.1 statistical set: 16 prompts x 2 seeds = 32 clips at a 2 s horizon (33 frames, 192x320). The first 4 prompts are those of wan_set.json. Ids are unique per (prompt, seed) so the runner keys latencies correctly. The effective sample size is 32 clips (16 prompts); per-prompt effects dominate, so report mean +- sem across clips and compare configurations pairwise. Encode prompts first: python scripts/encode_prompts.py --from-set worldoptbench/prompts/wan_set_16.json",
+  "horizons_seconds": [
+    2
+  ],
+  "prompts": [
+    {
+      "id": "ball_ramp_s0",
+      "domain": "physics_stress",
+      "prompt": "A red ball rolls down a wooden ramp and bounces on the floor.",
+      "seed": 0
+    },
+    {
+      "id": "ball_ramp_s1",
+      "domain": "physics_stress",
+      "prompt": "A red ball rolls down a wooden ramp and bounces on the floor.",
+      "seed": 1
+    },
+    {
+      "id": "water_pour_s0",
+      "domain": "physics_stress",
+      "prompt": "Water is poured from a pitcher into a glass on a kitchen counter.",
+      "seed": 0
+    },
+    {
+      "id": "water_pour_s1",
+      "domain": "physics_stress",
+      "prompt": "Water is poured from a pitcher into a glass on a kitchen counter.",
+      "seed": 1
+    },
+    {
+      "id": "robot_arm_s0",
+      "domain": "robotics",
+      "prompt": "A robot arm picks up a red cube from a table and places it into a bin.",
+      "seed": 0
+    },
+    {
+      "id": "robot_arm_s1",
+      "domain": "robotics",
+      "prompt": "A robot arm picks up a red cube from a table and places it into a bin.",
+      "seed": 1
+    },
+    {
+      "id": "car_intersection_s0",
+      "domain": "autonomous_driving",
+      "prompt": "A car drives through a busy four-way intersection while pedestrians cross the street.",
+      "seed": 0
+    },
+    {
+      "id": "car_intersection_s1",
+      "domain": "autonomous_driving",
+      "prompt": "A car drives through a busy four-way intersection while pedestrians cross the street.",
+      "seed": 1
+    },
+    {
+      "id": "domino_chain_s0",
+      "domain": "physics_stress",
+      "prompt": "A long chain of dominoes topples one after another across a table.",
+      "seed": 0
+    },
+    {
+      "id": "domino_chain_s1",
+      "domain": "physics_stress",
+      "prompt": "A long chain of dominoes topples one after another across a table.",
+      "seed": 1
+    },
+    {
+      "id": "pendulum_s0",
+      "domain": "physics_stress",
+      "prompt": "A metal pendulum swings back and forth in front of a plain wall.",
+      "seed": 0
+    },
+    {
+      "id": "pendulum_s1",
+      "domain": "physics_stress",
+      "prompt": "A metal pendulum swings back and forth in front of a plain wall.",
+      "seed": 1
+    },
+    {
+      "id": "candle_flame_s0",
+      "domain": "static_scene",
+      "prompt": "A single candle burns on a dark table, its flame flickering gently.",
+      "seed": 0
+    },
+    {
+      "id": "candle_flame_s1",
+      "domain": "static_scene",
+      "prompt": "A single candle burns on a dark table, its flame flickering gently.",
+      "seed": 1
+    },
+    {
+      "id": "cat_sofa_s0",
+      "domain": "animals",
+      "prompt": "A gray cat jumps onto a sofa and curls up to sleep.",
+      "seed": 0
+    },
+    {
+      "id": "cat_sofa_s1",
+      "domain": "animals",
+      "prompt": "A gray cat jumps onto a sofa and curls up to sleep.",
+      "seed": 1
+    },
+    {
+      "id": "ocean_waves_s0",
+      "domain": "nature",
+      "prompt": "Ocean waves roll in and break on a sandy beach at sunset.",
+      "seed": 0
+    },
+    {
+      "id": "ocean_waves_s1",
+      "domain": "nature",
+      "prompt": "Ocean waves roll in and break on a sandy beach at sunset.",
+      "seed": 1
+    },
+    {
+      "id": "pan_forest_s0",
+      "domain": "camera_motion",
+      "prompt": "The camera slowly pans across a misty pine forest at dawn.",
+      "seed": 0
+    },
+    {
+      "id": "pan_forest_s1",
+      "domain": "camera_motion",
+      "prompt": "The camera slowly pans across a misty pine forest at dawn.",
+      "seed": 1
+    },
+    {
+      "id": "drone_city_s0",
+      "domain": "camera_motion",
+      "prompt": "A drone flies forward over a city street lined with tall buildings.",
+      "seed": 0
+    },
+    {
+      "id": "drone_city_s1",
+      "domain": "camera_motion",
+      "prompt": "A drone flies forward over a city street lined with tall buildings.",
+      "seed": 1
+    },
+    {
+      "id": "pottery_s0",
+      "domain": "fine_texture",
+      "prompt": "Hands shape wet clay on a spinning pottery wheel.",
+      "seed": 0
+    },
+    {
+      "id": "pottery_s1",
+      "domain": "fine_texture",
+      "prompt": "Hands shape wet clay on a spinning pottery wheel.",
+      "seed": 1
+    },
+    {
+      "id": "knife_tomato_s0",
+      "domain": "robotics",
+      "prompt": "A chef slices a ripe tomato on a wooden cutting board.",
+      "seed": 0
+    },
+    {
+      "id": "knife_tomato_s1",
+      "domain": "robotics",
+      "prompt": "A chef slices a ripe tomato on a wooden cutting board.",
+      "seed": 1
+    },
+    {
+      "id": "skateboard_s0",
+      "domain": "fast_motion",
+      "prompt": "A skateboarder rides down a ramp and does a jump in a skate park.",
+      "seed": 0
+    },
+    {
+      "id": "skateboard_s1",
+      "domain": "fast_motion",
+      "prompt": "A skateboarder rides down a ramp and does a jump in a skate park.",
+      "seed": 1
+    },
+    {
+      "id": "rain_window_s0",
+      "domain": "static_scene",
+      "prompt": "Raindrops run down a window with blurry city lights behind it.",
+      "seed": 0
+    },
+    {
+      "id": "rain_window_s1",
+      "domain": "static_scene",
+      "prompt": "Raindrops run down a window with blurry city lights behind it.",
+      "seed": 1
+    },
+    {
+      "id": "tennis_serve_s0",
+      "domain": "fast_motion",
+      "prompt": "A tennis player serves the ball on a bright outdoor court.",
+      "seed": 0
+    },
+    {
+      "id": "tennis_serve_s1",
+      "domain": "fast_motion",
+      "prompt": "A tennis player serves the ball on a bright outdoor court.",
+      "seed": 1
+    }
+  ]
+}

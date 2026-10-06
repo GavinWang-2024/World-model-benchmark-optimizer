@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Any, Literal, Protocol, runtime_checkable
 
 Architecture = Literal["diffusion", "autoregressive", "jepa"]
 
@@ -49,6 +49,75 @@ class Rollout:
     frames: list[Any]
     fps: float
     metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@runtime_checkable
+class TorchBacked(Protocol):
+    """Optional capability: the model wrapper can hand out the loaded
+    `torch.nn.Module` whose weights do the work, so architecture-agnostic
+    optimizations (quantization, torch.compile) can modify it in place.
+    Loading the weights if they aren't loaded yet is the wrapper's job.
+    """
+
+    def torch_module(self) -> Any: ...
+
+
+def eager_executor(fn: Any, *tensors: Any) -> Any:
+    """The default tensor executor: just call the function."""
+    return fn(*tensors)
+
+
+@runtime_checkable
+class HasTensorExecutor(Protocol):
+    """Optional capability: the model routes its hot, static-shape tensor
+    computation through `self.tensor_executor(fn, *tensors) -> tensor`, where
+    `fn` is a pure tensor function (same `fn` object on every call). The
+    default is `eager_executor`; an optimization such as CUDA graphs replaces
+    it to run `fn` differently without the model knowing how.
+
+    `fn` must be safe to capture: no host syncs (no `.item()`, no Python
+    branching on tensor values) and no allocation of new inputs. The model
+    keeps anything that isn't (e.g. data-dependent control flow) outside `fn`.
+    """
+
+    tensor_executor: Any
+
+
+@runtime_checkable
+class HasAutocast(Protocol):
+    """Optional capability: the model runs its forward under
+    `torch.autocast(dtype=self.autocast_dtype)` when that is not None. Lets a
+    precision optimization turn on mixed precision without knowing the
+    model's internals. Set it before the first `generate()` — a CUDA graph
+    captured earlier keeps whatever dtype was active at capture time.
+    """
+
+    autocast_dtype: Any
+
+
+@runtime_checkable
+class HasChunkedRollout(Protocol):
+    """Optional capability: the rollout can run as a sequence of fixed-size chunks (`chunk_steps` steps
+    each, or None for the single whole-rollout function). Each chunk is one small tensor function run
+    through `tensor_executor`, so a CUDA graph captured for the chunk is reused for any horizon and the
+    host regains control between chunks. Needs an imagine backend that takes pre-drawn noise
+    (`draw_noise`), so the random stream cannot depend on the chunk size."""
+
+    chunk_steps: int | None
+
+
+@runtime_checkable
+class HasImagineBackend(Protocol):
+    """Optional capability: the model's latent-imagination loop can be replaced
+    by `self.imagine_backend(wm, stoch, deter, future_actions) -> {"stoch":
+    (B, N, ...), "deter": (B, N, ...)}` when that is not None. Lets an
+    optimization swap in a different engine (e.g. TensorRT) for the loop
+    without the model knowing how it works. Like `tensor_executor`, it must be
+    set before the first `generate()`, since a captured CUDA graph bakes in
+    whichever backend was active.
+    """
+
+    imagine_backend: Any
 
 
 class WorldModelInterface(ABC):

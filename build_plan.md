@@ -6,6 +6,25 @@
 
 ---
 
+
+## Where we are (2026-10-03) — summary; phase detail below is the history
+
+| Phase | Reality |
+|---|---|
+| 0 Setup | Done for **Dreamer** (Python venv, CUDA 12.8 torch for the RTX 5070 Ti, TensorRT, a trained walker). Cosmos access is **not** done and is no longer on the critical path. |
+| 1 Interface + model | `WorldModelInterface` done; **Dreamer wrapper working** (`models/dreamer.py`). Cosmos wrapper exists but is untested. |
+| 2 Benchmark runner | Done and trustworthy after methodology fixes (scenarios built up front, per-horizon warm-up, timing separated from metrics, repeated runs with medians). |
+| 3 Physics | Simulator-fidelity skill score done; PAI-Bench / WorldRoamBench wrappers still stubs (only relevant to text-to-video models). |
+| 4 PAES | Done; drift penalty is now decay-only. Drift not yet measurable (needs a better-trained model and `prompts/dreamer_dmc_set_10seeds.json`). |
+| 5-6 Optimization stack | Stack + 11 built optimizations; CUDA graphs and TensorRT help, quantization/precision do not. WorldCache built and measured on Wan2.1-1.3B (see DESIGN_DIFFUSION.md; the paper's 2.3x-at-99.4% claim is **not** reproduced; its motion warping is implemented and measured as a no-op); AdaCache built and measured (dominated by WorldCache on this model; see DESIGN_DIFFUSION.md). Learned perceptual scores (DINOv2 + CLIP) added and used to rank the diffusion configurations (WorldCache clearly ahead at 1.65-2x). Chunked rollouts (`DESIGN_STEP_HOOK.md` step 1) built and measured: equivalent output, ~0.2 ms per chunk boundary, not a speedup. |
+| 7 Drift correction | Rescoped per outline §12-A1 and built as a portable guard for AdaCache (`guard=`): helps AdaCache at matched speed, does not beat WorldCache; token-level selective recompute and the physics-gap target not attempted (see DESIGN_DIFFUSION.md). |
+| 8 worldserve | Built (`worldoptbench/serve.py`, stdlib HTTP, queue + micro-batching + cache + `worldserve` CLI), unit-tested with fake models and run end to end against real Wan2.1 over HTTP (8.9 s per 2 s clip with the recommended stack, cache hit 0.02 s); Dockerfile written but **untested** (no container runtime here). |
+| Beyond the plan | Constraints (`constraints.py`), cost per generated second (`cost.py`), leaderboard (`LEADERBOARD.md`), DINO-space Frechet distance, long-horizon scaling on Dreamer, and the §12-D policy-ranking check (optimizations preserve policy ranking within noise). See `OUTLINE_STATUS.md` for what the outline asks for that was not built. |
+
+**Done since:** the long run finished (515k env steps, eval return ~790). On it: speed ranking reproduced; 21 optimizations measured (best: `cuda_graphs` + TensorRT fp16, ~3.5-9.9 ms vs ~210 ms eager); **drift measurable (-0.092 +- 0.009 skill/s) on held-out walking at short horizons** but not on random-action scenarios (those measure a falling walker, and long horizons are saturated: both models score ~0.02 skill at 5 s on competent walking); `autotune` run end to end and agreed with the sweeps. **Next:** per-step hook + chunked graphs (`DESIGN_STEP_HOOK.md`); `worldserve`; Cosmos access to unlock the 42 diffusion items. Candidate list: `OPTIMIZATION_CATALOG.md`.
+
+---
+
 ## Phase 0 — Setup (before writing any framework code)
 
 **Goal:** you can run *something* on a GPU and see output.
@@ -34,6 +53,28 @@
 
 **Done when:** `CosmosPredict2B().generate(prompt=..., horizon=...)` returns real frames, called generically through the interface, on actual hardware.
 
+**Dreamer as a no-Hugging-Face first model (added 2026-10-03):**
+
+- [x] `models/dreamer.py` — `DreamerWorldModel` (imagination rollout from context frames + actions), `DreamerRepo` (loads a clone of NM512/dreamerv3-torch: config, env, spaces), `DreamerSimScenarios` (steps the real simulator for context frames, actions, and **ground-truth** continuation). Written from the repo source, **not run** — see the module docstring's INFERRED list.
+- [x] `scenarios.py` + `run_benchmark(scenario_fn=...)` — lets a model take more than a prompt and supply ground truth, with scenario building kept outside the timed region
+- [x] `metrics/physics.compute_sim_fidelity` — physics score from simulator ground truth (1 − mean normalized pixel error + per-step error curve). Used instead of PAI-Bench when reference frames exist; PAES/drift pick it up automatically. Coarse (see its docstring) — revisit with real numbers
+- [x] `prompts/dreamer_dmc_set.json` — horizons 2/5/10/20 s, not 4/16/60/120: a DMC episode is ~25 s, so there's no ground truth beyond that
+- [x] Environment built (Python 3.11 venv, CUDA 12.8 torch for the 5070 Ti, dreamerv3-torch cloned + patched) — see `DREAMER_SETUP.md`. First real run of `DreamerWorldModel`/`DreamerSimScenarios` against a 5k-step smoke checkpoint worked with **no code fixes needed**: env wrapper attribute forwarding, `env.step` shape, and the 20 steps/s assumption all held
+- [x] `compute_sim_fidelity` upgraded to a skill score vs a "nothing moves" baseline after the real run showed the raw pixel score couldn't separate an undertrained model (0.93) from freezing the last frame (0.92). Skill: model ~0.2-0.3, freeze 0.0, perfect 1.0
+- [x] Reproducibility: unseeded Dreamer generations from *identical weights* differed ~12/255 with fidelity 0.06-0.27 (noise > any effect). `generate(seed=...)` now seeds the latent sampling; scenarios pass per-scenario seeds
+- [x] Real baseline + quantization comparison done on a 115k-step checkpoint — see `DREAMER_SETUP.md` "Baseline results". Headline: quantization is no faster (launch-bound model), physics unchanged; the world model is under-trained (skill ~0.25), so drift/PAES differences aren't meaningful yet
+- [ ] Train the world model much longer (resume `logdir\walker` to ~500k steps) before trusting drift numbers; then add more seeds
+- [x] `optimizations/cuda_graphs.py` — `CudaGraphsModule` / `CudaGraphExecutor`: replays the imagination loop as one CUDA graph via a new `tensor_executor` extension point (`models.base.HasTensorExecutor`). **5.5x mean speedup (2.6x at 2 s -> 8.6x at 20 s), bit-identical output.** Used raw CUDA graphs, not `torch.compile` (needs Triton + a C toolchain on Windows). Context phase stays eager (the repo's `obs_step` host-syncs). First module that actually makes the model faster; quantization was a net loss.
+- [x] `vram_peak_gb` flattered graphs (missed persistent pools): added `SpeedMetrics.vram_reserved_gb` (memory held after the call), which shows graphs cost +128 MB
+- [x] More Dreamer optimizations built and swept (`scripts/sweep_dreamer.py`): `precision` (bf16/fp16 autocast), `tf32`, `lean_scan`, and the context phase fused into the CUDA graph (graphs 5.5x -> ~11.5x). Full table in `DREAMER_SETUP.md`. Only graphs (and now TensorRT) matter; lean/tf32 showed no effect once repeated
+- [x] **TensorRT** (`optimizations/tensorrt_backend.py`) + `gumbel_sampling` + `no_dist_validation`, via a new `imagine_backend` hook on the model. ONNX-exports one RSSM step, builds a TensorRT 11.3 engine (cached on disk), runs it per step inside the CUDA graph. **Best configuration: 13.2 ms mean, 1.64x faster than the repo loop in graphs, 1.33x faster than the pure-PyTorch step in graphs**, matching its PyTorch reference to 2.5e-6 in skill. Uses Gumbel-max sampling (statistically equivalent to `torch.multinomial`: pooled skill 0.274 vs 0.276, n=180 each). Do NOT install `torch-tensorrt` next to torch 2.11 (it replaces torch).
+- [x] Runner methodology fixes found while chasing this: build all scenarios before timing, warm up every horizon, time all rollouts back to back and compute metrics afterwards (metrics between timed calls slowed TensorRT-in-graph calls by ~5 ms), and the sweep now repeats each config 3x with medians + a noise column (the eager baseline varies +-34%). **Earlier 5.5x / 11.5x CUDA-graph figures are superseded (~9x)** — see `DREAMER_SETUP.md`.
+- [x] **Library layer (2026-10-03):** modules now declare `requires` / `needs_cuda` / `needs_packages` / `maturity` / `summary`; `OptimizationStack` skips non-applicable modules with a reason (so `available_modules()` can be handed over wholesale); `library_report(model)` lists what applies; `autotune` greedily builds the best stack by measured PAES with a noise margin and a physics-loss guard; `OptimizationStack.restore()` undoes process-global modules. New experimental modules: `cudnn_benchmark`, `channels_last`, `low_rank`, graph-pool sharing, and the VRAM/dtype advisor (`memory.py`). **All unit-tested only; none swept on hardware yet** — sweep them after the long training run finishes.
+- [ ] Not feasible here: `torch.compile` (no MSVC/Triton on this machine); custom CUDA kernels (no nvcc)
+- [ ] Remaining cost: host<->device copies + Python per call (~20 ms floor at short horizons); batching several rollouts per call is the next lever
+- [ ] Caveat to resolve: `compute_paes` penalizes |drift_rate|, so a model whose skill score *rises* with horizon (seen with the undertrained one) is penalized like one that decays. Probably want signed or decay-only drift
+- V-JEPA 2 deliberately **not** added as a model under test: it predicts latents, not frames, so visual/physics metrics don't apply. Possible later as a feature extractor for an embedding-based consistency score.
+
 **Skip for now:** Open-Sora, Genie 3, V-JEPA 2 — one model is enough to build everything else against. Add the second model only once the benchmark runner (Phase 2) exists, as a test that your abstraction is actually architecture-agnostic and not secretly Cosmos-shaped.
 
 ---
@@ -48,6 +89,8 @@
 - [x] `metrics/visual.py` — temporal consistency (no reference needed, always computed); PSNR/SSIM via `torchmetrics` **only if `reference_frames` is supplied** — pure Text2World prompts have no ground truth to compare against, so these are `None` by default (see caveat added to outline §3.2)
 - [x] `reporting.py` — `load_results`/`compare`/`summarize` (no extra deps) + `plot_pareto` (needs the `plot` extra)
 - [x] Tests: `test_speed.py`, `test_visual.py`, `test_runner.py`, `test_reporting.py` — all pass without GPU/torch (33 passed, 1 skipped for the torchmetrics-only test)
+
+- [x] Pre-Phase-5 runner fixes: `RunResult.optimization` label, `baseline_path=` (loads a prior results JSON for speedup instead of hand-built dicts), and per-prompt drift fitting — physics is scored at every horizon first, then `compute_drift_curve` runs across them, then PAES gets that drift rate (previously `drift_rate` was always 0)
 
 **Not done — real number still pending Phase 0:** everything above is boilerplate verified against a `FakeWorldModel`, not against Cosmos-Predict on real hardware. That's still the actual "done" condition.
 
@@ -87,8 +130,8 @@
 
 **Goal:** first real optimization, and proof the plug-in architecture works.
 
-- [ ] `optimizations/base.py` — `OptimizationModule` abstract class with `supported_architectures`
-- [ ] `stack.py` — `OptimizationStack`: filters incompatible modules by architecture, chains the rest
+- [x] `optimizations/base.py` — `OptimizationModule` abstract class with `supported_architectures`, plus a name registry. Modules take and return a `WorldModelInterface` (not a raw pipeline) — see its docstring for why; WorldCache will need a way for the model wrapper to expose its loaded pipeline(s), to be designed once its source is readable
+- [x] `stack.py` — `OptimizationStack`: filters incompatible modules by architecture (recorded in `.skipped`), chains the rest, `.name` feeds `run_benchmark(optimization=...)`. Constraint solver deferred. Note `ModelInfo.supported_optimizations` is NOT used for filtering (Cosmos doesn't list every module it can take) — consider dropping it
 - [ ] `optimizations/worldcache.py` — wrap the published WorldCache repo's caching logic behind your interface
 - [ ] Benchmark with vs. without WorldCache → confirm you reproduce their published 2.3x speedup before trusting anything downstream
 
@@ -101,7 +144,8 @@
 **Goal:** fill out the comparison table; same pattern as Phase 5, lower risk.
 
 - [ ] `optimizations/adacache.py`
-- [ ] `optimizations/quantization.py` (FP8/INT4 via TorchAO — architecture-agnostic, so cheapest module to add)
+- [x] `optimizations/quantization.py` — `QuantizationModule(scheme=...)` over TorchAO (int8/int4/float8 weight-only, int8/float8 dynamic), Linear layers only, registered as `"quantization"`. Works on any model with `torch_module()` (`models.base.TorchBacked`) — implemented by `DreamerWorldModel` so far, not Cosmos. Verified on the Dreamer model with TorchAO 0.18.0: int8/float8 weight-only and int8/float8 dynamic work (13 Linear layers each); int4 needs `mslk`. Seeded outputs differ from fp32 by only ~1.3/255, skill 0.23-0.26 vs 0.253 fp32 (undertrained smoke checkpoint, so just plumbing). Refuses to run if zero layers match so a no-op can't be reported as quantized. Expect small models like Dreamer's to show speedup < 1 — that's a legitimate result
+- [ ] Run it: baseline Dreamer → `OptimizationStack(model, ["quantization"], module_kwargs={"quantization": {"scheme": "int8_weight_only"}})` → compare via `run_benchmark(baseline_path=...)`
 - [ ] Full comparison table: baseline / WorldCache / AdaCache / quantization, all three axes + PAES
 
 **Done when:** the table in outline §3.2's example output is real, not illustrative.

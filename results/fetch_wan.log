@@ -1,0 +1,47 @@
+﻿fetching Wan-AI/Wan2.1-T2V-1.3B-Diffusers: ['model_index.json', 'scheduler/*', 'tokenizer/*', 'transformer/*', 'vae/*', 'text_encoder/*']
+.\.venv\Scripts\python.exe : 
+At line:3 char:1
++ .\.venv\Scripts\python.exe scripts\fetch_wan.py *> results\fetch_wan. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Fetching 19 files:   0%|          | 0/19 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF 
+Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\huggingface_hub\file_download.py:149: UserWarning: 
+`huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does 
+not support them in C:\Users\Venge\.cache\huggingface\hub. Caching files will still work but in a degraded version 
+that might require more space on your disk. This warning can be disabled by setting the 
+`HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see 
+https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In 
+order to activate developer mode, see this article: 
+https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\huggingface_hub\file_download.py:149: UserWarning: 
+`huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does 
+not support them in C:\Users\Venge\.cache\huggingface\hub\models--Wan-AI--Wan2.1-T2V-1.3B-Diffusers. Caching files 
+will still work but in a degraded version that might require more space on your disk. This warning can be disabled by 
+setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see 
+https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In 
+order to activate developer mode, see this article: 
+https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+
+Fetching 19 files:   5%|▌         | 1/19 [00:00<00:01,  9.56it/s]
+Fetching 19 files:  21%|██        | 4/19 [00:00<00:00, 18.38it/s]
+Fetching 19 files:  32%|███▏      | 6/19 [00:00<00:00, 16.26it/s]
+Fetching 19 files:  42%|████▏     | 8/19 [00:01<00:02,  3.84it/s]
+Fetching 19 files:  53%|█████▎    | 10/19 [00:02<00:02,  3.34it/s]
+Fetching 19 files:  58%|█████▊    | 11/19 [00:02<00:02,  3.63it/s]
+Fetching 19 files:  63%|██████▎   | 12/19 [01:09<01:46, 15.20s/it]
+Fetching 19 files:  68%|██████▊   | 13/19 [01:46<02:03, 20.58s/it]
+Fetching 19 files:  74%|███████▎  | 14/19 [02:55<02:45, 33.07s/it]
+Fetching 19 files:  79%|███████▉  | 15/19 [04:34<03:22, 50.75s/it]
+Fetching 19 files:  84%|████████▍ | 16/19 [04:35<01:50, 36.77s/it]
+Fetching 19 files:  89%|████████▉ | 17/19 [04:36<00:53, 26.67s/it]
+Fetching 19 files:  95%|█████████▍| 18/19 [04:36<00:19, 19.08s/it]
+Fetching 19 files: 100%|██████████| 19/19 [04:37<00:00, 13.82s/it]
+Fetching 19 files: 100%|██████████| 19/19 [04:37<00:00, 14.62s/it]
+done in 278s -> C:\Users\Venge\.cache\huggingface\hub\models--Wan-AI--Wan2.1-T2V-1.3B-Diffusers\snapshots\0fad780a534b6463e45facd96134c9f345acfa5b

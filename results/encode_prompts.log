@@ -1,0 +1,176 @@
+﻿.\.venv\Scripts\python.exe : W1003 21:24:22.227000 23780 
+Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not 
+supported in Windows or MacOs.
+At line:3 char:1
++ .\.venv\Scripts\python.exe scripts\encode_prompts.py *> results\encod ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1003 21:24:22....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]
+Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 778.20it/s]
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: 
+`torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading weights:   0%|          | 0/242 [00:00<?, ?it/s][A
+
+Loading weights:   2%|▏         | 5/242 [00:00<00:07, 29.75it/s][A
+
+Loading weights:   3%|▎         | 8/242 [00:00<00:10, 21.97it/s][A
+
+Loading weights:   5%|▍         | 11/242 [00:00<00:11, 20.42it/s][A
+
+Loading weights:   6%|▌         | 14/242 [00:00<00:15, 14.36it/s][A
+
+Loading weights:   7%|▋         | 16/242 [00:01<00:17, 12.92it/s][A
+
+Loading weights:   7%|▋         | 18/242 [00:01<00:16, 13.20it/s][A
+
+Loading weights:   9%|▊         | 21/242 [00:01<00:14, 14.97it/s][A
+
+Loading weights:  10%|▉         | 23/242 [00:01<00:15, 14.49it/s][A
+
+Loading weights:  10%|█         | 25/242 [00:01<00:20, 10.39it/s][A
+
+Loading weights:  11%|█         | 27/242 [00:02<00:24,  8.89it/s][A
+
+Loading weights:  12%|█▏        | 29/242 [00:02<00:21,  9.75it/s][A
+
+Loading weights:  14%|█▍        | 34/242 [00:02<00:19, 10.58it/s][A
+
+Loading weights:  16%|█▌        | 39/242 [00:02<00:13, 15.18it/s][A
+
+Loading weights:  18%|█▊        | 43/242 [00:03<00:12, 15.60it/s][A
+
+Loading weights:  19%|█▊        | 45/242 [00:03<00:14, 13.81it/s][A
+
+Loading weights:  20%|█▉        | 48/242 [00:03<00:12, 15.31it/s][A
+
+Loading weights:  22%|██▏       | 53/242 [00:03<00:12, 14.68it/s][A
+
+Loading weights:  24%|██▎       | 57/242 [00:03<00:10, 16.92it/s][A
+
+Loading weights:  25%|██▌       | 61/242 [00:04<00:12, 15.00it/s][A
+
+Loading weights:  27%|██▋       | 65/242 [00:04<00:11, 15.32it/s][A
+
+Loading weights:  29%|██▉       | 71/242 [00:04<00:08, 20.81it/s][A
+
+Loading weights:  31%|███       | 74/242 [00:04<00:09, 18.40it/s][A
+
+Loading weights:  32%|███▏      | 77/242 [00:05<00:09, 17.13it/s][A
+
+Loading weights:  33%|███▎      | 79/242 [00:05<00:09, 16.91it/s][A
+
+Loading weights:  34%|███▍      | 83/242 [00:05<00:12, 13.11it/s][A
+
+Loading weights:  35%|███▌      | 85/242 [00:05<00:11, 13.45it/s][A
+
+Loading weights:  38%|███▊      | 91/242 [00:06<00:07, 19.98it/s][A
+
+Loading weights:  39%|███▉      | 94/242 [00:06<00:08, 17.12it/s][A
+
+Loading weights:  40%|████      | 97/242 [00:06<00:08, 16.37it/s][A
+
+Loading weights:  41%|████      | 99/242 [00:06<00:09, 14.33it/s][A
+
+Loading weights:  42%|████▏     | 102/242 [00:07<00:13, 10.02it/s][A
+
+Loading weights:  45%|████▍     | 108/242 [00:07<00:08, 15.06it/s][A
+
+Loading weights:  46%|████▌     | 111/242 [00:07<00:08, 16.10it/s][A
+
+Loading weights:  47%|████▋     | 114/242 [00:07<00:11, 11.08it/s][A
+
+Loading weights:  48%|████▊     | 117/242 [00:08<00:09, 13.37it/s][A
+
+Loading weights:  50%|████▉     | 120/242 [00:08<00:08, 14.76it/s][A
+
+Loading weights:  51%|█████     | 123/242 [00:08<00:12,  9.72it/s][A
+
+Loading weights:  52%|█████▏    | 127/242 [00:08<00:08, 13.11it/s][A
+
+Loading weights:  54%|█████▎    | 130/242 [00:09<00:07, 14.60it/s][A
+
+Loading weights:  55%|█████▍    | 133/242 [00:09<00:11,  9.54it/s][A
+
+Loading weights:  57%|█████▋    | 137/242 [00:09<00:08, 12.08it/s][A
+
+Loading weights:  57%|█████▋    | 139/242 [00:09<00:08, 12.54it/s][A
+
+Loading weights:  59%|█████▊    | 142/242 [00:10<00:07, 13.65it/s][A
+
+Loading weights:  60%|█████▉    | 144/242 [00:10<00:09, 10.50it/s][A
+
+Loading weights:  61%|██████    | 148/242 [00:10<00:08, 11.42it/s][A
+
+Loading weights:  63%|██████▎   | 153/242 [00:10<00:05, 15.45it/s][A
+
+Loading weights:  64%|██████▍   | 155/242 [00:11<00:08, 10.45it/s][A
+
+Loading weights:  65%|██████▍   | 157/242 [00:11<00:07, 11.14it/s][A
+
+Loading weights:  67%|██████▋   | 162/242 [00:11<00:05, 14.00it/s][A
+
+Loading weights:  68%|██████▊   | 164/242 [00:11<00:05, 13.36it/s][A
+
+Loading weights:  69%|██████▊   | 166/242 [00:12<00:06, 11.15it/s][A
+
+Loading weights:  70%|██████▉   | 169/242 [00:12<00:05, 13.18it/s][A
+
+Loading weights:  71%|███████   | 171/242 [00:12<00:07,  9.26it/s][A
+
+Loading weights:  72%|███████▏  | 175/242 [00:13<00:06, 10.98it/s][A
+
+Loading weights:  74%|███████▍  | 179/242 [00:13<00:04, 14.19it/s][A
+
+Loading weights:  76%|███████▌  | 183/242 [00:13<00:05, 10.21it/s][A
+
+Loading weights:  78%|███████▊  | 188/242 [00:13<00:03, 13.89it/s][A
+
+Loading weights:  79%|███████▉  | 191/242 [00:14<00:03, 15.23it/s][A
+
+Loading weights:  80%|████████  | 194/242 [00:14<00:04, 10.74it/s][A
+
+Loading weights:  81%|████████▏ | 197/242 [00:14<00:04, 10.48it/s][A
+
+Loading weights:  84%|████████▍ | 203/242 [00:15<00:02, 15.10it/s][A
+
+Loading weights:  85%|████████▌ | 206/242 [00:15<00:03, 11.47it/s][A
+
+Loading weights:  86%|████████▌ | 208/242 [00:15<00:02, 12.12it/s][A
+
+Loading weights:  88%|████████▊ | 212/242 [00:16<00:02, 13.37it/s][A
+
+Loading weights:  88%|████████▊ | 214/242 [00:16<00:02, 10.34it/s][A
+
+Loading weights:  90%|████████▉ | 217/242 [00:16<00:02, 10.44it/s][A
+
+Loading weights:  90%|█████████ | 219/242 [00:16<00:02,  9.14it/s][A
+
+Loading weights:  91%|█████████▏| 221/242 [00:17<00:02,  9.46it/s][A
+
+Loading weights:  94%|█████████▍| 227/242 [00:17<00:01, 13.80it/s][A
+
+Loading weights:  96%|█████████▌| 232/242 [00:17<00:00, 16.05it/s][A
+
+Loading weights:  97%|█████████▋| 234/242 [00:17<00:00, 12.19it/s][A
+
+Loading weights:  98%|█████████▊| 237/242 [00:22<00:02,  1.99it/s][A
+
+Loading weights: 100%|██████████| 242/242 [00:23<00:00,  2.93it/s][A
+Loading weights: 100%|██████████| 242/242 [00:23<00:00, 10.46it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:23<00:47, 23.76s/it]
+Loading pipeline components...: 100%|██████████| 3/3 [00:25<00:00,  6.70s/it]
+Loading pipeline components...: 100%|██████████| 3/3 [00:25<00:00,  8.41s/it]
+encoded in 7s, shape (1, 512, 4096) torch.bfloat16: A red ball rolls down a wooden ramp and bounces on the floor
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: Water is poured from a pitcher into a glass on a kitchen cou
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A robot arm picks up a red cube from a table and places it i
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A car drives through a busy four-way intersection while pede
+saved 4 prompt embeddings -> C:\Users\Venge\Documents\ai\results\wan_prompts.pt (21 MB)

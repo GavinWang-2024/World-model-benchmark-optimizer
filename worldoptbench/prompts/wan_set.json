@@ -1,0 +1,10 @@
+{
+  "_comment": "Wan2.1 diffusion benchmark set: 4 physics-flavoured prompts x 1 seed at a 2 s horizon (33 frames, 192x320). `prompt` must be one of the embeddings made by scripts/encode_prompts.py (the defaults match these). Quality is agreement with the unoptimized model's video for the same seed (WanReferenceScenarios), NOT physics: no physics scorer exists for Wan here. Small on purpose: each rollout is ~12 s on a laptop GPU, and full 480p x 81 frames takes minutes. Add seeds for statistical power: for optimizations that change the noise, the effective sample size is the number of distinct (prompt, seed) pairs.",
+  "horizons_seconds": [2],
+  "prompts": [
+    { "id": "ball_ramp", "domain": "physics_stress", "prompt": "A red ball rolls down a wooden ramp and bounces on the floor.", "seed": 0 },
+    { "id": "water_pour", "domain": "physics_stress", "prompt": "Water is poured from a pitcher into a glass on a kitchen counter.", "seed": 0 },
+    { "id": "robot_arm", "domain": "robotics", "prompt": "A robot arm picks up a red cube from a table and places it into a bin.", "seed": 0 },
+    { "id": "car_intersection", "domain": "autonomous_driving", "prompt": "A car drives through a busy four-way intersection while pedestrians cross the street.", "seed": 0 }
+  ]
+}

@@ -1,0 +1,768 @@
+﻿=== baseline ...
+.\.venv\Scripts\python.exe : W1003 21:27:49.068000 22776 
+Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not 
+supported in Windows or MacOs.
+At line:3 char:1
++ .\.venv\Scripts\python.exe scripts\sweep_wan.py *> results\sweep_wan. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1003 21:27:49....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: 
+`torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.93it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.42it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.59it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.72it/s]
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 1913.02it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.98it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.52it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.43it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.28it/s]
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`peak_signal_noise_ratio` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`peak_signal_noise_ratio` from `torchmetrics.image` instead.
+  _future_warning(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`spectral_angle_mapper` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`spectral_angle_mapper` from `torchmetrics.image` instead.
+  _future_warning(
+=== baseline (repeat) ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.68it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.97it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.40it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.20it/s]
+=== fbc_0.05 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.68it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.01it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.42it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.25it/s]
+=== fbc_0.1 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.70it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.05it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.44it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.30it/s]
+=== fbc_0.2 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.78it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.21it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.52it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.54it/s]
+=== pab_2 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.79it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.19it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.51it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.51it/s]
+=== pab_3 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.79it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.18it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.49it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.47it/s]
+=== taylorseer_3 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 1142.78it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.56it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.81it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.33it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  3.99it/s]
+=== taylorseer_5 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.80it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.20it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.50it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.48it/s]
+=== layer_skip_2 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.78it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.18it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.48it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.43it/s]
+=== layer_skip_4 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.05it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.66it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.72it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.14it/s]
+=== attn_native ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.79it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.20it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.50it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.49it/s]
+Attention backends are an experimental feature and the API may be subject to change.
+Attention backends are an experimental feature and the API may be subject to change.
+=== attn_flex ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 510.98it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.78it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.19it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.47it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.42it/s]
+Attention backends are an experimental feature and the API may be subject to change.
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\attention\flex_attention.py:1704: UserWarning: 
+flex_attention called without torch.compile() - this will use an unfused implementation that materializes the full 
+scores matrix instead of generating a fused kernel.
+
+SOLUTION: Use torch.compile(flex_attention)(...)
+
+If you want to debug your score_mod/mask_mod, you can set:
+torch.nn.attention.flex_attention._FLEX_ATTENTION_DISABLE_COMPILE_DEBUG = True
+
+This will allow you to use print statements or breakpoints. Note: This doesn't work with the backwards pass and may 
+produce incorrect results.
+  _warn_once(
+W1003 21:40:13.882000 22776 Lib\site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not 
+work for triton kernels
+Attention backends are an experimental feature and the API may be subject to change.
+=== attn_cudnn ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.80it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.20it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.49it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.44it/s]
+Attention backends are an experimental feature and the API may be subject to change.
+Attention backends are an experimental feature and the API may be subject to change.
+=== attn_efficient ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.85it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.33it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.55it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.66it/s]
+Attention backends are an experimental feature and the API may be subject to change.
+Attention backends are an experimental feature and the API may be subject to change.
+=== attn_flash_sdpa ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.93it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.47it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.62it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  4.86it/s]
+Attention backends are an experimental feature and the API may be subject to change.
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: Memory 
+efficient kernel not used because: (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:986.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: Memory 
+Efficient attention has been runtime disabled. (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen/native/transformers/sdp_utils_cpp.h:552.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: Flash 
+attention kernel not used because: (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:988.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: Torch 
+was not compiled with flash attention. (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:797.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: cuDNN 
+attention kernel not used because: (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:990.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py:3848: UserWarning: cuDNN 
+attention has been runtime disabled. (Triggered internally at 
+C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:706.)
+  out = torch.nn.functional.scaled_dot_product_attention(
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+704, in forward
+    hidden_states = block(hidden_states, encoder_hidden_states, timestep_proj, rotary_emb)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+489, in forward
+    attn_output = self.attn1(norm_hidden_states, None, None, rotary_emb)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+281, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, rotary_emb, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+143, in __call__
+    hidden_states = dispatch_attention_fn(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 439, in 
+dispatch_attention_fn
+    return backend_fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 3848, in 
+_native_flash_attention
+    out = torch.nn.functional.scaled_dot_product_attention(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No available kernel. Aborting execution.
+Attention backends are an experimental feature and the API may be subject to change.
+=== fp8_storage ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 525.45it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.05it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.66it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.73it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.16it/s]
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+670, in forward
+    hidden_states = self.patch_embedding(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\conv.py", line 723, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\conv.py", line 718, in _conv_forward
+    return F.conv3d(
+           ^^^^^^^^^
+RuntimeError: Input type (float) and bias type (struct c10::BFloat16) should be the same
+=== cfg_trunc_0.6 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 505.09it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.05it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.66it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.72it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.14it/s]
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+704, in forward
+    hidden_states = block(hidden_states, encoder_hidden_states, timestep_proj, rotary_emb)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+489, in forward
+    attn_output = self.attn1(norm_hidden_states, None, None, rotary_emb)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+281, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, rotary_emb, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+143, in __call__
+    hidden_states = dispatch_attention_fn(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 439, in 
+dispatch_attention_fn
+    return backend_fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 3848, in 
+_native_flash_attention
+    out = torch.nn.functional.scaled_dot_product_attention(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No available kernel. Aborting execution.
+=== cfg_trunc_0.4 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.04it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.65it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.72it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.16it/s]
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+704, in forward
+    hidden_states = block(hidden_states, encoder_hidden_states, timestep_proj, rotary_emb)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+489, in forward
+    attn_output = self.attn1(norm_hidden_states, None, None, rotary_emb)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+281, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, rotary_emb, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+143, in __call__
+    hidden_states = dispatch_attention_fn(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 439, in 
+dispatch_attention_fn
+    return backend_fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 3848, in 
+_native_flash_attention
+    out = torch.nn.functional.scaled_dot_product_attention(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No available kernel. Aborting execution.
+=== steps_20 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 508.62it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.05it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.65it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.72it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.14it/s]
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+704, in forward
+    hidden_states = block(hidden_states, encoder_hidden_states, timestep_proj, rotary_emb)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+489, in forward
+    attn_output = self.attn1(norm_hidden_states, None, None, rotary_emb)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+281, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, rotary_emb, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+143, in __call__
+    hidden_states = dispatch_attention_fn(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 439, in 
+dispatch_attention_fn
+    return backend_fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 3848, in 
+_native_flash_attention
+    out = torch.nn.functional.scaled_dot_product_attention(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No available kernel. Aborting execution.
+=== steps_15 ...
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<?, ?it/s]
+
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.04it/s][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.64it/s]
+
+Loading pipeline components...:  33%|███▎      | 1/3 [00:00<00:01,  1.72it/s]
+Loading pipeline components...: 100%|██████████| 3/3 [00:00<00:00,  5.14it/s]
+Traceback (most recent call last):
+  File "C:\Users\Venge\Documents\ai\scripts\sweep_wan.py", line 91, in main
+    results = run_benchmark(
+              ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\worldoptbench\runner.py", line 210, in run_benchmark
+    model.generate(
+  File "C:\Users\Venge\Documents\ai\worldoptbench\models\wan_video.py", line 162, in generate
+    output = self.pipeline(
+             ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\pipelines\wan\pipeline_wan.py", line 615, in 
+__call__
+    noise_pred = current_model(
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\peft_utils.py", line 323, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+704, in forward
+    hidden_states = block(hidden_states, encoder_hidden_states, timestep_proj, rotary_emb)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+489, in forward
+    attn_output = self.attn1(norm_hidden_states, None, None, rotary_emb)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in 
+_wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+281, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, rotary_emb, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\transformers\transformer_wan.py", line 
+143, in __call__
+    hidden_states = dispatch_attention_fn(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 439, in 
+dispatch_attention_fn
+    return backend_fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\models\attention_dispatch.py", line 3848, in 
+_native_flash_attention
+    out = torch.nn.functional.scaled_dot_product_attention(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No available kernel. Aborting execution.
+
+configuration           latency  speedup   PSNR   SSIM  skill  peak GB  notes
+baseline                  12.4s     1.00    inf  1.000  1.000     7.54  
+baseline (repeat)         12.4s     1.00    inf  1.000  1.000     7.55  
+fbc_0.05                  10.2s     1.22  18.61  0.809  0.194     7.58  
+fbc_0.1                    7.1s     1.76  10.76  0.484  0.000     7.58  
+fbc_0.2                    4.8s     2.62  10.22  0.435  0.000     7.58  
+pab_2                     11.5s     1.08  25.80  0.935  0.431     7.73  
+pab_3                     11.4s     1.09  23.76  0.893  0.281     7.73  
+taylorseer_3              12.4s     1.00    inf  1.000  1.000     7.55  
+taylorseer_5              12.4s     1.00    inf  1.000  1.000     7.55  
+layer_skip_2              11.7s     1.06  10.28  0.465  0.000     7.55  
+layer_skip_4              11.0s     1.14  10.00  0.429  0.000     7.55  
+attn_native               12.5s     1.00    inf  1.000  1.000     7.55  
+attn_flex                 36.4s     0.34  16.51  0.737  0.146     7.55  
+attn_cudnn                11.4s     1.10  15.44  0.721  0.069     7.55  
+attn_efficient            12.4s     1.00    inf  1.000  1.000     7.55  
+attn_flash_sdpa        FAILED: RuntimeError: No available kernel. Aborting execution.
+fp8_storage            FAILED: RuntimeError: Input type (float) and bias type (struct c10::BFloat16) should be the same
+cfg_trunc_0.6          FAILED: RuntimeError: No available kernel. Aborting execution.
+cfg_trunc_0.4          FAILED: RuntimeError: No available kernel. Aborting execution.
+steps_20               FAILED: RuntimeError: No available kernel. Aborting execution.
+steps_15               FAILED: RuntimeError: No available kernel. Aborting execution.

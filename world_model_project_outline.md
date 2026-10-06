@@ -2,6 +2,17 @@
 
 > **One-liner:** A general framework for benchmarking and optimizing world model inference across architectures — treating speed, visual quality, and physics consistency as a joint objective for the first time.
 
+> **Status update (2026-10-04) — read this first; the rest of this document is the original plan and is partly out of date. For a section-by-section map of what exists, what is partial and what was not built (and why), see [`OUTLINE_STATUS.md`](OUTLINE_STATUS.md).**
+>
+> - **The v1 model is Dreamer, not Cosmos.** Cosmos-Predict is gated on Hugging Face and was never run (the wrapper in `models/cosmos_predict.py` is untested). A DreamerV3 world model trained locally on the DMC walker is the working model; it's simulator-backed, so it also has ground truth. V-JEPA 2 predicts latents, not frames, so it can't be scored on the visual/physics axes as a generator.
+> - **What exists and runs:** `WorldModelInterface`, the benchmark runner (speed + visual + physics + PAES), the optimization stack, and 11 built optimizations, all measured on the Dreamer model. See `OPTIMIZATION_CATALOG.md` (124 candidate optimizations with status) and `DREAMER_SETUP.md` (environment, results, caveats).
+> - **Headline result:** the Dreamer model is launch-bound, so CUDA graphs (~9x) and then TensorRT on the RSSM step (a further ~1.6x, 13 ms vs ~210 ms eager) are what help; quantization and mixed precision (§3.4, §7.6) do not, and are slower here. These speedups are measured against a noisy eager baseline (+-34% run to run), so compare absolute latencies.
+> - **Physics axis:** for a simulator-backed model the physics score is *simulator fidelity* (a skill score against a "nothing moves" baseline, using ground-truth rollouts), not PAI-Bench, which scores text-to-video plausibility. The raw pixel-error version could not tell an undertrained model from a frozen scene (0.93 vs 0.92), which is why it's a skill score.
+> - **PAES changed:** the drift penalty now counts only a *falling* physics score (a rising one is not penalized); see §3.3. Drift is now measurable on the 515k-step model (about -0.09 skill per second on held-out walking at short horizons, `DREAMER_SETUP.md`); the first, under-trained model had mixed-sign drift rates.
+> - **Diffusion work, done on Wan2.1-1.3B (a text-to-video model; Cosmos is still blocked on a token):** WorldCache and AdaCache implemented from the papers' descriptions and measured (WorldCache's 2.3x at 99.4% quality is not reproduced), a portable drift guard for AdaCache (the §12-A1 rescoping of §3.5), quality measured with DINO / CLIP scores and contact sheets because there is no physics score for Wan (`DESIGN_DIFFUSION.md`). **Not built:** speculative decoding, token-level drift correction, PAI-Bench / WorldRoamBench wrappers, Open-Sora, V-JEPA 2, KV-cache modules.
+> - **Also built beyond the original plan:** `worldserve` (standard-library HTTP), constraints, a cost-per-second comparison, a leaderboard, and the §12-D functional-utility check (do optimized models still rank policies correctly; yes, within noise, on Dreamer).
+> - **A second, diverging copy of this outline exists** (`world_model_project_outline (2).md`): it has the speculative-decoding and distributed-inference sections this one lacks, and lacks §12. They should be merged or one deleted.
+
 ---
 
 ## 1. The Problem
@@ -81,6 +92,7 @@ class WorldModelInterface:
 | Cosmos-Predict 2.5-2B | Diffusion (DiT) | ✅ Lightweight experiments |
 
 > ⚠️ **Unconfirmed (2026-09-12):** NVIDIA's own docs list Cosmos-Predict2 checkpoint sizes as **2B and 14B**, not 7B. Confirm the real available size during `build_plan.md` Phase 0 and fix this table + `CosmosPredict7B`'s class name/`_SIZE` in `worldoptbench/models/cosmos_predict.py` accordingly if it's actually 14B.
+| **Dreamer (DreamerV3, DMC walker)** | Recurrent latent (labelled autoregressive) | ✅ **Working v1 model** — no gating, trained locally, has ground truth (added 2026-10-03) |
 | Open-Sora | Diffusion (DiT) | ✅ Secondary target |
 | Genie 3 | Autoregressive | ⏳ Future (API closed) |
 | V-JEPA 2 | JEPA latent | ⏳ Future work |
@@ -132,12 +144,13 @@ A single combined metric — architecture agnostic — so any optimization paper
 ```
 PAES = Speedup × Physics_Score × (1 / Drift_Penalty)
 
-where Drift_Penalty = 1 + |drift_rate| × horizon_T
+where Drift_Penalty = 1 + decay_rate × horizon_T
+      decay_rate    = max(0, -drift_rate)      # drift_rate = physics-score change per second
 ```
 
 - `Speedup` = baseline latency / optimized latency
-- `Physics_Score` = PAI-Bench or WorldRoamBench physics subscore (0–1)
-- `Drift_Penalty` = how much physics degrades over the rollout horizon
+- `Physics_Score` = PAI-Bench or WorldRoamBench physics subscore (0–1) for text-to-video models; for simulator-backed models (Dreamer), simulator fidelity as a skill score against a "nothing moves" baseline (0 = no better than freezing the scene, 1 = perfect)
+- `Drift_Penalty` = how much physics *degrades* over the rollout horizon. Only a falling score is penalized: the original definition used `|drift_rate|`, which charged a rising score as much as a falling one and on the first real runs penalized noise in both directions (`compute_paes(..., drift_mode="abs")` keeps the old behavior for comparison)
 
 **Why this matters:** A method that gets 4x speedup with 50% physics degradation should score lower than one that gets 2x speedup with 5% degradation. No current metric captures this. PAES does — and it works identically whether the model is diffusion, autoregressive, or JEPA.
 

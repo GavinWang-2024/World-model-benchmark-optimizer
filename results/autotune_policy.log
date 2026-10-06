@@ -1,0 +1,289 @@
+﻿candidates (14): channels_last, cuda_graphs, cudnn_benchmark, gumbel_sampling, latent_noise, lean_scan, low_rank, no_dist_validation, precision, quantization, sparse_decode, tensorrt, tensorrt_decoder, tf32
+replay scenarios: 16 episodes
+.\.venv\Scripts\python.exe : Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other 
+critical functionality.
+At line:3 char:1
++ .\.venv\Scripts\python.exe scripts\autotune_dreamer.py --checkpoint $ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Gym has been un... functionality.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and 
+request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\gym\spaces\box.py:78: UserWarning: [33mWARN: Box bound precision 
+lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+C:\Users\Venge\Documents\dreamerv3-torch\tools.py:747: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is 
+deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self._scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`peak_signal_noise_ratio` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`peak_signal_noise_ratio` from `torchmetrics.image` instead.
+  _future_warning(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`spectral_angle_mapper` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`spectral_angle_mapper` from `torchmetrics.image` instead.
+  _future_warning(
+C:\Users\Venge\Documents\dreamerv3-torch\tools.py:747: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is 
+deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self._scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+WARNING:torchao.kernel.intmm:Warning: Detected no triton, on systems without Triton certain kernels will not work
+W1003 20:32:32.096000 20608 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: 
+Redirects are currently not supported in Windows or MacOs.
+C:\Users\Venge\Documents\dreamerv3-torch\tools.py:747: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is 
+deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self._scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`peak_signal_noise_ratio` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`peak_signal_noise_ratio` from `torchmetrics.image` instead.
+  _future_warning(
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\torchmetrics\utilities\prints.py:70: FutureWarning: Importing 
+`spectral_angle_mapper` from `torchmetrics.functional` was deprecated and will be removed in 2.0. Import 
+`spectral_angle_mapper` from `torchmetrics.image` instead.
+  _future_warning(
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+
+steps tried:
+   channels_last                                           PAES   0.406  physics 0.299  candidate
+ * cuda_graphs                                             PAES   3.525  physics 0.299  accepted: PAES 3.525
+   cudnn_benchmark                                         PAES   0.404  physics 0.299  candidate
+   gumbel_sampling                                         PAES   0.336  physics 0.251  candidate
+   latent_noise                                            PAES   0.410  physics 0.234  rejected: physics 0.234 is 0.065 below baseline 0.299
+   lean_scan                                               PAES   0.324  physics 0.299  candidate
+   low_rank                                                PAES   0.113  physics 0.112  rejected: physics 0.112 is 0.187 below baseline 0.299
+   no_dist_validation                                      PAES   0.479  physics 0.299  candidate
+   precision                                               PAES   0.278  physics 0.284  candidate
+   quantization                                            PAES   0.320  physics 0.280  candidate
+   sparse_decode                                           PAES   0.336  physics 0.241  candidate
+   tensorrt                                                PAES   0.732  physics 0.251  candidate
+   tensorrt_decoder                                        PAES   0.218  physics 0.299  candidate
+   tf32                                                    PAES   0.420  physics 0.299  candidate
+   cuda_graphs+channels_last                               PAES   3.561  physics 0.299  candidate
+   cuda_graphs+cudnn_benchmark                             PAES   3.222  physics 0.299  candidate
+   cuda_graphs+gumbel_sampling                             PAES   3.202  physics 0.251  candidate
+   cuda_graphs+latent_noise                                PAES   2.950  physics 0.234  rejected: physics 0.234 is 0.065 below baseline 0.299
+   cuda_graphs+lean_scan                                   PAES   3.583  physics 0.299  candidate
+   cuda_graphs+low_rank                                    PAES   1.385  physics 0.112  rejected: physics 0.112 is 0.187 below baseline 0.299
+   cuda_graphs+no_dist_validation                          PAES   3.330  physics 0.299  candidate
+   cuda_graphs+precision                                   PAES   2.852  physics 0.284  candidate
+   cuda_graphs+quantization                                PAES   2.940  physics 0.280  candidate
+   cuda_graphs+sparse_decode                               PAES   2.968  physics 0.241  candidate
+ * cuda_graphs+tensorrt                                    PAES   3.948  physics 0.251  accepted: PAES 3.948
+   cuda_graphs+tensorrt_decoder                            PAES   3.335  physics 0.299  candidate
+   cuda_graphs+tf32                                        PAES   3.441  physics 0.299  candidate
+   cuda_graphs+tensorrt+channels_last                      PAES   3.971  physics 0.251  candidate
+   cuda_graphs+tensorrt+cudnn_benchmark                    PAES   3.696  physics 0.251  candidate
+   cuda_graphs+tensorrt+gumbel_sampling                    PAES   2.960  physics 0.251  candidate
+   cuda_graphs+tensorrt+latent_noise                       PAES   3.350  physics 0.231  rejected: physics 0.231 is 0.068 below baseline 0.299
+   cuda_graphs+tensorrt+lean_scan                          PAES   4.003  physics 0.251  best of round, but gain +1.4% <= required +10%
+   cuda_graphs+tensorrt+low_rank                           PAES   1.689  physics 0.109  rejected: physics 0.109 is 0.190 below baseline 0.299
+   cuda_graphs+tensorrt+no_dist_validation                 PAES   3.592  physics 0.251  candidate
+   cuda_graphs+tensorrt+precision                          PAES   3.361  physics 0.240  candidate
+   cuda_graphs+tensorrt+quantization                       PAES   3.351  physics 0.230  rejected: physics 0.230 is 0.069 below baseline 0.299
+   cuda_graphs+tensorrt+sparse_decode                      PAES   3.416  physics 0.204  rejected: physics 0.204 is 0.095 below baseline 0.299
+   cuda_graphs+tensorrt+tensorrt_decoder                   PAES   3.734  physics 0.251  candidate
+   cuda_graphs+tensorrt+tf32                               PAES   3.711  physics 0.251  candidate
+
+baseline: PAES 0.274, physics 0.299
+best stack: ['cuda_graphs', 'tensorrt']
+           PAES 3.948, physics 0.251, mean latency 3.5 ms

@@ -27,6 +27,14 @@ class VisualMetrics:
     psnr: float | None = None
     ssim: float | None = None
     fvd: float | None = None  # TODO: needs a real reference distribution, see module docstring
+    # Reference-free statistics (metrics/blind.py) of this video, their ratio to the reference video's, and
+    # the mean |log ratio|. Present only when a reference was supplied and the video has >= 3 frames.
+    blind: dict[str, float] | None = None
+    blind_ratio: dict[str, float] | None = None
+    style_deviation: float | None = None
+    # Learned scores (metrics/perceptual.py): DINO similarity to the reference, consistency, CLIP prompt score.
+    # Present only when a scorer was supplied.
+    perceptual: dict[str, Any] | None = None
 
 
 def _temporal_consistency(frames: Sequence[Any]) -> float:
@@ -48,6 +56,8 @@ def _temporal_consistency(frames: Sequence[Any]) -> float:
 def compute_visual_metrics(
     frames: Sequence[Any],
     reference_frames: Sequence[Any] | None = None,
+    prompt: str | None = None,
+    scorer: Any = None,
 ) -> VisualMetrics:
     temporal_consistency = _temporal_consistency(frames)
 
@@ -56,14 +66,15 @@ def compute_visual_metrics(
         # Lazy import: torch/torchmetrics only needed when a reference is
         # actually supplied, so importing this module never requires the
         # `ml` extra.
+        import numpy as np
         import torch
         from torchmetrics.functional import (
             peak_signal_noise_ratio,
             structural_similarity_index_measure,
         )
 
-        gen = torch.stack([torch.as_tensor(f, dtype=torch.float32) for f in frames])
-        ref = torch.stack([torch.as_tensor(f, dtype=torch.float32) for f in reference_frames])
+        gen = torch.stack([torch.as_tensor(np.ascontiguousarray(f), dtype=torch.float32) for f in frames])
+        ref = torch.stack([torch.as_tensor(np.ascontiguousarray(f), dtype=torch.float32) for f in reference_frames])
         # torchmetrics expects (N, C, H, W); frames are typically (H, W, C).
         if gen.ndim == 4 and gen.shape[-1] in (1, 3):
             gen = gen.permute(0, 3, 1, 2)
@@ -73,4 +84,17 @@ def compute_visual_metrics(
         ssim = float(structural_similarity_index_measure(gen, ref, data_range=255.0))
         # fvd intentionally left None — see module docstring.
 
-    return VisualMetrics(temporal_consistency=temporal_consistency, psnr=psnr, ssim=ssim, fvd=fvd)
+    blind = blind_ratio = style_deviation = None
+    if reference_frames is not None and len(frames) >= 3 and len(reference_frames) >= 3:
+        from worldoptbench.metrics.blind import stat_ratios, style_deviation as _style_deviation, video_stats
+
+        blind = video_stats(frames)
+        blind_ratio = stat_ratios(blind, video_stats(reference_frames))
+        style_deviation = _style_deviation(blind_ratio)
+
+    perceptual = scorer.score(frames, reference_frames, prompt) if scorer is not None and len(frames) >= 2 else None
+
+    return VisualMetrics(
+        temporal_consistency=temporal_consistency, psnr=psnr, ssim=ssim, fvd=fvd,
+        blind=blind, blind_ratio=blind_ratio, style_deviation=style_deviation, perceptual=perceptual,
+    )

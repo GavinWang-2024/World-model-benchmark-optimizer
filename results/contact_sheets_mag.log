@@ -1,0 +1,70 @@
+W1004 23:24:55.489000 17032 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<?, ?it/s]
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.74it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.12it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  2.91it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.32it/s]
+generated baseline
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 5068.65it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.63it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  2.86it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  2.71it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.07it/s]
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+generated kv+vae_bf16+cfg0.4+pab
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 530.52it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.84it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.26it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  3.01it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.50it/s]
+generated mag_0.24
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<?, ?it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.62it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  2.90it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  2.73it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.09it/s]
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+generated mag_0.24+cfg0.6+kv+vae
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 2248.05it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.83it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.27it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  3.07it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.59it/s]
+generated mag_0.24_ret0.1
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<?, ?it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.85it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.28it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  3.09it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.63it/s]
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+generated mag_0.5+cfg0.6+kv+vae
+There are modules in AutoencoderKLWan that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 626.19it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.84it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.27it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  3.07it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.61it/s]
+generated mag_0.5_skip5
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 2241.89it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.84it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.24it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  3.04it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.54it/s]
+generated perturb_1e-4
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|##########| 8/8 [00:00<00:00, 2491.97it/s]
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|#####     | 1/2 [00:00<00:00,  1.79it/s][ALoading checkpoint shards: 100%|##########| 2/2 [00:00<00:00,  3.18it/s]
+Loading pipeline components...:  67%|######6   | 2/3 [00:00<00:00,  2.99it/s]Loading pipeline components...: 100%|##########| 3/3 [00:00<00:00,  4.48it/s]
+generated wc_0.04
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\ball_ramp_s0_magcache.png (2174, 1790)
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\water_pour_s0_magcache.png (2174, 1790)
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\pendulum_s0_magcache.png (2174, 1790)
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\pan_forest_s0_magcache.png (2174, 1790)
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\skateboard_s0_magcache.png (2174, 1790)
+wrote C:\Users\Venge\Documents\ai\results\contact_sheets\candle_flame_s0_magcache.png (2174, 1790)

@@ -1,0 +1,9 @@
+{
+  "_comment": "Standard set for DreamerWorldModel on DMC (simulator-backed, so it has ground truth — see worldoptbench/scenarios.py). Horizons are shorter than the Cosmos set (4/16/60/120s) because a DMC episode is 500 agent steps: ~25s at 20 steps/s (walker, action_repeat 2), and the simulator can't provide ground truth past episode end. 20s + 5 context steps = 404 steps, inside that limit. `prompt` is just a label (Dreamer isn't text-conditioned); `seed` drives the simulator start state and the random action sequence, so baseline and optimized runs see identical scenarios.",
+  "horizons_seconds": [2, 5, 10, 20],
+  "prompts": [
+    { "id": "walker_seed0", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 0 },
+    { "id": "walker_seed1", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 1 },
+    { "id": "walker_seed2", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 2 }
+  ]
+}

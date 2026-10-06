@@ -1,0 +1,18 @@
+{
+  "_comment": "Scenarios from HELD-OUT recorded episodes of the trained policy (use with --episodes <logdir>/eval_eps --min-return 600), at SHORT horizons. Why: random-action scenarios measure a flailing walker falling over (easy), and long horizons are saturated: on competent walking both Dreamer models scored ~0.02 skill at 5 s, because DreamerV3 is trained to imagine ~15 steps (<1 s) ahead, not to free-run for seconds. The informative range is sub-second to a few seconds, so the horizons here stop at 5 s. 12 scenarios; `seed` picks the episode and the start offset deterministically, and the horizons of one scenario are nested prefixes of one window. `prompt` is only a label. Requires episodes with at least 5 context + 100 frames.",
+  "horizons_seconds": [0.25, 0.5, 1, 2, 3, 5],
+  "prompts": [
+    { "id": "policy_0", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 0 },
+    { "id": "policy_1", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 1 },
+    { "id": "policy_2", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 2 },
+    { "id": "policy_3", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 3 },
+    { "id": "policy_4", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 4 },
+    { "id": "policy_5", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 5 },
+    { "id": "policy_6", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 6 },
+    { "id": "policy_7", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 7 },
+    { "id": "policy_8", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 8 },
+    { "id": "policy_9", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 9 },
+    { "id": "policy_10", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 10 },
+    { "id": "policy_11", "domain": "dmc_walker_policy", "prompt": "dmc_walker_walk", "seed": 11 }
+  ]
+}

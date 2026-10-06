@@ -1,0 +1,1 @@
+{"name": "steps_15", "applied": ["fewer_steps"], "skipped": [], "latency": 6.817107925000528, "speedup": 1.8254436944382266, "psnr": 10.53922963142395, "ssim": 0.4605301395058632, "skill": 0.0, "peak_gb": 4.397027969360352, "error": null}

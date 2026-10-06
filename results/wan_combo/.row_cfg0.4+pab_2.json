@@ -1,0 +1,1 @@
+{"name": "cfg0.4+pab_2", "applied": ["pab", "cfg_truncation"], "skipped": [], "latency": 8.663580475000344, "speedup": 1.436422326494443, "psnr": 25.374192237854004, "ssim": 0.9287590533494949, "skill": 0.40143840577328327, "peak_gb": 4.583013534545898, "error": null}

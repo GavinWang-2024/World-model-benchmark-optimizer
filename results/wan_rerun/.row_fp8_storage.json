@@ -1,0 +1,1 @@
+{"name": "fp8_storage", "applied": ["layerwise_casting"], "skipped": [], "latency": 13.678372300000774, "speedup": 0.9097773322874287, "psnr": 13.22185206413269, "ssim": 0.639165610074997, "skill": 0.050356375571609296, "peak_gb": 3.1082515716552734, "error": null}

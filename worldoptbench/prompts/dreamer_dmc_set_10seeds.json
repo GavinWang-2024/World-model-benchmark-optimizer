@@ -1,0 +1,16 @@
+{
+  "_comment": "Larger Dreamer/DMC set built to make drift measurable: 10 scenarios x 7 horizons (70 rollouts) instead of 3 x 4. A single scenario's fitted drift rate is mostly noise (a first real run gave -0.006, +0.001, +0.005 per second), so drift is read off the mean across scenarios and its standard error (reporting.drift_stats). More horizons give each scenario's score-vs-horizon fit more points; horizons of one scenario are nested prefixes of the same trajectory, so the extra ones are cheap. Same constraints as dreamer_dmc_set.json: a DMC episode is 500 agent steps (~25 s at 20 steps/s), so 20 s + 5 context steps is the practical maximum; `prompt` is only a label; `seed` fixes the simulator start, action sequence, and latent sampling. A separate file (not an edit) so results and baselines made with the 3-seed set stay comparable. Run with: python scripts/run_dreamer.py --standard-set worldoptbench/prompts/dreamer_dmc_set_10seeds.json ...",
+  "horizons_seconds": [1, 2, 4, 7, 10, 15, 20],
+  "prompts": [
+    { "id": "walker_seed0", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 0 },
+    { "id": "walker_seed1", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 1 },
+    { "id": "walker_seed2", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 2 },
+    { "id": "walker_seed3", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 3 },
+    { "id": "walker_seed4", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 4 },
+    { "id": "walker_seed5", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 5 },
+    { "id": "walker_seed6", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 6 },
+    { "id": "walker_seed7", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 7 },
+    { "id": "walker_seed8", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 8 },
+    { "id": "walker_seed9", "domain": "dmc_walker", "prompt": "dmc_walker_walk", "seed": 9 }
+  ]
+}

@@ -1,0 +1,98 @@
+4 already encoded, 12 to do
+W1003 22:32:46.720000 568 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|##########| 13/13 [00:00<?, ?it/s]
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Loading pipeline components...:   0%|          | 0/3 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/242 [00:00<?, ?it/s][A
+Loading weights:   1%|1         | 3/242 [00:00<00:31,  7.68it/s][A
+Loading weights:   3%|3         | 8/242 [00:00<00:15, 15.31it/s][A
+Loading weights:   5%|5         | 13/242 [00:00<00:11, 19.22it/s][A
+Loading weights:   7%|6         | 16/242 [00:01<00:15, 14.53it/s][A
+Loading weights:   8%|7         | 19/242 [00:01<00:14, 15.23it/s][A
+Loading weights:   9%|9         | 22/242 [00:01<00:18, 12.03it/s][A
+Loading weights:  11%|#1        | 27/242 [00:01<00:13, 15.55it/s][A
+Loading weights:  14%|#3        | 33/242 [00:02<00:10, 20.48it/s][A
+Loading weights:  15%|#4        | 36/242 [00:02<00:11, 17.58it/s][A
+Loading weights:  16%|#6        | 39/242 [00:02<00:11, 17.58it/s][A
+Loading weights:  17%|#6        | 41/242 [00:02<00:12, 16.09it/s][A
+Loading weights:  18%|#7        | 43/242 [00:02<00:12, 15.90it/s][A
+Loading weights:  19%|#8        | 45/242 [00:02<00:14, 13.89it/s][A
+Loading weights:  20%|##        | 49/242 [00:03<00:10, 18.02it/s][A
+Loading weights:  21%|##1       | 51/242 [00:03<00:11, 16.36it/s][A
+Loading weights:  22%|##1       | 53/242 [00:03<00:11, 16.61it/s][A
+Loading weights:  23%|##2       | 55/242 [00:03<00:14, 12.77it/s][A
+Loading weights:  25%|##5       | 61/242 [00:03<00:10, 17.11it/s][A
+Loading weights:  26%|##6       | 63/242 [00:04<00:10, 16.58it/s][A
+Loading weights:  27%|##6       | 65/242 [00:04<00:11, 15.05it/s][A
+Loading weights:  28%|##7       | 67/242 [00:04<00:12, 13.71it/s][A
+Loading weights:  29%|##9       | 71/242 [00:04<00:14, 11.95it/s][A
+Loading weights:  30%|###       | 73/242 [00:04<00:14, 11.38it/s][A
+Loading weights:  32%|###1      | 77/242 [00:05<00:11, 13.79it/s][A
+Loading weights:  34%|###4      | 83/242 [00:05<00:10, 14.73it/s][A
+Loading weights:  35%|###5      | 85/242 [00:05<00:11, 13.89it/s][A
+Loading weights:  36%|###5      | 87/242 [00:05<00:11, 13.82it/s][A
+Loading weights:  38%|###7      | 91/242 [00:05<00:08, 17.24it/s][A
+Loading weights:  38%|###8      | 93/242 [00:06<00:15,  9.36it/s][A
+Loading weights:  40%|####      | 98/242 [00:07<00:14, 10.20it/s][A
+Loading weights:  41%|####1     | 100/242 [00:07<00:13, 10.37it/s][A
+Loading weights:  42%|####2     | 102/242 [00:07<00:13, 10.16it/s][A
+Loading weights:  44%|####3     | 106/242 [00:07<00:10, 13.27it/s][A
+Loading weights:  45%|####5     | 110/242 [00:07<00:08, 16.16it/s][A
+Loading weights:  47%|####6     | 113/242 [00:08<00:11, 10.82it/s][A
+Loading weights:  48%|####8     | 117/242 [00:08<00:10, 12.12it/s][A
+Loading weights:  50%|#####     | 122/242 [00:09<00:09, 12.06it/s][A
+Loading weights:  51%|#####1    | 124/242 [00:09<00:10, 11.77it/s][A
+Loading weights:  52%|#####2    | 127/242 [00:09<00:09, 12.00it/s][A
+Loading weights:  55%|#####4    | 132/242 [00:09<00:10, 10.04it/s][A
+Loading weights:  57%|#####6    | 137/242 [00:10<00:08, 11.77it/s][A
+Loading weights:  58%|#####8    | 141/242 [00:10<00:08, 11.42it/s][A
+Loading weights:  59%|#####9    | 143/242 [00:10<00:09, 10.57it/s][A
+Loading weights:  61%|######1   | 148/242 [00:11<00:06, 14.21it/s][A
+Loading weights:  62%|######2   | 151/242 [00:11<00:06, 13.45it/s][A
+Loading weights:  63%|######3   | 153/242 [00:11<00:07, 12.69it/s][A
+Loading weights:  64%|######4   | 155/242 [00:11<00:07, 11.28it/s][A
+Loading weights:  66%|######5   | 159/242 [00:11<00:06, 13.16it/s][A
+Loading weights:  67%|######7   | 163/242 [00:12<00:05, 15.30it/s][A
+Loading weights:  68%|######8   | 165/242 [00:12<00:06, 11.18it/s][A
+Loading weights:  69%|######9   | 167/242 [00:12<00:07, 10.69it/s][A
+Loading weights:  71%|#######1  | 173/242 [00:13<00:04, 14.92it/s][A
+Loading weights:  72%|#######2  | 175/242 [00:13<00:05, 11.51it/s][A
+Loading weights:  74%|#######3  | 178/242 [00:13<00:04, 13.35it/s][A
+Loading weights:  74%|#######4  | 180/242 [00:13<00:04, 13.55it/s][A
+Loading weights:  75%|#######5  | 182/242 [00:13<00:05, 10.74it/s][A
+Loading weights:  76%|#######6  | 185/242 [00:14<00:04, 12.42it/s][A
+Loading weights:  77%|#######7  | 187/242 [00:14<00:05, 10.52it/s][A
+Loading weights:  80%|#######9  | 193/242 [00:14<00:02, 16.84it/s][A
+Loading weights:  81%|########  | 196/242 [00:14<00:03, 13.75it/s][A
+Loading weights:  82%|########1 | 198/242 [00:14<00:03, 12.56it/s][A
+Loading weights:  83%|########3 | 202/242 [00:15<00:02, 13.87it/s][A
+Loading weights:  84%|########4 | 204/242 [00:15<00:02, 13.54it/s][A
+Loading weights:  85%|########5 | 206/242 [00:15<00:03, 10.81it/s][A
+Loading weights:  86%|########6 | 209/242 [00:15<00:02, 12.84it/s][A
+Loading weights:  88%|########8 | 213/242 [00:16<00:01, 15.87it/s][A
+Loading weights:  89%|########8 | 215/242 [00:16<00:02, 10.25it/s][A
+Loading weights:  90%|########9 | 217/242 [00:16<00:02, 11.08it/s][A
+Loading weights:  92%|#########2| 223/242 [00:16<00:01, 15.34it/s][A
+Loading weights:  93%|#########2| 225/242 [00:17<00:01, 11.65it/s][A
+Loading weights:  94%|#########3| 227/242 [00:17<00:01, 11.48it/s][A
+Loading weights:  95%|#########4| 229/242 [00:17<00:01, 12.06it/s][A
+Loading weights:  95%|#########5| 231/242 [00:17<00:00, 12.01it/s][A
+Loading weights:  96%|#########6| 233/242 [00:18<00:00,  9.53it/s][A
+Loading weights:  98%|#########8| 238/242 [00:22<00:02,  1.93it/s][A
+Loading weights: 100%|##########| 242/242 [00:23<00:00,  2.67it/s][ALoading weights: 100%|##########| 242/242 [00:23<00:00, 10.42it/s]
+Loading pipeline components...:  33%|###3      | 1/3 [00:23<00:47, 23.53s/it]Loading pipeline components...:  67%|######6   | 2/3 [00:24<00:10, 10.47s/it]Loading pipeline components...: 100%|##########| 3/3 [00:24<00:00,  8.30s/it]
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A long chain of dominoes topples one after another across a 
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A metal pendulum swings back and forth in front of a plain w
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A single candle burns on a dark table, its flame flickering 
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A gray cat jumps onto a sofa and curls up to sleep.
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: Ocean waves roll in and break on a sandy beach at sunset.
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: The camera slowly pans across a misty pine forest at dawn.
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A drone flies forward over a city street lined with tall bui
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: Hands shape wet clay on a spinning pottery wheel.
+encoded in 6s, shape (1, 512, 4096) torch.bfloat16: A chef slices a ripe tomato on a wooden cutting board.
+encoded in 7s, shape (1, 512, 4096) torch.bfloat16: A skateboarder rides down a ramp and does a jump in a skate 
+encoded in 7s, shape (1, 512, 4096) torch.bfloat16: Raindrops run down a window with blurry city lights behind i
+encoded in 7s, shape (1, 512, 4096) torch.bfloat16: A tennis player serves the ball on a bright outdoor court.
+saved 16 prompt embeddings -> C:\Users\Venge\Documents\ai\results\wan_prompts.pt (71 MB)

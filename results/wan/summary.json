@@ -1,0 +1,232 @@
+[
+  {
+    "name": "baseline",
+    "applied": [],
+    "skipped": [],
+    "latency": 12.444244050002453,
+    "speedup": 1.0,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.543745517730713,
+    "error": null
+  },
+  {
+    "name": "baseline (repeat)",
+    "applied": [],
+    "skipped": [],
+    "latency": 12.433720199998788,
+    "speedup": 1.000848195766377,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "fbc_0.05",
+    "applied": [
+      "first_block_cache"
+    ],
+    "skipped": [],
+    "latency": 10.200990975003151,
+    "speedup": 1.2203824777338315,
+    "psnr": 18.605172395706177,
+    "ssim": 0.8091448992490768,
+    "skill": 0.19383356295290738,
+    "peak_gb": 7.58291482925415,
+    "error": null
+  },
+  {
+    "name": "fbc_0.1",
+    "applied": [
+      "first_block_cache"
+    ],
+    "skipped": [],
+    "latency": 7.073496974999216,
+    "speedup": 1.7592772606792684,
+    "psnr": 10.763515710830688,
+    "ssim": 0.4838133528828621,
+    "skill": 0.0,
+    "peak_gb": 7.5821213722229,
+    "error": null
+  },
+  {
+    "name": "fbc_0.2",
+    "applied": [
+      "first_block_cache"
+    ],
+    "skipped": [],
+    "latency": 4.750789550002082,
+    "speedup": 2.623123469487833,
+    "psnr": 10.216292142868042,
+    "ssim": 0.43517670035362244,
+    "skill": 0.0,
+    "peak_gb": 7.581800937652588,
+    "error": null
+  },
+  {
+    "name": "pab_2",
+    "applied": [
+      "pab"
+    ],
+    "skipped": [],
+    "latency": 11.539330725001491,
+    "speedup": 1.0784823041676521,
+    "psnr": 25.804717540740967,
+    "ssim": 0.9354158192873001,
+    "skill": 0.43108761195152345,
+    "peak_gb": 7.73318338394165,
+    "error": null
+  },
+  {
+    "name": "pab_3",
+    "applied": [
+      "pab"
+    ],
+    "skipped": [],
+    "latency": 11.379477874999793,
+    "speedup": 1.0938588132745437,
+    "psnr": 23.755404472351074,
+    "ssim": 0.8925812095403671,
+    "skill": 0.2812974323842,
+    "peak_gb": 7.733259677886963,
+    "error": null
+  },
+  {
+    "name": "taylorseer_3",
+    "applied": [
+      "taylorseer"
+    ],
+    "skipped": [],
+    "latency": 12.430787000001146,
+    "speedup": 1.0010822271231283,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "taylorseer_5",
+    "applied": [
+      "taylorseer"
+    ],
+    "skipped": [],
+    "latency": 12.43001705000097,
+    "speedup": 1.0011447042680393,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "layer_skip_2",
+    "applied": [
+      "layer_skip"
+    ],
+    "skipped": [],
+    "latency": 11.695751300001575,
+    "speedup": 1.0639970466489073,
+    "psnr": 10.283427715301514,
+    "ssim": 0.4646362103521824,
+    "skill": 0.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "layer_skip_4",
+    "applied": [
+      "layer_skip"
+    ],
+    "skipped": [],
+    "latency": 10.957231750002393,
+    "speedup": 1.1357112864831387,
+    "psnr": 10.00439727306366,
+    "ssim": 0.42871907353401184,
+    "skill": 0.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "attn_native",
+    "applied": [
+      "attention_backend"
+    ],
+    "skipped": [],
+    "latency": 12.45819389999815,
+    "speedup": 0.9988832279983801,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "attn_flex",
+    "applied": [
+      "attention_backend"
+    ],
+    "skipped": [],
+    "latency": 36.42345597500207,
+    "speedup": 0.34165858869879373,
+    "psnr": 16.513434648513794,
+    "ssim": 0.7369749397039413,
+    "skill": 0.1462214497904725,
+    "peak_gb": 7.546507358551025,
+    "error": null
+  },
+  {
+    "name": "attn_cudnn",
+    "applied": [
+      "attention_backend"
+    ],
+    "skipped": [],
+    "latency": 11.359124925000287,
+    "speedup": 1.0955279927993582,
+    "psnr": 15.43932294845581,
+    "ssim": 0.7206435054540634,
+    "skill": 0.06867571832456976,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "attn_efficient",
+    "applied": [
+      "attention_backend"
+    ],
+    "skipped": [],
+    "latency": 12.434746999999334,
+    "speedup": 1.0007644550579962,
+    "psnr": Infinity,
+    "ssim": 0.9999340921640396,
+    "skill": 1.0,
+    "peak_gb": 7.54556131362915,
+    "error": null
+  },
+  {
+    "name": "attn_flash_sdpa",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  },
+  {
+    "name": "fp8_storage",
+    "error": "RuntimeError: Input type (float) and bias type (struct c10::BFloat16) should be the same"
+  },
+  {
+    "name": "cfg_trunc_0.6",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  },
+  {
+    "name": "cfg_trunc_0.4",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  },
+  {
+    "name": "steps_20",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  },
+  {
+    "name": "steps_15",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  }
+]

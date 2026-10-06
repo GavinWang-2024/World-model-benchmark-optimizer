@@ -1,0 +1,1 @@
+{"name": "cfg0.6+fbc_0.05", "applied": ["first_block_cache", "cfg_truncation"], "skipped": [], "latency": 8.023528574998636, "speedup": 1.5518667875594736, "psnr": 18.58775520324707, "ssim": 0.8057372719049454, "skill": 0.18153562991096223, "peak_gb": 4.435003280639648, "error": null}

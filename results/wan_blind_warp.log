@@ -1,0 +1,5 @@
+=== wc_0.04_warp ...
+
+mean +- standard error over clips (n per row below); PSNR capped at 60 dB
+configuration            n     latency s       speedup         PSNR          SSIM         skill     style dev  peak GB  notes
+wc_0.04_warp            32     8.3 +-0.0   1.50 +-0.01   19.1 +-0.6 0.787 +-0.019 0.131 +-0.040 0.131 +-0.017     4.47  

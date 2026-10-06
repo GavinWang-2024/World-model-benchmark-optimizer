@@ -1,0 +1,9 @@
+=== ada_slow30_x2 ...
+=== ada_slow30_x4 ...
+=== ada_fast30_x4 ...
+
+mean +- standard error over clips (n per row below); PSNR capped at 60 dB
+configuration            n     latency s       speedup         PSNR          SSIM         skill     style dev  peak GB  notes
+ada_slow30_x2           32     8.5 +-0.1   1.47 +-0.02   21.2 +-0.9 0.762 +-0.029 0.184 +-0.048 0.318 +-0.053     5.51  
+ada_slow30_x4           32    10.9 +-0.2   1.15 +-0.02   34.7 +-2.0 0.955 +-0.013 0.577 +-0.056 0.051 +-0.013     5.51  
+ada_fast30_x4           32     7.1 +-0.1   1.77 +-0.02   19.1 +-0.7 0.679 +-0.035 0.073 +-0.034 0.380 +-0.054     5.51  

@@ -1,0 +1,36 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+C:\Users\Venge\Documents\ai\.venv\Lib\site-packages\gym\spaces\box.py:78: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+C:\Users\Venge\Documents\dreamerv3-torch\tools.py:747: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self._scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+median latency over 5 calls; frames returned; GPU memory held after warm-up
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+
+eager (unoptimized)
+  horizon  steps  frames  latency ms  ms / sim second  held MB
+       2s     40      40        53.7            26.85       70
+       5s    100     100       116.5            23.29       70
+      10s    200     200       221.7            22.17       70
+      20s    400     400       437.2            21.86       70
+      60s   1200    1200      1271.4            21.19       70
+     120s   2400    2400      2567.6            21.40       70
+Encoder CNN shapes: {'image': (64, 64, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (64, 64, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 15687811 variables.
+
+tensorrt fp16 + cuda_graphs
+  horizon  steps  frames  latency ms  ms / sim second  held MB
+       2s     40      40         3.3             1.63      149
+       5s    100     100         5.6             1.11      160
+      10s    200     200         9.4             0.94      171
+      20s    400     400        17.8             0.89      185
+      60s   1200    1200        54.8             0.91      209
+     120s   2400    2400        99.2             0.83      246

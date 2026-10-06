@@ -1,0 +1,104 @@
+[
+  {
+    "name": "taylorseer_3",
+    "applied": [
+      "taylorseer"
+    ],
+    "skipped": [],
+    "latency": 9.292903175000902,
+    "speedup": 1.3392145955472208,
+    "psnr": 12.21204686164856,
+    "ssim": 0.5872572064399719,
+    "skill": 0.0,
+    "peak_gb": 5.884500503540039,
+    "error": null
+  },
+  {
+    "name": "taylorseer_5",
+    "applied": [
+      "taylorseer"
+    ],
+    "skipped": [],
+    "latency": 8.694607950001227,
+    "speedup": 1.4312723156445943,
+    "psnr": 11.336772680282593,
+    "ssim": 0.534460686147213,
+    "skill": 0.0,
+    "peak_gb": 5.883920669555664,
+    "error": null
+  },
+  {
+    "name": "attn_flash_sdpa",
+    "error": "RuntimeError: No available kernel. Aborting execution."
+  },
+  {
+    "name": "fp8_storage",
+    "applied": [
+      "layerwise_casting"
+    ],
+    "skipped": [],
+    "latency": 13.678372300000774,
+    "speedup": 0.9097773322874287,
+    "psnr": 13.22185206413269,
+    "ssim": 0.639165610074997,
+    "skill": 0.050356375571609296,
+    "peak_gb": 3.1082515716552734,
+    "error": null
+  },
+  {
+    "name": "cfg_trunc_0.6",
+    "applied": [
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 10.212548975001482,
+    "speedup": 1.2185287965533833,
+    "psnr": 30.314242362976074,
+    "ssim": 0.9700655490159988,
+    "skill": 0.6169799171596845,
+    "peak_gb": 4.397542953491211,
+    "error": null
+  },
+  {
+    "name": "cfg_trunc_0.4",
+    "applied": [
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 9.079217449998396,
+    "speedup": 1.3706290318058099,
+    "psnr": 25.03751564025879,
+    "ssim": 0.9242050051689148,
+    "skill": 0.4041436082154821,
+    "peak_gb": 4.397542953491211,
+    "error": null
+  },
+  {
+    "name": "steps_20",
+    "applied": [
+      "fewer_steps"
+    ],
+    "skipped": [],
+    "latency": 8.684177274999456,
+    "speedup": 1.432979059747867,
+    "psnr": 10.958165645599365,
+    "ssim": 0.4633980616927147,
+    "skill": 0.0,
+    "peak_gb": 4.397027969360352,
+    "error": null
+  },
+  {
+    "name": "steps_15",
+    "applied": [
+      "fewer_steps"
+    ],
+    "skipped": [],
+    "latency": 6.817107925000528,
+    "speedup": 1.8254436944382266,
+    "psnr": 10.53922963142395,
+    "ssim": 0.4605301395058632,
+    "skill": 0.0,
+    "peak_gb": 4.397027969360352,
+    "error": null
+  }
+]

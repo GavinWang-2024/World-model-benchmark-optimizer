@@ -31,10 +31,10 @@ ml = [
     "torchmetrics",
     "torchao",
 ]
-# Phase 8: worldserve
+# Phase 8: worldserve. The server (worldoptbench/serve.py) is standard-library only, so it needs no
+# extra packages beyond the model's own (`ml`); Pillow makes it return PNG frames instead of .npy.
 serve = [
-    "fastapi",
-    "uvicorn[standard]",
+    "pillow",
 ]
 # Phase 2/7: Pareto plots, drift curves
 plot = [
@@ -46,8 +46,11 @@ dev = [
     "ruff",
 ]
 
+[project.scripts]
+worldserve = "worldoptbench.serve:main"
+
 [tool.hatch.build.targets.wheel]
-packages = ["worldoptbench"]
+packages = ["worldoptbench", "worldserve"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

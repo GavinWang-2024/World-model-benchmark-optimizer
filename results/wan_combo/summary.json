@@ -1,0 +1,62 @@
+[
+  {
+    "name": "cfg0.6+pab_2",
+    "applied": [
+      "pab",
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 9.606448125001407,
+    "speedup": 1.2956175010732403,
+    "psnr": 26.18473768234253,
+    "ssim": 0.9387789666652679,
+    "skill": 0.43928800131416273,
+    "peak_gb": 4.583013534545898,
+    "error": null
+  },
+  {
+    "name": "cfg0.6+pab_3",
+    "applied": [
+      "pab",
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 9.423043924998638,
+    "speedup": 1.3208602817898478,
+    "psnr": 25.45747709274292,
+    "ssim": 0.9286690056324005,
+    "skill": 0.36204181004679353,
+    "peak_gb": 4.583013534545898,
+    "error": null
+  },
+  {
+    "name": "cfg0.4+pab_2",
+    "applied": [
+      "pab",
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 8.663580475000344,
+    "speedup": 1.436422326494443,
+    "psnr": 25.374192237854004,
+    "ssim": 0.9287590533494949,
+    "skill": 0.40143840577328327,
+    "peak_gb": 4.583013534545898,
+    "error": null
+  },
+  {
+    "name": "cfg0.6+fbc_0.05",
+    "applied": [
+      "first_block_cache",
+      "cfg_truncation"
+    ],
+    "skipped": [],
+    "latency": 8.023528574998636,
+    "speedup": 1.5518667875594736,
+    "psnr": 18.58775520324707,
+    "ssim": 0.8057372719049454,
+    "skill": 0.18153562991096223,
+    "peak_gb": 4.435003280639648,
+    "error": null
+  }
+]

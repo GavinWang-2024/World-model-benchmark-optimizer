@@ -1,0 +1,1 @@
+{"name": "cfg_trunc_0.6", "applied": ["cfg_truncation"], "skipped": [], "latency": 10.212548975001482, "speedup": 1.2185287965533833, "psnr": 30.314242362976074, "ssim": 0.9700655490159988, "skill": 0.6169799171596845, "peak_gb": 4.397542953491211, "error": null}
