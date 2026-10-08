@@ -86,7 +86,8 @@ def compute_visual_metrics(
 
     blind = blind_ratio = style_deviation = None
     if reference_frames is not None and len(frames) >= 3 and len(reference_frames) >= 3:
-        from worldoptbench.metrics.blind import stat_ratios, style_deviation as _style_deviation, video_stats
+        from worldoptbench.metrics.blind import stat_ratios, video_stats
+        from worldoptbench.metrics.blind import style_deviation as _style_deviation
 
         blind = video_stats(frames)
         blind_ratio = stat_ratios(blind, video_stats(reference_frames))

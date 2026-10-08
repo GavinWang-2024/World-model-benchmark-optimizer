@@ -93,7 +93,7 @@ class CudaGraphExecutor:
         return entry.output.clone()
 
     def _capture(self, fn: Any, tensors: tuple[Any, ...]) -> _Captured:
-        import torch  # noqa: PLC0415
+        import torch
 
         inputs = [t.detach().contiguous().clone() for t in tensors]
         device = inputs[0].device
@@ -143,7 +143,7 @@ class CudaGraphsModule(OptimizationModule):
                 f"{type(model).__name__} doesn't expose a `tensor_executor`, so there is "
                 "nothing for CUDA graphs to wrap — see models.base.HasTensorExecutor"
             )
-        import torch  # noqa: PLC0415
+        import torch
 
         if not torch.cuda.is_available():
             raise RuntimeError("cuda_graphs needs a CUDA device; none is available")

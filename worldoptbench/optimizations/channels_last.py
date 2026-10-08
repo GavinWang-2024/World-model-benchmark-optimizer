@@ -33,7 +33,7 @@ class ChannelsLastModule(OptimizationModule):
             raise TypeError(
                 f"{type(model).__name__} doesn't expose torch_module(), so there is nothing to convert"
             )
-        import torch  # noqa: PLC0415
+        import torch
 
         module = model.torch_module()
         module.to(memory_format=torch.channels_last)  # only 4-D tensors are affected

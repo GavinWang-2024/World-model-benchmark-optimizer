@@ -59,10 +59,10 @@ class TensorRTImagination:
         self._contexts: dict[int, Any] = {}
 
     def _build_context(self, wm: Any, batch: int) -> Any:
-        import tensorrt as trt  # noqa: PLC0415
-        import torch  # noqa: PLC0415
+        import tensorrt as trt
+        import torch
 
-        from worldoptbench.models.dreamer_step import RSSMStepCore, gumbel_noise  # noqa: PLC0415
+        from worldoptbench.models.dreamer_step import RSSMStepCore, gumbel_noise
 
         core = RSSMStepCore(wm.dynamics).eval()
         dtype = torch.float32
@@ -115,16 +115,16 @@ class TensorRTImagination:
     def draw_noise(self, wm: Any, stoch: Any, steps: int) -> Any:
         """The Gumbel noise for `steps` steps, shape (steps, B, stoch, classes), scaled and in the engine's
         working dtype. Drawn apart from the loop so a chunked rollout can draw it all up front."""
-        import torch  # noqa: PLC0415
+        import torch
 
-        from worldoptbench.models.dreamer_step import gumbel_noise  # noqa: PLC0415
+        from worldoptbench.models.dreamer_step import gumbel_noise
 
         s, c = stoch.shape[1:]
         work = torch.float16 if self.precision == "fp16" else stoch.dtype
         return (gumbel_noise((steps, stoch.shape[0], s, c), stoch.device) * self.noise_scale).to(work)
 
     def __call__(self, wm: Any, stoch: Any, deter: Any, future_actions: Any, noise: Any = None) -> dict[str, Any]:
-        import torch  # noqa: PLC0415
+        import torch
 
         batch, steps = future_actions.shape[:2]
         if batch != 1:
@@ -186,13 +186,13 @@ class TensorRTModule(OptimizationModule):
                 "imagination loop to hand to TensorRT — see models.base.HasImagineBackend"
             )
         try:
-            import tensorrt  # noqa: F401, PLC0415
+            import tensorrt  # noqa: F401
         except ImportError as e:
             raise ImportError(
                 "TensorRTModule needs tensorrt: `pip install tensorrt-cu12 onnx` "
                 "(don't install torch-tensorrt next to an older torch — it replaces it)"
             ) from e
-        import torch  # noqa: PLC0415
+        import torch
 
         if not torch.cuda.is_available():
             raise RuntimeError("tensorrt needs a CUDA device; none is available")

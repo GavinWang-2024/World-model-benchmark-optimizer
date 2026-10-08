@@ -8,7 +8,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from worldoptbench.optimizations.worldcache import (  # noqa: E402
+from worldoptbench.optimizations.worldcache import (
     WorldCacheModule,
     interpolation_gain,
     motion_threshold,
@@ -104,11 +104,11 @@ def test_constructor_validates_and_label_names_the_ablations():
 
 pytest.importorskip("diffusers")
 
-from diffusers.models.transformers.transformer_wan import WanTransformer3DModel  # noqa: E402
+from diffusers.models.transformers.transformer_wan import WanTransformer3DModel
 
-from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface  # noqa: E402
-from worldoptbench.optimizations import FirstBlockCacheModule  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface
+from worldoptbench.optimizations import FirstBlockCacheModule
+from worldoptbench.stack import OptimizationStack
 
 
 def tiny_transformer():
@@ -270,7 +270,12 @@ def test_both_drift_references_agree_on_the_first_decision_and_record_every_late
 
 # ---- motion estimation and warping ---------------------------------------------------------------------------
 
-from worldoptbench.optimizations.worldcache import estimate_shift, phase_shift, translate, warp_tokens  # noqa: E402
+from worldoptbench.optimizations.worldcache import (
+    estimate_shift,
+    phase_shift,
+    translate,
+    warp_tokens,
+)
 
 
 def _smooth(channels, h, w, seed=0):

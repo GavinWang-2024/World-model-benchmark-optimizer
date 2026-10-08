@@ -267,7 +267,7 @@ def test_a_text_request_is_never_batched():
 
 
 def test_recommended_uses_the_libraries_default_and_reports_it(monkeypatch):
-    import worldoptbench.defaults as defaults
+    from worldoptbench import defaults
 
     monkeypatch.setattr(defaults, "recommended_config", lambda model: ([], {}))
     server = WorldModelServer(FakeModel(), recommended=True).start()

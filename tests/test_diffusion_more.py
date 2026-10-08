@@ -7,11 +7,11 @@ import pytest
 pytest.importorskip("diffusers")
 torch = pytest.importorskip("torch")
 
-import diffusers  # noqa: E402
-from diffusers.models.transformers.transformer_wan import WanTransformer3DModel  # noqa: E402
+import diffusers
+from diffusers.models.transformers.transformer_wan import WanTransformer3DModel
 
-from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface  # noqa: E402
-from worldoptbench.optimizations import (  # noqa: E402
+from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface
+from worldoptbench.optimizations import (
     CrossAttentionKVCacheModule,
     SchedulerModule,
     UncondReuseModule,
@@ -180,7 +180,7 @@ def test_uncond_reuse_restore_is_exact_and_validates():
 def _count_projections(model):
     counter = {"n": 0}
     for name, module in model.transformer.named_modules():
-        if name.endswith("attn2.to_k") or name.endswith("attn2.to_v"):
+        if name.endswith(("attn2.to_k", "attn2.to_v")):
             original = module.forward
 
             def counted(*a, _orig=original, **k):

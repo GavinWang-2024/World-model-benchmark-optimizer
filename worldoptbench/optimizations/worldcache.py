@@ -52,7 +52,11 @@ from typing import Any
 
 from worldoptbench.models.base import Architecture, WorldModelInterface
 from worldoptbench.optimizations.base import register_module
-from worldoptbench.optimizations.diffusion import CACHE_GROUP, _TransformerModule, refresh_hook_registries
+from worldoptbench.optimizations.diffusion import (
+    CACHE_GROUP,
+    _TransformerModule,
+    refresh_hook_registries,
+)
 
 _HEAD_HOOK = "worldcache_head_hook"
 _BLOCK_HOOK = "worldcache_block_hook"
@@ -83,7 +87,7 @@ def weighted_drift(current: Any, previous: Any, grid: tuple[int, int, int] | Non
     beta_s == 0 this is exactly `relative_l1`."""
     if grid is None or beta_s == 0.0:
         return relative_l1(current, previous)
-    batch, tokens, dim = current.shape
+    batch, tokens, _dim = current.shape
     frames, height, width = grid
     if frames * height * width != tokens:
         return relative_l1(current, previous)  # tokens aren't a plain grid (e.g. extra tokens): no spatial weighting
@@ -116,8 +120,8 @@ def interpolation_gain(probe_now: Any, probe_prev: Any, probe_prev2: Any, gamma_
 def translate(images: Any, dy: Any, dx: Any) -> Any:
     """Shift each image by (dy, dx) pixels (may be fractional): out(y, x) = in(y - dy, x - dx), bilinear,
     border-padded. images: (N, C, H, W); dy, dx: (N,) tensors. Content moves by +d."""
-    import torch  # noqa: PLC0415
-    import torch.nn.functional as functional  # noqa: PLC0415
+    import torch
+    from torch.nn import functional
 
     n, _, h, w = images.shape
     ys = torch.arange(h, device=images.device, dtype=torch.float32)[None, :, None]
@@ -130,7 +134,7 @@ def translate(images: Any, dy: Any, dx: Any) -> Any:
 
 
 def _hann(h: int, w: int, device: Any) -> Any:
-    import torch  # noqa: PLC0415
+    import torch
 
     rows = torch.hann_window(h, periodic=False, device=device)[:, None]
     cols = torch.hann_window(w, periodic=False, device=device)[None, :]
@@ -140,7 +144,7 @@ def _hann(h: int, w: int, device: Any) -> Any:
 def phase_shift(a: Any, b: Any) -> tuple[float, float]:
     """(dy, dx) with a(y, x) ~= b(y - dy, x - dx), by phase correlation summed over channels, with a
     Hann window against edge effects and a parabolic fit for sub-pixel accuracy. a, b: (C, H, W)."""
-    import torch  # noqa: PLC0415
+    import torch
 
     _, h, w = a.shape
     window = _hann(h, w, a.device)
@@ -169,8 +173,8 @@ def estimate_shift(current: Any, previous: Any, levels: int = 2, max_shift: floa
     previous(y - dy, x - dx). Coarse to fine over `levels` pyramid levels (2x average pooling each).
     Estimates larger than `max_shift` in either axis are treated as unreliable and zeroed.
     current, previous: (B, C, F, H, W) latents."""
-    import torch  # noqa: PLC0415
-    import torch.nn.functional as functional  # noqa: PLC0415
+    import torch
+    from torch.nn import functional
 
     b, c, frames, h, w = current.shape
     cur = current.float().permute(2, 0, 1, 3, 4).reshape(frames, b * c, h, w)
@@ -211,8 +215,12 @@ def warp_tokens(features: Any, grid: tuple[int, int, int], shifts: Any) -> Any:
 
 def _build_hooks():
     """diffusers imports are deferred so this module imports without diffusers installed."""
-    import torch  # noqa: PLC0415
-    from diffusers.hooks.first_block_cache import FBCBlockHook, FBCHeadBlockHook, FBCSharedBlockState  # noqa: PLC0415
+    import torch
+    from diffusers.hooks.first_block_cache import (
+        FBCBlockHook,
+        FBCHeadBlockHook,
+        FBCSharedBlockState,
+    )
 
     class WorldCacheState(FBCSharedBlockState):
         def __init__(self) -> None:
@@ -363,10 +371,10 @@ def _build_hooks():
 def apply_worldcache(transformer: Any, config: dict, total_steps, recorder: dict) -> list:
     """Hook `transformer`'s blocks; returns the (module, hook name) pairs to undo, plus the
     transformer pre-hook handle as ("pre", handle)."""
-    from diffusers.hooks import HookRegistry  # noqa: PLC0415
-    from diffusers.hooks._common import _ALL_TRANSFORMER_BLOCK_IDENTIFIERS  # noqa: PLC0415
-    from diffusers.hooks.hooks import StateManager  # noqa: PLC0415
-    import torch  # noqa: PLC0415
+    import torch
+    from diffusers.hooks import HookRegistry
+    from diffusers.hooks._common import _ALL_TRANSFORMER_BLOCK_IDENTIFIERS
+    from diffusers.hooks.hooks import StateManager
 
     WorldCacheState, HeadHook, BlockHook = _build_hooks()
     state_manager = StateManager(WorldCacheState, (), {})
@@ -392,13 +400,13 @@ def apply_worldcache(transformer: Any, config: dict, total_steps, recorder: dict
     def read_input(module, args, kwargs):
         hidden = kwargs.get("hidden_states", args[0] if args else None)
         if hidden is None or hidden.ndim != 5:
-            return None
+            return
         state = state_manager.get_state()
         _, _, frames, height, width = hidden.shape
         state.grid = (frames // patch[0], height // patch[1], width // patch[2])
         state.patch = patch
         state.latent = hidden.detach()
-        return None
+        return
 
     handle = transformer.register_forward_pre_hook(read_input, with_kwargs=True)
     undo.append(("pre", handle))

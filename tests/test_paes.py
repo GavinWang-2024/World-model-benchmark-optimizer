@@ -36,7 +36,7 @@ def test_abs_mode_keeps_the_original_sign_blind_behavior():
 
 
 def test_decay_and_abs_agree_when_the_score_decays():
-    kwargs = dict(speedup=1.5, physics_score=0.8, drift_rate=-0.004, horizon_t=30)
+    kwargs = {"speedup": 1.5, "physics_score": 0.8, "drift_rate": -0.004, "horizon_t": 30}
     assert compute_paes(**kwargs, drift_mode="decay") == compute_paes(**kwargs, drift_mode="abs")
 
 

@@ -270,7 +270,7 @@ def main() -> int:
         row_file = args.out_dir / f".row_{name.replace(' ', '_')}.json"
         row_file.unlink(missing_ok=True)
         cmd = [sys.executable, str(Path(__file__)), "--single", name, "--standard-set", str(args.standard_set), "--out-dir", str(args.out_dir)]
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = subprocess.run(cmd, capture_output=True, text=True, check=False)  # a failed config is reported, not fatal
         if proc.returncode == 0 and row_file.exists():
             rows.append(json.loads(row_file.read_text(encoding="utf-8")))
         else:
@@ -285,7 +285,9 @@ def main() -> int:
             print(f"{r['name']:22s} FAILED: {r['error']}")
             continue
         c = r["clips"]
-        cell = lambda key, w=5, d=2: "{:{w}.{d}f} +-{:.{d}f}".format(*mean_sem(c[key]), w=w, d=d)
+        def cell(key, w=5, d=2, clips=c):
+            return "{:{w}.{d}f} +-{:.{d}f}".format(*mean_sem(clips[key]), w=w, d=d)
+
         notes = ("skipped: " + ",".join(r["skipped"])) if r["skipped"] else ""
         print(f"{r['name']:22s} {r['n']:3d} {cell('latency', 5, 1):>13s} {cell('speedup', 5, 2):>13s} {cell('psnr', 5, 1):>12s} {cell('ssim', 5, 3):>13s} {cell('skill', 5, 3):>13s} {cell('style', 5, 3):>13s} {cell('dino_sim', 5, 3):>13s} {cell('clip_delta', 5, 3):>13s} {r['peak_gb']:8.2f}  {notes}")
     (args.out_dir / "summary.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")

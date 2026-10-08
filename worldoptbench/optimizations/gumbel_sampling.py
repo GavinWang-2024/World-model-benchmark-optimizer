@@ -34,7 +34,7 @@ class GumbelSamplingModule(OptimizationModule):
                 f"{type(model).__name__} has no `imagine_backend` hook — see "
                 "models.base.HasImagineBackend"
             )
-        from worldoptbench.models.dreamer_step import TorchGumbelImagination  # noqa: PLC0415
+        from worldoptbench.models.dreamer_step import TorchGumbelImagination
 
         backend = TorchGumbelImagination()
         # Keep a noise scale a previous module (latent_noise) already set.

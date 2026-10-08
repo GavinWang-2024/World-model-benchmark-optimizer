@@ -38,10 +38,10 @@ class TensorRTDecoder:
         self._engines: dict[Any, tuple[Any, tuple[int, ...]]] = {}
 
     def _build(self, wm: Any, features: Any) -> tuple[Any, tuple[int, ...]]:
-        import tensorrt as trt  # noqa: PLC0415
-        import torch  # noqa: PLC0415
+        import tensorrt as trt
+        import torch
 
-        from worldoptbench.models.dreamer_step import DecoderCore  # noqa: PLC0415
+        from worldoptbench.models.dreamer_step import DecoderCore
 
         core = DecoderCore(wm.heads["decoder"]).eval()
         example = features.detach().contiguous()
@@ -78,7 +78,7 @@ class TensorRTDecoder:
         return engine.create_execution_context(), tuple(engine.get_tensor_shape("image"))
 
     def __call__(self, wm: Any, features: Any) -> Any:
-        import torch  # noqa: PLC0415
+        import torch
 
         key = (id(wm), tuple(features.shape), features.dtype)
         entry = self._engines.get(key)
@@ -113,13 +113,13 @@ class TensorRTDecoderModule(OptimizationModule):
                 f"{type(model).__name__} has no `decode_backend` hook, so there is no decoder call to replace"
             )
         try:
-            import tensorrt  # noqa: F401, PLC0415
+            import tensorrt  # noqa: F401
         except ImportError as e:
             raise ImportError(
                 "TensorRTDecoderModule needs tensorrt: `pip install tensorrt-cu12 onnx` "
                 "(don't install torch-tensorrt next to an older torch — it replaces it)"
             ) from e
-        import torch  # noqa: PLC0415
+        import torch
 
         if not torch.cuda.is_available():
             raise RuntimeError("tensorrt_decoder needs a CUDA device; none is available")

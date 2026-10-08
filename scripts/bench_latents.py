@@ -21,14 +21,23 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel, horizon_to_steps  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.models.dreamer import (
+    DreamerRepo,
+    DreamerWorldModel,
+    horizon_to_steps,
+)
+from worldoptbench.stack import OptimizationStack
 
 CONFIGS = {
     "eager": ([], {}),
     "cuda_graphs": (["cuda_graphs"], {}),
     "tensorrt fp16 + cuda_graphs": (["tensorrt", "cuda_graphs"], {"tensorrt": {"precision": "fp16"}}),
 }
+
+
+def _call(model, kind: str, kw: dict):
+    """One timed call: the frames path or the decoder-free latents path, same inputs."""
+    return model.generate(**kw) if kind == "frames" else model.generate_latents(**kw)
 
 
 def main() -> int:
@@ -56,20 +65,20 @@ def main() -> int:
         stack.apply()
         for horizon in args.horizons:
             actions = [rng.uniform(-1, 1, n_actions).astype(np.float32) for _ in range(horizon_to_steps(horizon, repo.steps_per_second))]
-            kw = dict(init_video=context, actions=actions, horizon=horizon, context_actions=context_actions, seed=3)
+            kw = {"init_video": context, "actions": actions, "horizon": horizon, "context_actions": context_actions, "seed": 3}
             times = {}
-            for kind, call in (("frames", lambda: model.generate(**kw)), ("latents", lambda: model.generate_latents(**kw))):
+            for kind in ("frames", "latents"):
                 for _ in range(3):
-                    call()
+                    _call(model, kind, kw)
                 samples = []
                 for _ in range(args.repeats):
                     t = time.perf_counter()
-                    call()
+                    _call(model, kind, kw)
                     samples.append((time.perf_counter() - t) * 1000)
                 times[kind] = st.median(samples)
             print(f"{label:30s} {horizon:7g}s {times['frames']:8.2f} {times['latents']:8.2f} {1 - times['latents'] / times['frames']:7.0%}")
         stack.restore()
-        del model, stack
+        model = stack = None  # let the model's memory go before the next configuration
     return 0
 
 

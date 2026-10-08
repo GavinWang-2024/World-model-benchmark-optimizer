@@ -74,7 +74,7 @@ class QuantizationModule(OptimizationModule):
 
     def _config(self) -> Any:
         try:
-            import torchao.quantization as ao  # noqa: PLC0415
+            import torchao.quantization as ao
         except ImportError as e:
             raise ImportError(
                 "QuantizationModule needs torchao — install the `ml` extra "
@@ -90,7 +90,7 @@ class QuantizationModule(OptimizationModule):
             ) from e
 
     def _filter(self) -> Callable[[Any, str], bool]:
-        import torch.nn as nn  # noqa: PLC0415
+        from torch import nn
 
         def keep(module: Any, fqn: str) -> bool:
             return (

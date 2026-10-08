@@ -31,7 +31,7 @@ class CudnnBenchmarkModule(OptimizationModule):
         self._previous: bool | None = None
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import torch  # noqa: PLC0415
+        import torch
 
         if not torch.cuda.is_available():
             raise RuntimeError("cudnn_benchmark needs a CUDA device; none is available")
@@ -43,7 +43,7 @@ class CudnnBenchmarkModule(OptimizationModule):
         """Undo `apply()` (the setting is process-wide)."""
         if self._previous is None:
             return
-        import torch  # noqa: PLC0415
+        import torch
 
         torch.backends.cudnn.benchmark = self._previous
         self._previous = None

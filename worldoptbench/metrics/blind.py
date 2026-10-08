@@ -32,7 +32,7 @@ STATS = ("sharpness", "noise", "contrast", "colorfulness", "motion", "flicker", 
 
 
 def _gray(frame: Any) -> Any:
-    import numpy as np  # noqa: PLC0415
+    import numpy as np
 
     a = np.asarray(frame, dtype=np.float64)
     return 0.299 * a[..., 0] + 0.587 * a[..., 1] + 0.114 * a[..., 2]
@@ -56,7 +56,7 @@ def _immerkaer_noise(gray: Any) -> float:
 
 def _colorfulness(frame: Any) -> float:
     """Hasler and Suesstrunk's colourfulness measure."""
-    import numpy as np  # noqa: PLC0415
+    import numpy as np
 
     a = np.asarray(frame, dtype=np.float64)
     rg = a[..., 0] - a[..., 1]
@@ -66,7 +66,7 @@ def _colorfulness(frame: Any) -> float:
 
 def video_stats(frames: Sequence[Any]) -> dict[str, float]:
     """The seven reference-free statistics of one video (at least 3 frames)."""
-    import numpy as np  # noqa: PLC0415
+    import numpy as np
 
     if len(frames) < 3:
         raise ValueError("video_stats needs at least 3 frames (jerk uses a second difference)")

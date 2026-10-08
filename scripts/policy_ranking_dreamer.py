@@ -28,10 +28,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel  # noqa: E402
-from worldoptbench.models.dreamer_policy import POLICY_SETS, imagined_returns, load_actor, load_starts, true_returns  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
-from worldoptbench.utility import rank_agreement, ranking  # noqa: E402
+from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel
+from worldoptbench.models.dreamer_policy import (
+    POLICY_SETS,
+    imagined_returns,
+    load_actor,
+    load_starts,
+    true_returns,
+)
+from worldoptbench.stack import OptimizationStack
+from worldoptbench.utility import rank_agreement, ranking
 
 # name -> (modules, per-module kwargs, imagination seed)
 CONFIGS: dict[str, tuple[list[str], dict, int]] = {
@@ -116,13 +122,13 @@ def main() -> int:
     lines += ["", "Agreement of each model's ranking with the real simulator and with the unoptimized model's:", "",
               "| model | vs simulator | vs unoptimized model |", "|---|---|---|"]
     reference = imagined.get("baseline")
-    for c in imagined:
-        vs_true = rank_agreement(true_mean, imagined[c]).summary()
-        vs_base = "" if reference is None or c == "baseline" else rank_agreement(reference, imagined[c]).summary()
+    for c, scores in imagined.items():
+        vs_true = rank_agreement(true_mean, scores).summary()
+        vs_base = "" if reference is None or c == "baseline" else rank_agreement(reference, scores).summary()
         lines.append(f"| {c} | {vs_true} | {vs_base} |")
     lines += ["", "Ranking, best first: simulator: " + " > ".join(ranking(true_mean))]
-    for c in imagined:
-        lines.append(f"- {c}: " + " > ".join(ranking(imagined[c])))
+    for c, scores in imagined.items():
+        lines.append(f"- {c}: " + " > ".join(ranking(scores)))
     text = "\n".join(lines)
     print("\n" + text)
     (args.out_dir / "report.md").write_text(text + "\n", encoding="utf-8")

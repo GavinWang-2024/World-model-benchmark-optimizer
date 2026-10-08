@@ -7,7 +7,11 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from worldoptbench.models.dreamer import DreamerWorldModel, _imagine_decode, _imagine_features  # noqa: E402
+from worldoptbench.models.dreamer import (
+    DreamerWorldModel,
+    _imagine_decode,
+    _imagine_features,
+)
 
 
 class FakeDyn:

@@ -128,8 +128,8 @@ def format_profile(results: list[dict[str, Any]], hardware: str | None = None) -
         "",
         f"Speed:        {fmt(speedups)}x speedup | {fmt(per_second)} s/s generation | {fmt(vram)} GB VRAM peak"
         + (f" ({fmt(reserved)} GB held)" if reserved else ""),
-        f"Visual:       FVD n/a | PSNR {fmt(values(lambda r: r['visual'].get('psnr')), '.1f')} | "
-        f"Temporal consistency {fmt(values(lambda r: r['visual'].get('temporal_consistency')), '.3f')}{extra}",
+        (f"Visual:       FVD n/a | PSNR {fmt(values(lambda r: r['visual'].get('psnr')), '.1f')} | "
+        f"Temporal consistency {fmt(values(lambda r: r['visual'].get('temporal_consistency')), '.3f')}{extra}"),
         f"Physics:      {fmt(physics, '.3f')} | Drift onset: n/a (not computed) | Drift rate: {drift_text}",
         "",
         f"PAES Score:   {fmt(values(lambda r: r.get('paes')), '.3f')}",

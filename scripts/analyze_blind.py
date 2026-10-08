@@ -28,7 +28,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from worldoptbench.metrics.blind import STATS  # noqa: E402
+from worldoptbench.metrics.blind import STATS
 
 
 def mean_sem(values: list[float]) -> tuple[float, float]:

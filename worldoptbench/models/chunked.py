@@ -43,7 +43,7 @@ def run_chunked(
       decode_fn(features) -> frames (B, K, ...): features is (B, K, feature_dim).
       noise_fn(state, steps) -> noise (steps, B, ...), called once, after observe_fn and before any chunk.
     """
-    import torch  # noqa: PLC0415
+    import torch
 
     if chunk_steps < 1:
         raise ValueError("chunk_steps must be >= 1")

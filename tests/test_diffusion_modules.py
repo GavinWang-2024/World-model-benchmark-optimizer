@@ -14,10 +14,10 @@ import pytest
 pytest.importorskip("diffusers")
 torch = pytest.importorskip("torch")
 
-from diffusers.models.transformers.transformer_wan import WanTransformer3DModel  # noqa: E402
+from diffusers.models.transformers.transformer_wan import WanTransformer3DModel
 
-from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface  # noqa: E402
-from worldoptbench.optimizations import (  # noqa: E402
+from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface
+from worldoptbench.optimizations import (
     AttentionBackendModule,
     CfgTruncationModule,
     FasterCacheModule,
@@ -28,7 +28,7 @@ from worldoptbench.optimizations import (  # noqa: E402
     PyramidAttentionBroadcastModule,
     TaylorSeerCacheModule,
 )
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.stack import OptimizationStack
 
 
 def tiny_transformer():
@@ -162,7 +162,7 @@ def test_taylorseer_explicit_identifiers_override_the_default():
 def test_taylorseer_refuses_to_do_nothing_when_no_block_matches():
     model = FakeDiffusion()
     model.transformer = torch.nn.Sequential(torch.nn.Linear(2, 2))  # no attention blocks at all
-    with pytest.raises(Exception):  # no cache support or no blocks: either way, not a silent no-op
+    with pytest.raises(AttributeError, match="enable_cache"):  # not a silent no-op
         TaylorSeerCacheModule().apply(model)
 
 

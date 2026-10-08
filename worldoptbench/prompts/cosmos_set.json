@@ -1,0 +1,32 @@
+{
+  "_comment": "Cosmos-Predict2.5-2B screening set: the 4 physics-flavoured prompts of wan_set.json x 1 seed at a 1 s horizon (17 frames, 480x832: the smallest size at which the model produces coherent video; see models/cosmos_predict.py). `prompt` must be one of the embeddings made by scripts/encode_cosmos_prompts.py (the defaults match these). Quality is agreement with the unoptimized model's video for the same seed (CosmosReferenceScenarios), NOT physics. Each rollout is ~113 s on a 12 GB laptop GPU, so this is a 4-clip screen: confirm anything promising on more prompts before believing it.",
+  "horizons_seconds": [
+    1
+  ],
+  "prompts": [
+    {
+      "id": "ball_ramp",
+      "domain": "physics_stress",
+      "prompt": "A red ball rolls down a wooden ramp and bounces on the floor.",
+      "seed": 0
+    },
+    {
+      "id": "water_pour",
+      "domain": "physics_stress",
+      "prompt": "Water is poured from a pitcher into a glass on a kitchen counter.",
+      "seed": 0
+    },
+    {
+      "id": "robot_arm",
+      "domain": "robotics",
+      "prompt": "A robot arm picks up a red cube from a table and places it into a bin.",
+      "seed": 0
+    },
+    {
+      "id": "car_intersection",
+      "domain": "autonomous_driving",
+      "prompt": "A car drives through a busy four-way intersection while pedestrians cross the street.",
+      "seed": 0
+    }
+  ]
+}

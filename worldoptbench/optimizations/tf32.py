@@ -30,7 +30,7 @@ class Tf32Module(OptimizationModule):
         self._previous: tuple[str, bool] | None = None
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import torch  # noqa: PLC0415
+        import torch
 
         if not torch.cuda.is_available():
             raise RuntimeError("tf32 needs a CUDA device; none is available")
@@ -45,7 +45,7 @@ class Tf32Module(OptimizationModule):
         """Undo `apply()` (the setting is process-wide)."""
         if self._previous is None:
             return
-        import torch  # noqa: PLC0415
+        import torch
 
         precision, cudnn_tf32 = self._previous
         torch.set_float32_matmul_precision(precision)

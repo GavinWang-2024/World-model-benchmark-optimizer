@@ -27,7 +27,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from sweep_wan import CONFIGS, MODEL_KWARGS, _mag_ratios, _perturbation  # noqa: E402
+from sweep_wan import CONFIGS, MODEL_KWARGS, _mag_ratios, _perturbation
 
 SET16 = ROOT / "worldoptbench" / "prompts" / "wan_set_16.json"
 
@@ -82,6 +82,7 @@ def generate(names: set[str], prompts: dict[str, dict]) -> dict[tuple[str, str],
         stack.restore()
         del model, stack
         import gc
+
         import torch
 
         gc.collect()

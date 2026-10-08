@@ -6,7 +6,7 @@ The implementation lives in `worldoptbench.serve` (this is only an alias, so the
 the command line is `worldserve` (see pyproject.toml) or `python -m worldoptbench.serve`.
 """
 
-from worldoptbench.serve import (  # noqa: F401
+from worldoptbench.serve import (
     ServerBusy,
     ServerStopped,
     WorldModelServer,

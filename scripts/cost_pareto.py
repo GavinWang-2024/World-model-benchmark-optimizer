@@ -19,7 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from worldoptbench.cost import cheapest_meeting, cost_pareto, cost_rows  # noqa: E402
+from worldoptbench.cost import cheapest_meeting, cost_pareto, cost_rows
 
 
 def main() -> int:

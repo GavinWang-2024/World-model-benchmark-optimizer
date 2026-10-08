@@ -95,7 +95,7 @@ def check_vram(info: Any, device: int = 0, overhead: float = DEFAULT_OVERHEAD) -
     """`recommend` for a model (anything with `.param_count`, e.g. `ModelInfo`) on a
     real CUDA device. Needs torch; raises RuntimeError without a CUDA device.
     """
-    import torch  # noqa: PLC0415
+    import torch
 
     if not torch.cuda.is_available():
         raise RuntimeError("check_vram needs a CUDA device; none is available")

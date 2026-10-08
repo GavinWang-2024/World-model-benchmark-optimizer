@@ -95,7 +95,9 @@ def _get(result: Any, *path: str) -> Any:
 
 def measure_results(results: Sequence[Any]) -> Measured:
     """Aggregates the rollouts of one run (RunResult objects or the dicts from a results JSON)."""
-    from worldoptbench.runner import _primary_physics_score  # noqa: PLC0415  (avoids an import cycle at load)
+    from worldoptbench.runner import (
+        _primary_physics_score,
+    )
 
     if not results:
         return Measured()

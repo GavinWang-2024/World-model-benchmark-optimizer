@@ -43,7 +43,11 @@ from typing import Any
 
 from worldoptbench.models.base import Architecture, WorldModelInterface
 from worldoptbench.optimizations.base import register_module
-from worldoptbench.optimizations.diffusion import CACHE_GROUP, _TransformerModule, refresh_hook_registries
+from worldoptbench.optimizations.diffusion import (
+    CACHE_GROUP,
+    _TransformerModule,
+    refresh_hook_registries,
+)
 
 _HOOK = "adacache_hook"
 _MODULE_PATTERN = r"^[A-Za-z_]*blocks\.\d+\.(attn\d*|ffn|ff)$"
@@ -74,8 +78,8 @@ def motion_score(latent: Any, frame_step: int = 1) -> float:
 
 
 def _build_hook():
-    import torch  # noqa: PLC0415
-    from diffusers.hooks.hooks import BaseState, ModelHook  # noqa: PLC0415
+    import torch
+    from diffusers.hooks.hooks import BaseState, ModelHook
 
     class AdaState(BaseState):
         def __init__(self) -> None:
@@ -212,8 +216,8 @@ def _build_hook():
 def apply_adacache(transformer: Any, config: dict) -> tuple[list, dict, Any]:
     """Hook the transformer's attention / cross-attention / MLP modules. Returns (undo list, recorder,
     state manager)."""
-    from diffusers.hooks import HookRegistry  # noqa: PLC0415
-    from diffusers.hooks.hooks import StateManager  # noqa: PLC0415
+    from diffusers.hooks import HookRegistry
+    from diffusers.hooks.hooks import StateManager
 
     AdaState, Hook = _build_hook()
     state_manager = StateManager(AdaState, (), {})
@@ -242,7 +246,6 @@ def apply_adacache(transformer: Any, config: dict) -> tuple[list, dict, Any]:
             hidden = kwargs.get("hidden_states", args[0] if args else None)
             if hidden is not None and hidden.ndim == 5:
                 state_manager.get_state().latent = hidden.detach()
-            return None
 
         undo.append(("pre", transformer.register_forward_pre_hook(read_input, with_kwargs=True)))
     return undo, recorder, state_manager

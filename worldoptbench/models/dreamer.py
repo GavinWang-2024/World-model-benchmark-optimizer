@@ -161,15 +161,15 @@ class DreamerRepo:
         # doesn't exist on Windows. Keep a value the user set; otherwise leave
         # the repo's osmesa default off-Windows and unset it on Windows.
         user_gl = os.environ.get("MUJOCO_GL")
-        import dreamer  # noqa: PLC0415 — path-dependent import
+        import dreamer
 
         if user_gl is not None:
             os.environ["MUJOCO_GL"] = user_gl
         elif sys.platform == "win32":
             os.environ.pop("MUJOCO_GL", None)
 
-        import models  # noqa: PLC0415
-        import tools  # noqa: PLC0415
+        import models
+        import tools
 
         self._modules = (dreamer, models, tools)
         return self._modules
@@ -179,7 +179,7 @@ class DreamerRepo:
         if self._config is not None:
             return self._config
 
-        import ruamel.yaml as yaml  # noqa: PLC0415 — a dreamerv3-torch dependency
+        from ruamel import yaml
 
         _, _, tools = self.modules()
         raw = yaml.safe_load((self.repo_path / "configs.yaml").read_text())
@@ -194,7 +194,7 @@ class DreamerRepo:
 
         device = self.device
         if device is None:
-            import torch  # noqa: PLC0415
+            import torch
 
             device = "cuda:0" if torch.cuda.is_available() else "cpu"
         argv = overrides_to_argv(
@@ -263,12 +263,12 @@ def _own(frame: Any) -> np.ndarray:
 def _close(env: Any) -> None:
     try:
         env.close()
-    except Exception:
+    except Exception:  # noqa: BLE001, S110  (closing is best effort: some wrapped envs have no close)
         pass
 
 
 def _autocast(device_type: str, dtype: Any) -> Any:
-    import torch  # noqa: PLC0415
+    import torch
 
     return torch.autocast(device_type=device_type, dtype=dtype, enabled=dtype is not None)
 
@@ -288,7 +288,7 @@ def _observe_core(wm: Any, image: Any, prev_actions: Any) -> tuple[Any, Any]:
     Uses RSSM's private `_obs_out_layers` / `_suff_stats_layer`, which is fine
     for the pinned clone but would need revisiting if the repo changes.
     """
-    import torch  # noqa: PLC0415
+    import torch
 
     dyn = wm.dynamics
     embed = wm.encoder({"image": image})  # (B, C, E)
@@ -315,7 +315,7 @@ def _keyframe_positions(n: int, stride: int, device: Any) -> Any:
     uploading a Python list would be a host-to-device copy, which CUDA-graph
     capture forbids.
     """
-    import torch  # noqa: PLC0415
+    import torch
 
     keys = torch.arange(0, n, stride, device=device)
     if (n - 1) % stride != 0:
@@ -328,7 +328,7 @@ def _interpolate_keyframes(decoded_keys: Any, n: int, stride: int) -> Any:
     (B, n, ...), exact at the key frames themselves. Pure tensor ops (searchsorted
     and gathers), so it is capture-safe.
     """
-    import torch  # noqa: PLC0415
+    import torch
 
     keys = _keyframe_positions(n, stride, decoded_keys.device)
     t = torch.arange(n, device=decoded_keys.device)
@@ -351,7 +351,7 @@ def _decode_features(wm: Any, features: Any, decode_backend: Any = None) -> Any:
 def _imagine_features(wm: Any, stoch: Any, deter: Any, future_actions: Any, lean: bool, backend: Any = None) -> Any:
     """Imagines forward under `future_actions` (B, N, A) and returns the latent features (B, N, F), before any decoding.
     The imagination half of `_imagine_decode`, shared with `generate_latents` (consumers that never look at pixels)."""
-    import torch  # noqa: PLC0415
+    import torch
 
     dyn = wm.dynamics
     if backend is not None:  # a swapped-in engine (TensorRT, Gumbel-torch) runs the whole loop
@@ -393,9 +393,8 @@ def _imagine_decode(
     interpolates the rest — cheaper decoding for some visual error.
     `decode_backend` replaces the decoder call (e.g. with a TensorRT engine).
     """
-    import torch  # noqa: PLC0415
+    import torch
 
-    dyn = wm.dynamics
     features = _imagine_features(wm, stoch, deter, future_actions, lean, backend)
     n = features.shape[1]
     if decode_stride > 1 and n > 1:
@@ -456,7 +455,7 @@ class DreamerWorldModel(WorldModelInterface):
         if self._wm is not None:
             return self._wm
 
-        import torch  # noqa: PLC0415
+        import torch
 
         _, models, _ = self._repo.modules()
         config = self._repo.config
@@ -501,7 +500,7 @@ class DreamerWorldModel(WorldModelInterface):
         executors cache on their identity. The latent state travels packed in one float32 tensor
         (flattened stochastic state, then deterministic state), since an executor passes single tensors.
         None for models whose latent is not discrete (the explicit-noise backends need discrete latents)."""
-        import torch  # noqa: PLC0415
+        import torch
 
         dyn = wm.dynamics
         if not getattr(dyn, "_discrete", 0):
@@ -536,7 +535,7 @@ class DreamerWorldModel(WorldModelInterface):
         return observe_fn, chunk_fn, decode_fn, noise_fn
 
     def _run_chunked(self, wm: Any, image: Any, prev_actions: Any, futures: Any) -> Any:
-        from worldoptbench.models.chunked import run_chunked  # noqa: PLC0415
+        from worldoptbench.models.chunked import run_chunked
 
         backend = self.imagine_backend
         if backend is None or not hasattr(backend, "draw_noise"):
@@ -652,7 +651,7 @@ class DreamerWorldModel(WorldModelInterface):
     def _run(self, contexts, prev_actions, futures, seed, latents: bool = False):
         """Runs B same-shaped prepared requests as one batch; returns uint8 frames (B, N, H, W, 3), or with
         `latents=True` the float latent features (B, N, F) of the decoder-free rollout."""
-        import torch  # noqa: PLC0415
+        import torch
 
         wm = self._load()
         device = torch.device(self._repo.config.device)

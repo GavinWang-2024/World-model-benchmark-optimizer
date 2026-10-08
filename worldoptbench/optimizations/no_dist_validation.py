@@ -31,7 +31,7 @@ class NoDistValidationModule(OptimizationModule):
         self._previous: bool | None = None
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import torch  # noqa: PLC0415
+        import torch
 
         self._previous = torch.distributions.Distribution._validate_args
         torch.distributions.Distribution.set_default_validate_args(False)
@@ -40,7 +40,7 @@ class NoDistValidationModule(OptimizationModule):
     def restore(self) -> None:
         if self._previous is None:
             return
-        import torch  # noqa: PLC0415
+        import torch
 
         torch.distributions.Distribution.set_default_validate_args(self._previous)
         self._previous = None

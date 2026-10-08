@@ -166,7 +166,7 @@ def autotune(
 
     report = None
     if constraints is not None:
-        from worldoptbench.constraints import Measured, check_constraints  # noqa: PLC0415
+        from worldoptbench.constraints import Measured, check_constraints
 
         report = check_constraints(
             constraints,
@@ -191,8 +191,8 @@ def evaluate_with_runner(
     every run via `OptimizationStack.restore()`, so one candidate can't leak into
     the next.
     """
-    from worldoptbench.runner import latency_key, run_benchmark  # noqa: PLC0415
-    from worldoptbench.stack import OptimizationStack  # noqa: PLC0415
+    from worldoptbench.runner import latency_key, run_benchmark
+    from worldoptbench.stack import OptimizationStack
 
     run_kwargs = dict(run_kwargs or {})
     baseline_latency: dict[str, float] = {}
@@ -222,8 +222,8 @@ def evaluate_with_runner(
         if not module_names:
             baseline_latency.update(merged_latency)
 
-        from worldoptbench.metrics.paes import compute_paes  # noqa: PLC0415
-        from worldoptbench.runner import _primary_physics_score  # noqa: PLC0415
+        from worldoptbench.metrics.paes import compute_paes
+        from worldoptbench.runner import _primary_physics_score
 
         paes_values, physics_values, speedup_values = [], [], []
         for r in runs[0]:
@@ -251,7 +251,7 @@ def evaluate_with_runner(
 
 def default_candidates(model: Any) -> list[str]:
     """Registered modules that can be applied to `model` here, in registry order."""
-    from worldoptbench.optimizations.base import get_module_class  # noqa: PLC0415
+    from worldoptbench.optimizations.base import get_module_class
 
     return [
         name

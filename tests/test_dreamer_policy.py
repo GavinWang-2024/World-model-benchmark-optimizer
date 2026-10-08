@@ -7,7 +7,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from worldoptbench.models.dreamer_policy import (  # noqa: E402
+from worldoptbench.models.dreamer_policy import (
     DEFAULT_POLICIES,
     PolicyActor,
     PolicySpec,
@@ -137,7 +137,7 @@ def _fake_model(backend=None):
 
 @pytest.fixture()
 def fixed_observation(monkeypatch):
-    import worldoptbench.models.dreamer as dreamer
+    from worldoptbench.models import dreamer
 
     monkeypatch.setattr(dreamer, "_observe_core", lambda wm, image, prev: (torch.zeros(1, 2, 3), torch.zeros(1, 1)))
 

@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from analyze_perceptual import build, load  # noqa: E402
+from analyze_perceptual import build, load
 
 FAMILIES = [
     ("cfg", "CFG truncation / PAB", "tab:green"),
@@ -39,17 +39,17 @@ FAMILIES = [
 def family(name: str) -> tuple[str, str]:
     if name.startswith("perturb_"):
         return "noise control", "gray"
-    if name.startswith("kv+uncond") or name.startswith("uncond"):
+    if name.startswith(("kv+uncond", "uncond")):
         return "unconditional-pass reuse", "tab:olive"
     if name.startswith("mag_"):
         return "MagCache (+ CFG truncation, KV cache, bf16 VAE)", "tab:cyan"
-    if name.startswith("sched_") or name.startswith("s20shift"):
+    if name.startswith(("sched_", "s20shift")):
         return "scheduler + fewer steps", "tab:pink"
     if name.startswith(("lossless_", "vae_", "kv_cache", "tf32", "cudnn_bench")):
         return "lossless extras (KV cache, bf16 VAE, TF32)", "lightgreen"
     if name.startswith("kv+vae"):
         return "CFG truncation / PAB", "tab:green"
-    if name.startswith("cfg0.6+wc") or name.startswith("wc_"):
+    if name.startswith(("cfg0.6+wc", "wc_")):
         return "WorldCache (+CFG truncation)", "tab:blue"
     if name.startswith("cfg0.6+ada") or "guard" in name:
         return "AdaCache with guard", "tab:purple"

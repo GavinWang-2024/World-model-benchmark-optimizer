@@ -91,7 +91,7 @@ def _fake_decode_world(n_steps):
 
     dyn = types.SimpleNamespace(get_feat=lambda prior: prior["feat"])
     wm = types.SimpleNamespace(dynamics=dyn, heads={"decoder": decoder})
-    backend = lambda wm_, stoch, deter, future: {"feat": features}  # noqa: E731
+    backend = lambda wm_, stoch, deter, future: {"feat": features}
     return wm, backend, calls, torch
 
 

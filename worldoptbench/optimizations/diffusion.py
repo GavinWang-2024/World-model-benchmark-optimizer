@@ -120,7 +120,7 @@ class FirstBlockCacheModule(_CacheModule):
         return f"{self.name}_{self.threshold:g}"
 
     def _config(self, model):
-        from diffusers.hooks import FirstBlockCacheConfig  # noqa: PLC0415
+        from diffusers.hooks import FirstBlockCacheConfig
 
         return FirstBlockCacheConfig(threshold=self.threshold)
 
@@ -147,7 +147,7 @@ class PyramidAttentionBroadcastModule(_CacheModule):
         return f"{self.name}_{self.block_skip_range}"
 
     def _config(self, model):
-        from diffusers.hooks import PyramidAttentionBroadcastConfig  # noqa: PLC0415
+        from diffusers.hooks import PyramidAttentionBroadcastConfig
 
         return PyramidAttentionBroadcastConfig(
             spatial_attention_block_skip_range=self.block_skip_range,
@@ -187,10 +187,10 @@ class TaylorSeerCacheModule(_CacheModule):
         return f"{self.name}_{self.cache_interval}"
 
     def _config(self, model):
-        import re  # noqa: PLC0415
+        import re
 
-        from diffusers.hooks import TaylorSeerCacheConfig  # noqa: PLC0415
-        from diffusers.hooks.taylorseer_cache import _TRANSFORMER_BLOCK_IDENTIFIERS  # noqa: PLC0415
+        from diffusers.hooks import TaylorSeerCacheConfig
+        from diffusers.hooks.taylorseer_cache import _TRANSFORMER_BLOCK_IDENTIFIERS
 
         identifiers = self.cache_identifiers
         if identifiers is None:
@@ -241,7 +241,7 @@ class FasterCacheModule(_CacheModule):
         return reason
 
     def _config(self, model):
-        from diffusers.hooks import FasterCacheConfig  # noqa: PLC0415
+        from diffusers.hooks import FasterCacheConfig
 
         return FasterCacheConfig(
             spatial_attention_block_skip_range=self.block_skip_range,
@@ -291,10 +291,11 @@ class LayerSkipModule(_TransformerModule):
         return sorted({low + round(i * (high - low) / (count - 1)) for i in range(count)})
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        from diffusers.hooks import LayerSkipConfig, apply_layer_skip  # noqa: PLC0415
+        from diffusers.hooks import LayerSkipConfig, apply_layer_skip
 
         transformer = self._transformer(model)
-        indices = self.indices if self.indices is not None else self.middle_indices(len(transformer.blocks), self.num_blocks)
+        blocks = getattr(transformer, "blocks", None) or transformer.transformer_blocks  # Wan names them `blocks`, Cosmos `transformer_blocks`
+        indices = self.indices if self.indices is not None else self.middle_indices(len(blocks), self.num_blocks)
         apply_layer_skip(transformer, LayerSkipConfig(indices=indices))
         self.applied_indices = indices
         return model
@@ -319,7 +320,7 @@ class AttentionBackendModule(_TransformerModule):
         return f"attention_{self.backend}"
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        from diffusers.models.attention_dispatch import AttentionBackendName  # noqa: PLC0415
+        from diffusers.models.attention_dispatch import AttentionBackendName
 
         valid = [b.value for b in AttentionBackendName]
         if self.backend not in valid:
@@ -359,7 +360,7 @@ class LayerwiseCastingModule(_TransformerModule):
         return f"{self.name}_{self.storage_dtype}"
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import torch  # noqa: PLC0415
+        import torch
 
         transformer = self._transformer(model)
         # `transformer.dtype` (diffusers' own logic) skips the fp32 modules a model keeps on purpose;

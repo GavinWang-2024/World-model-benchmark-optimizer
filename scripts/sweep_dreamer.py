@@ -118,7 +118,7 @@ def run_once(checkpoint: Path, out: Path, baseline: Path | None, flags: list[str
     if standard_set is not None:
         cmd += ["--standard-set", str(standard_set)]
     cmd += flags + (extra or [])
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)  # a failed config is reported, not fatal
     if proc.returncode != 0:
         last = [ln for ln in proc.stderr.strip().splitlines() if ln.strip()][-3:]
         print(f"  FAILED ({proc.returncode}): {' | '.join(last)[:300]}")

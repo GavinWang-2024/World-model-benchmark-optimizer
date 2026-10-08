@@ -57,9 +57,9 @@ class LowRankModule(OptimizationModule):
     def label(self) -> str:
         return f"{self.name}_{self.rank_fraction:g}"
 
-    def _factor(self, linear):  # noqa: ANN001 — torch is imported lazily
-        import torch  # noqa: PLC0415
-        from torch import nn  # noqa: PLC0415
+    def _factor(self, linear):
+        import torch
+        from torch import nn
 
         weight = linear.weight.data
         out_features, in_features = weight.shape
@@ -84,8 +84,8 @@ class LowRankModule(OptimizationModule):
             raise TypeError(
                 f"{type(model).__name__} doesn't expose torch_module(), so there is nothing to factor"
             )
-        import torch  # noqa: PLC0415
-        from torch import nn  # noqa: PLC0415
+        import torch
+        from torch import nn
 
         module = model.torch_module()
         self.parameters_before = sum(p.numel() for p in module.parameters())

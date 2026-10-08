@@ -79,9 +79,9 @@ def encode_frames(frames: list[Any], fmt: str | None = None) -> dict[str, Any]:
     """Frames as base64 PNGs (needs Pillow) or one base64 .npy; `fmt` "npy" forces the latter."""
     if fmt != "npy":
         try:
-            from PIL import Image  # noqa: PLC0415
+            from PIL import Image
         except ImportError:
-            Image = None  # noqa: N806
+            Image = None
         if Image is not None:
             encoded = []
             for frame in frames:
@@ -100,7 +100,7 @@ def _json_safe(value: Any) -> Any:
 
 
 class _Job:
-    __slots__ = ("request", "kwargs", "fmt", "future", "submitted", "key")
+    __slots__ = ("fmt", "future", "key", "kwargs", "request", "submitted")
 
     def __init__(self, request: dict, kwargs: dict, fmt: str | None, key: str | None):
         self.request, self.kwargs, self.fmt, self.key = request, kwargs, fmt, key
@@ -151,10 +151,10 @@ class WorldModelServer:
         self.constraints = constraints
         self.baseline_seconds_per_video_second = baseline_seconds_per_video_second
         self._speedups: deque[float] = deque(maxlen=1000)
-        from worldoptbench.stack import OptimizationStack  # noqa: PLC0415
+        from worldoptbench.stack import OptimizationStack
 
         if recommended:
-            from worldoptbench.defaults import recommended_config  # noqa: PLC0415
+            from worldoptbench.defaults import recommended_config
 
             modules, module_kwargs = recommended_config(model)
         self._stack = OptimizationStack(model, modules or [], module_kwargs=module_kwargs)
@@ -250,11 +250,11 @@ class WorldModelServer:
 
     def _sync(self) -> None:
         try:
-            import torch  # noqa: PLC0415
+            import torch
 
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
-        except Exception:  # noqa: BLE001  (no torch, or no CUDA: nothing to wait for)
+        except Exception:  # noqa: BLE001, S110  (no torch, or no CUDA: nothing to wait for)
             pass
 
     def _batchable(self, job: _Job) -> bool:
@@ -290,7 +290,7 @@ class WorldModelServer:
         batchable = [j for j in group if self._batchable(j)]
         loose = [j for j in group if not self._batchable(j)]
         if batchable:
-            from worldoptbench.scheduling import bucket_requests  # noqa: PLC0415
+            from worldoptbench.scheduling import bucket_requests
 
             for indices in bucket_requests([j.kwargs for j in batchable], max_batch=self.max_batch):
                 batches.append([batchable[i] for i in indices])
@@ -430,7 +430,7 @@ def make_http_server(server: WorldModelServer, host: str = "127.0.0.1", port: in
     """A ThreadingHTTPServer in front of `server` (call `.serve_forever()`; port 0 picks a free port)."""
 
     class Handler(BaseHTTPRequestHandler):
-        def log_message(self, format: str, *args: Any) -> None:  # noqa: A002  (keep tests and CLI quiet)
+        def log_message(self, format: str, *args: Any) -> None:
             pass
 
         def _send(self, status: int, payload: dict) -> None:
@@ -441,13 +441,13 @@ def make_http_server(server: WorldModelServer, host: str = "127.0.0.1", port: in
             self.end_headers()
             self.wfile.write(body)
 
-        def do_GET(self) -> None:  # noqa: N802
+        def do_GET(self) -> None:
             routes = {"/health": lambda: {"status": "ok", "queue_depth": server._queue.qsize()},
                       "/info": server.info, "/profile": server.profile}
             handler = routes.get(self.path.split("?")[0])
             self._send(200, handler()) if handler else self._send(404, {"error": f"no route {self.path}"})
 
-        def do_POST(self) -> None:  # noqa: N802
+        def do_POST(self) -> None:
             if self.path.split("?")[0] != "/generate":
                 return self._send(404, {"error": f"no route {self.path}"})
             length = int(self.headers.get("Content-Length") or 0)
@@ -476,11 +476,11 @@ def make_http_server(server: WorldModelServer, host: str = "127.0.0.1", port: in
 
 def build_model(name: str, kwargs: dict[str, Any]) -> Any:
     if name == "wan":
-        from worldoptbench.models.wan_video import WanVideo  # noqa: PLC0415
+        from worldoptbench.models.wan_video import WanVideo
 
         return WanVideo(**kwargs)
     if name == "dreamer":
-        from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel  # noqa: PLC0415
+        from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel
 
         kwargs = dict(kwargs)
         checkpoint = kwargs.pop("checkpoint_dir")

@@ -27,7 +27,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from worldoptbench.metrics.fvd import reduced_frechet_distance  # noqa: E402
+from worldoptbench.metrics.fvd import reduced_frechet_distance
 
 
 def load(directory: Path) -> dict[str, dict[str, dict]]:
@@ -86,8 +86,8 @@ def main() -> int:
     rows.sort(key=lambda r: (not r["control"], r["speed"]))
 
     lines = [
-        f"Frechet distance to the baseline set in the baseline's PCA space ({args.components} components, shrink {args.shrink}); "
-        f"floor (mean over the perturbation controls) {('%.3f' % floor) if floor is not None else 'n/a'}; sd = bootstrap over clips.",
+        (f"Frechet distance to the baseline set in the baseline's PCA space ({args.components} components, shrink {args.shrink}); "
+        f"floor (mean over the perturbation controls) {(f'{floor:.3f}') if floor is not None else 'n/a'}; sd = bootstrap over clips."),
         "",
         "| configuration | n | speedup | distance | sd | excess over floor |",
         "|---|---|---|---|---|---|",

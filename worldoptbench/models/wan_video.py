@@ -78,9 +78,9 @@ class WanVideo(WorldModelInterface):
         """
         if height % 16 or width % 16:
             raise ValueError("height and width must be multiples of 16 (VAE 8x spatial compression x patch size 2)")
-        import torch  # noqa: PLC0415
-        from diffusers import AutoencoderKLWan, WanPipeline  # noqa: PLC0415
-        from huggingface_hub import snapshot_download  # noqa: PLC0415
+        import torch
+        from diffusers import AutoencoderKLWan, WanPipeline
+        from huggingface_hub import snapshot_download
 
         self.height, self.width = height, width
         self.num_inference_steps = num_inference_steps
@@ -114,7 +114,7 @@ class WanVideo(WorldModelInterface):
         """MagCache's per-step magnitude ratios for this model, size, step count and sampler, from the table bundled in
         `worldoptbench/data/wan_mag_ratios.json` (measured with `optimizations.diffusion_more.calibrate_mag_ratios`), or None
         when this setup was never calibrated. Read at call time, so it follows `fewer_steps` and a swapped scheduler."""
-        import json  # noqa: PLC0415
+        import json
 
         path = Path(__file__).resolve().parent.parent / "data" / "wan_mag_ratios.json"
         if not path.exists():
@@ -161,7 +161,7 @@ class WanVideo(WorldModelInterface):
             raise NotImplementedError("WanVideo is text-to-video; frame/video conditioning isn't supported")
         if actions is not None:
             raise NotImplementedError("WanVideo isn't action-conditioned")
-        import torch  # noqa: PLC0415
+        import torch
 
         seed = int(kwargs.pop("seed", 0))
         guidance = float(kwargs.pop("guidance_scale", self.guidance_scale))
@@ -240,13 +240,13 @@ class WanReferenceScenarios:
         )
 
     def _path(self, prompt: str, seed: int, horizon: float) -> Path:
-        import hashlib  # noqa: PLC0415
+        import hashlib
 
         digest = hashlib.sha1(prompt.encode()).hexdigest()[:10]
         return self._cache_dir / f"{digest}_seed{seed}_h{horizon:g}_{self._settings_tag()}.npz"
 
     def __call__(self, entry: dict[str, Any], horizon: float):
-        from worldoptbench.scenarios import Scenario  # noqa: PLC0415
+        from worldoptbench.scenarios import Scenario
 
         prompt, seed = entry["prompt"], int(entry.get("seed", 0))
         path = self._path(prompt, seed, horizon)

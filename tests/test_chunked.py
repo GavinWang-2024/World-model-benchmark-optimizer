@@ -8,15 +8,20 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from test_tensorrt_gumbel import _fake_rssm  # noqa: E402
+from test_tensorrt_gumbel import _fake_rssm
 
-from worldoptbench.models.base import HasChunkedRollout, ModelInfo, Rollout, WorldModelInterface  # noqa: E402
-from worldoptbench.models.chunked import run_chunked  # noqa: E402
-from worldoptbench.models.dreamer import DreamerWorldModel  # noqa: E402
-from worldoptbench.models.dreamer_step import TorchGumbelImagination  # noqa: E402
-from worldoptbench.optimizations import ChunkedRolloutModule  # noqa: E402
-from worldoptbench.optimizations.tensorrt_backend import TensorRTImagination  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.models.base import (
+    HasChunkedRollout,
+    ModelInfo,
+    Rollout,
+    WorldModelInterface,
+)
+from worldoptbench.models.chunked import run_chunked
+from worldoptbench.models.dreamer import DreamerWorldModel
+from worldoptbench.models.dreamer_step import TorchGumbelImagination
+from worldoptbench.optimizations import ChunkedRolloutModule
+from worldoptbench.optimizations.tensorrt_backend import TensorRTImagination
+from worldoptbench.stack import OptimizationStack
 
 # ---- the driver on fake functions -----------------------------------------------------------------------
 

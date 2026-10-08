@@ -65,7 +65,7 @@ POLICY_SETS = {"coarse": DEFAULT_POLICIES, "fine": FINE_POLICIES}
 
 def load_actor(repo: Any, checkpoint_dir: str | pathlib.Path, wm: Any) -> Any:
     """The trained actor network from a dreamerv3-torch checkpoint, in eval mode with gradients off."""
-    import torch  # noqa: PLC0415
+    import torch
 
     _, models, _ = repo.modules()
     config = repo.config
@@ -89,7 +89,7 @@ class PolicyActor:
     so the same seed gives the same random draws whatever world model it is run in."""
 
     def __init__(self, actor: Any, spec: PolicySpec, num_actions: int, device: Any, seed: int):
-        import torch  # noqa: PLC0415
+        import torch
 
         self._actor, self.spec, self._n, self._device = actor, spec, num_actions, torch.device(device)
         self._generator = torch.Generator(device=self._device).manual_seed(int(seed))
@@ -100,7 +100,7 @@ class PolicyActor:
 
     def act(self, feat: Any) -> Any:
         """`feat`: (1, F) latent features -> (1, A) action in [-1, 1]."""
-        import torch  # noqa: PLC0415
+        import torch
 
         kind, value = self.spec.kind, self.spec.value
         step = self._step
@@ -132,9 +132,9 @@ def true_returns(
     """Episode returns of each policy in the real simulator. The baseline world model does the state estimation
     (encoder, then the RSSM posterior), as the agent does when it acts; `episodes` episodes per policy, each on its own seed
     (the same seeds for every policy)."""
-    import torch  # noqa: PLC0415
+    import torch
 
-    from worldoptbench.models.dreamer import _close, _own  # noqa: PLC0415
+    from worldoptbench.models.dreamer import _close, _own
 
     config = repo.config
     device = torch.device(config.device)
@@ -183,7 +183,7 @@ def load_starts(
     episodes = []
     for path in files:
         with np.load(path) as data:
-            reward = data["reward"] if "reward" in data else None
+            reward = data.get("reward", None)
             if min_return is not None and (reward is None or float(reward.sum()) < min_return):
                 continue
             if len(data["image"]) > context_steps + 1:
@@ -208,9 +208,9 @@ def imagined_returns(
     """For each policy, the summed reward the (possibly optimized) world model predicts over `horizon` imagined steps from each
     start state. `model` is a DreamerWorldModel with its optimization stack applied: the weights are whatever the stack left,
     `autocast_dtype` is honoured, and a set `imagine_backend` (Gumbel sampler, TensorRT) does each imagination step."""
-    import torch  # noqa: PLC0415
+    import torch
 
-    from worldoptbench.models.dreamer import _autocast, _observe_core  # noqa: PLC0415
+    from worldoptbench.models.dreamer import _autocast, _observe_core
 
     wm = model._load()
     config = model._repo.config

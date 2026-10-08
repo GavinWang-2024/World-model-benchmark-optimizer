@@ -33,8 +33,9 @@ class TorchModel(PlainModel):
         return self._module
 
 
-def _install_fake_torchao(monkeypatch, config_names=tuple(SCHEMES.values())):
+def _install_fake_torchao(monkeypatch, config_names=None):
     """Registers a fake `torchao.quantization` whose quantize_ just records its call."""
+    config_names = tuple(SCHEMES.values()) if config_names is None else config_names
     calls = []
     fake = types.ModuleType("torchao.quantization")
     fake.quantize_ = lambda module, config, filter_fn=None: calls.append((module, config, filter_fn))

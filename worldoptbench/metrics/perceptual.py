@@ -43,7 +43,7 @@ def sample_indices(count: int, wanted: int) -> list[int]:
     """`wanted` evenly spaced frame indices out of `count` (all of them if there are fewer)."""
     if count < 1:
         raise ValueError("a video needs at least one frame")
-    return sorted({int(round(i)) for i in np.linspace(0, count - 1, min(wanted, count))})
+    return sorted({round(i) for i in np.linspace(0, count - 1, min(wanted, count))})
 
 
 def cosine_rows(a: Any, b: Any) -> Any:
@@ -76,28 +76,28 @@ class PerceptualScorer:
     # -- models --
 
     def _device_name(self) -> str:
-        import torch  # noqa: PLC0415
+        import torch
 
         return self._device or ("cuda" if torch.cuda.is_available() else "cpu")
 
     def _load_dino(self) -> Any:
         if self._dino is None:
-            from transformers import AutoModel  # noqa: PLC0415
+            from transformers import AutoModel
 
             self._dino = AutoModel.from_pretrained(DINO_REPO).to(self._device_name()).eval()
         return self._dino
 
     def _load_clip(self) -> tuple[Any, Any]:
         if self._clip is None:
-            from transformers import AutoTokenizer, CLIPModel  # noqa: PLC0415
+            from transformers import AutoTokenizer, CLIPModel
 
             self._clip = CLIPModel.from_pretrained(CLIP_REPO).to(self._device_name()).eval()
             self._tokenizer = AutoTokenizer.from_pretrained(CLIP_REPO)
         return self._clip, self._tokenizer
 
     def _pixels(self, frames: Sequence[Any], size: tuple[int, int], stats: tuple) -> Any:
-        import torch  # noqa: PLC0415
-        import torch.nn.functional as functional  # noqa: PLC0415
+        import torch
+        from torch.nn import functional
 
         x = torch.from_numpy(np.stack([np.ascontiguousarray(f, dtype=np.uint8) for f in frames]))
         x = x.permute(0, 3, 1, 2).float().div(255.0).to(self._device_name())
@@ -110,17 +110,17 @@ class PerceptualScorer:
 
     def dino_embed(self, frames: Sequence[Any]) -> np.ndarray:
         """(n, d) DINOv2 [CLS] embeddings, frames resized (not cropped) to 224 x a multiple of 14."""
-        import torch  # noqa: PLC0415
+        import torch
 
         height, width = np.asarray(frames[0]).shape[:2]
-        size = (224, max(14, int(round(224 * width / height / 14)) * 14))
+        size = (224, max(14, round(224 * width / height / 14) * 14))
         with torch.no_grad():
             out = self._load_dino()(pixel_values=self._pixels(frames, size, _IMAGENET))
         return out.pooler_output.float().cpu().numpy()
 
     def clip_image_embed(self, frames: Sequence[Any]) -> np.ndarray:
         """(n, d) CLIP image embeddings; frames are squashed to 224 x 224 so no side of the frame is lost."""
-        import torch  # noqa: PLC0415
+        import torch
 
         model, _ = self._load_clip()
         with torch.no_grad():
@@ -130,7 +130,7 @@ class PerceptualScorer:
 
     def clip_text_embed(self, text: str) -> np.ndarray:
         """(1, d) CLIP text embedding."""
-        import torch  # noqa: PLC0415
+        import torch
 
         model, tokenizer = self._load_clip()
         tokens = tokenizer(text, padding="max_length", max_length=77, truncation=True, return_tensors="pt")

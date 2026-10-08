@@ -22,7 +22,12 @@ import json
 from pathlib import Path
 
 from worldoptbench.autotune import autotune, default_candidates, evaluate_with_runner
-from worldoptbench.models.dreamer import DreamerReplayScenarios, DreamerRepo, DreamerSimScenarios, DreamerWorldModel
+from worldoptbench.models.dreamer import (
+    DreamerReplayScenarios,
+    DreamerRepo,
+    DreamerSimScenarios,
+    DreamerWorldModel,
+)
 from worldoptbench.optimizations.base import get_module_class
 from worldoptbench.scenarios import Scenario
 

@@ -103,7 +103,7 @@ class OptimizationModule(ABC):
 
 def _cuda_available() -> bool:
     try:
-        import torch  # noqa: PLC0415
+        import torch
     except ImportError:
         return False
     return bool(torch.cuda.is_available())

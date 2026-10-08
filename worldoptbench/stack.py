@@ -16,7 +16,12 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
-from worldoptbench.constraints import ConstraintReport, Constraints, check_constraints, measure_results
+from worldoptbench.constraints import (
+    ConstraintReport,
+    Constraints,
+    check_constraints,
+    measure_results,
+)
 from worldoptbench.models.base import WorldModelInterface
 from worldoptbench.optimizations.base import OptimizationModule, get_module_class
 from worldoptbench.runner import BASELINE_OPTIMIZATION

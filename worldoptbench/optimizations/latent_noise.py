@@ -57,7 +57,7 @@ class LatentNoiseModule(OptimizationModule):
             )
         backend = model.imagine_backend
         if backend is None:
-            from worldoptbench.models.dreamer_step import TorchGumbelImagination  # noqa: PLC0415
+            from worldoptbench.models.dreamer_step import TorchGumbelImagination
 
             backend = TorchGumbelImagination()
         if not hasattr(backend, "noise_scale"):

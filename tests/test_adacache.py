@@ -8,7 +8,12 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from worldoptbench.optimizations.adacache import PRESETS, AdaCacheModule, codebook_rate, motion_score  # noqa: E402
+from worldoptbench.optimizations.adacache import (
+    PRESETS,
+    AdaCacheModule,
+    codebook_rate,
+    motion_score,
+)
 
 # ---- the maths ---------------------------------------------------------------------------------------
 
@@ -65,11 +70,11 @@ def test_constructor_validates_and_labels():
 
 pytest.importorskip("diffusers")
 
-from diffusers.models.transformers.transformer_wan import WanTransformer3DModel  # noqa: E402
+from diffusers.models.transformers.transformer_wan import WanTransformer3DModel
 
-from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface  # noqa: E402
-from worldoptbench.optimizations import FirstBlockCacheModule  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.models.base import ModelInfo, Rollout, WorldModelInterface
+from worldoptbench.optimizations import FirstBlockCacheModule
+from worldoptbench.stack import OptimizationStack
 
 
 def tiny_transformer():
@@ -226,7 +231,7 @@ def test_it_will_not_stack_on_another_cache_and_the_stack_skips_it():
 def test_a_transformer_without_blocks_is_refused_loudly():
     model = FakeDiffusion()
     model.transformer = torch.nn.Sequential(torch.nn.Linear(2, 2))
-    with pytest.raises(Exception):  # no cache_context support or no matching modules: never a silent no-op
+    with pytest.raises(ValueError, match="no attention/MLP modules"):  # never a silent no-op
         AdaCacheModule().apply(model)
 
 

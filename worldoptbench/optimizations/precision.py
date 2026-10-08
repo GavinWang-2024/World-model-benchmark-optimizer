@@ -48,7 +48,7 @@ class PrecisionModule(OptimizationModule):
                 f"{type(model).__name__} doesn't expose `autocast_dtype`, so there is nothing "
                 "to switch to mixed precision — see models.base.HasAutocast"
             )
-        import torch  # noqa: PLC0415
+        import torch
 
         if self.dtype == "bfloat16" and torch.cuda.is_available() and not torch.cuda.is_bf16_supported():
             raise RuntimeError("This GPU doesn't support bfloat16; use dtype='float16'")

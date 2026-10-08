@@ -45,7 +45,7 @@ class RankAgreement:
 def rank_agreement(reference: dict[str, float], other: dict[str, float]) -> RankAgreement:
     """How closely `other`'s ordering of the policies follows `reference`'s. Only policies present in both are used;
     fewer than 3 give an all-None result, and a constant score vector (no ordering) gives None for the correlations."""
-    from scipy import stats  # noqa: PLC0415
+    from scipy import stats
 
     names = sorted(set(reference) & set(other))
     if len(names) < 3:

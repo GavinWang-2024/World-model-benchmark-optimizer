@@ -42,7 +42,7 @@ def frechet_distance(a: Any, b: Any, shrink: float = 0.0) -> float:
     `shrink` in [0, 1) blends each covariance towards (trace / d) * I, which keeps the matrix square root
     well defined when n < d. Raises if the two sets do not share a dimension or either has fewer than 2 rows.
     """
-    from scipy import linalg  # noqa: PLC0415
+    from scipy import linalg
 
     a, b = np.asarray(a, dtype=np.float64), np.asarray(b, dtype=np.float64)
     if a.ndim != 2 or b.ndim != 2 or a.shape[1] != b.shape[1]:

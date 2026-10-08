@@ -14,6 +14,7 @@ Configurations: the unoptimized eager rollout, and the best measured stack (Tens
 from __future__ import annotations
 
 import argparse
+import functools
 import statistics as st
 import sys
 import time
@@ -24,8 +25,12 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from worldoptbench.models.dreamer import DreamerRepo, DreamerWorldModel, horizon_to_steps  # noqa: E402
-from worldoptbench.stack import OptimizationStack  # noqa: E402
+from worldoptbench.models.dreamer import (
+    DreamerRepo,
+    DreamerWorldModel,
+    horizon_to_steps,
+)
+from worldoptbench.stack import OptimizationStack
 
 CONFIGS = {
     "eager (unoptimized)": ([], {}),
@@ -62,7 +67,9 @@ def main() -> int:
         for horizon in args.horizons:
             steps = horizon_to_steps(horizon, repo.steps_per_second)
             actions = [rng.uniform(-1, 1, n_actions).astype(np.float32) for _ in range(steps)]
-            call = lambda: model.generate(init_video=context, actions=actions, horizon=horizon, context_actions=context_actions, seed=3)
+            call = functools.partial(  # binds this iteration's values
+                model.generate, init_video=context, actions=actions, horizon=horizon, context_actions=context_actions, seed=3
+            )
             for _ in range(2):
                 out = call()
             times = []
@@ -74,7 +81,7 @@ def main() -> int:
             print(f"{horizon:8g}s {steps:6d} {len(out.frames):7d} {median:11.1f} {median / horizon:16.2f} {torch.cuda.memory_allocated() / 2**20:8.0f}")
             assert len(out.frames) == steps, "the model must return one frame per step"
         stack.restore()
-        del model, stack
+        model = stack = None
         torch.cuda.empty_cache()
     return 0
 

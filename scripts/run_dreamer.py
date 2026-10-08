@@ -20,7 +20,12 @@ import json
 import sys
 from pathlib import Path
 
-from worldoptbench.models.dreamer import DreamerReplayScenarios, DreamerRepo, DreamerSimScenarios, DreamerWorldModel
+from worldoptbench.models.dreamer import (
+    DreamerReplayScenarios,
+    DreamerRepo,
+    DreamerSimScenarios,
+    DreamerWorldModel,
+)
 from worldoptbench.reporting import summarize
 from worldoptbench.runner import run_benchmark
 from worldoptbench.stack import OptimizationStack

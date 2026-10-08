@@ -5,11 +5,13 @@ identical video).
 """
 
 import numpy as np
-import pytest
 
 from worldoptbench.models.base import Rollout
-from worldoptbench.models.wan_video import WanReferenceScenarios, compose_callbacks, frames_for_horizon
-
+from worldoptbench.models.wan_video import (
+    WanReferenceScenarios,
+    compose_callbacks,
+    frames_for_horizon,
+)
 
 # ---- frame counts ----------------------------------------------------------------------------------
 
@@ -102,7 +104,7 @@ def test_seed_defaults_to_zero_and_distinct_requests_get_distinct_cache_files(tm
     provider({"id": "x", "prompt": "a ball", "seed": 1}, 2)
     provider({"id": "x", "prompt": "a ball", "seed": 0}, 3)
     provider({"id": "y", "prompt": "a cube", "seed": 0}, 2)
-    assert [c[2] for c in fake.calls][0] == 0
+    assert next(c[2] for c in fake.calls) == 0
     assert len(list(tmp_path.glob("*.npz"))) == 4  # seed, horizon and prompt each change the reference
 
 

@@ -78,7 +78,7 @@ class SchedulerModule(OptimizationModule):
         return reason
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import diffusers  # noqa: PLC0415
+        import diffusers
 
         pipeline = model.pipeline
         config = dict(pipeline.scheduler.config)
@@ -106,7 +106,7 @@ class SchedulerModule(OptimizationModule):
 
 
 def _build_uncond_hook():
-    from diffusers.hooks.hooks import BaseState, ModelHook  # noqa: PLC0415
+    from diffusers.hooks.hooks import BaseState, ModelHook
 
     class State(BaseState):
         def __init__(self) -> None:
@@ -171,8 +171,8 @@ class UncondReuseModule(_TransformerModule):
         return f"{self.name}_{self.period}"
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        from diffusers.hooks import HookRegistry  # noqa: PLC0415
-        from diffusers.hooks.hooks import StateManager  # noqa: PLC0415
+        from diffusers.hooks import HookRegistry
+        from diffusers.hooks.hooks import StateManager
 
         transformer = self._transformer(model)
         if not hasattr(transformer, "cache_context"):
@@ -199,7 +199,7 @@ class UncondReuseModule(_TransformerModule):
 
 
 def _build_kv_hook():
-    from diffusers.hooks.hooks import BaseState, ModelHook  # noqa: PLC0415
+    from diffusers.hooks.hooks import BaseState, ModelHook
 
     class State(BaseState):
         def __init__(self) -> None:
@@ -246,24 +246,24 @@ class CrossAttentionKVCacheModule(_TransformerModule):
     )
 
     _HOOK = "cross_attn_kv_cache_hook"
-    _PATTERN = r"^blocks\.\d+\.attn2\.(to_k|to_v)$"
+    _PATTERN = r"^(transformer_)?blocks\.\d+\.attn2\.(to_k|to_v)$"  # Wan: blocks, Cosmos: transformer_blocks
 
     def __init__(self) -> None:
         self._hooked: list = []
         self._applied_to: Any = None
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import re  # noqa: PLC0415
+        import re
 
-        from diffusers.hooks import HookRegistry  # noqa: PLC0415
-        from diffusers.hooks.hooks import StateManager  # noqa: PLC0415
+        from diffusers.hooks import HookRegistry
+        from diffusers.hooks.hooks import StateManager
 
         transformer = self._transformer(model)
         if not hasattr(transformer, "cache_context"):
             raise TypeError("cross_attn_kv_cache needs a diffusers transformer with cache_context")
         targets = [m for name, m in transformer.named_modules() if re.fullmatch(self._PATTERN, name)]
         if not targets:
-            raise ValueError("cross_attn_kv_cache found no `blocks.N.attn2.to_k` / `to_v` projections")
+            raise ValueError("cross_attn_kv_cache found no `blocks.N.attn2.to_k` / `to_v` (or `transformer_blocks.N...`) projections")
         state_cls, hook_cls = _build_kv_hook()
         for module in targets:
             HookRegistry.check_if_exists_or_initialize(module).register_hook(hook_cls(StateManager(state_cls, (), {})), self._HOOK)
@@ -323,7 +323,7 @@ class VaeModule(OptimizationModule):
         return reason
 
     def apply(self, model: WorldModelInterface) -> WorldModelInterface:
-        import torch  # noqa: PLC0415
+        import torch
 
         vae = model.pipeline.vae
         self._vae = vae
@@ -356,11 +356,11 @@ def calibrate_mag_ratios(model: Any, run: Any, num_inference_steps: int | None =
     full generation on `model`) with calibration switched on, captures that output, and returns the conditional branch's
     list (the first printed). The ratios are checkpoint- and scheduler-dependent: calibrate with the sampler and step
     count you will use."""
-    import contextlib  # noqa: PLC0415
-    import io  # noqa: PLC0415
-    import re  # noqa: PLC0415
+    import contextlib
+    import io
+    import re
 
-    from diffusers.hooks import MagCacheConfig  # noqa: PLC0415
+    from diffusers.hooks import MagCacheConfig
 
     transformer = model.transformer
     steps = int(num_inference_steps or model.num_inference_steps)
@@ -378,7 +378,7 @@ def calibrate_mag_ratios(model: Any, run: Any, num_inference_steps: int | None =
     return [float(x) for x in lists[0].split(",")]
 
 
-from worldoptbench.optimizations.diffusion import _CacheModule  # noqa: E402
+from worldoptbench.optimizations.diffusion import _CacheModule
 
 
 @register_module
@@ -424,7 +424,7 @@ class MagCacheModule(_CacheModule):
         return reason
 
     def _config(self, model):
-        from diffusers.hooks import MagCacheConfig  # noqa: PLC0415
+        from diffusers.hooks import MagCacheConfig
 
         ratios = self._ratios(model)
         if ratios is None:

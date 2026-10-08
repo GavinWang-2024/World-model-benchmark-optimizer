@@ -35,7 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from analyze_blind import load, mean_sem  # noqa: E402
+from analyze_blind import load, mean_sem
 
 
 def pareto_front(points: dict[str, tuple[float, float]]) -> set[str]:

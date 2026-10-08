@@ -81,12 +81,12 @@ def policy_section(coarse_dir: Path, fine_dir: Path) -> list[str]:
         return ["_No policy-ranking results found; run `scripts/policy_ranking_dreamer.py`._", ""]
     names = list(next(iter(sets.values()))[1])
     lines = [
-        "Does the optimized world model still rank policies like the real simulator and like the unoptimized model? Nine policies per set "
+        ("Does the optimized world model still rank policies like the real simulator and like the unoptimized model? Nine policies per set "
         "(variants of the trained actor: `coarse` spans terrible to good play, `fine` is graded action noise so true returns are close), "
         "imagined from 24 held-out walking start states over 60 steps (`scripts/policy_ranking_dreamer.py`). Spearman rank correlation; "
         "`baseline_reseed` is the unoptimized model with different random draws, the noise floor: nothing can agree with another model "
         "better than that. **With nine policies these measures cannot see small losses**: one swapped pair of policies moves Spearman by about "
-        "0.02-0.03, so rows within a few hundredths of the reseed's value are not distinguishable from it.",
+        "0.02-0.03, so rows within a few hundredths of the reseed's value are not distinguishable from it."),
         "",
         "| model | coarse: vs simulator | coarse: vs unoptimized | fine: vs simulator | fine: vs unoptimized | actor's imagined return (coarse) |",
         "|---|---|---|---|---|---|",
@@ -107,9 +107,9 @@ def policy_section(coarse_dir: Path, fine_dir: Path) -> list[str]:
         lines.append(f"| {name} | " + " | ".join(cells) + f" | {scale} |")
     lines += [
         "",
-        "Read the last column with the others: `low_rank_0.25` keeps the ranking (about 0.95) while its imagined returns collapse "
+        ("Read the last column with the others: `low_rank_0.25` keeps the ranking (about 0.95) while its imagined returns collapse "
         "(the actor scores about 40 against 112 unoptimized), so it is still usable to *order* policies and useless for estimating how "
-        "good one is. The same model lost most of its physics skill (0.11 against 0.30) in the Dreamer table above.",
+        "good one is. The same model lost most of its physics skill (0.11 against 0.30) in the Dreamer table above."),
         "",
     ]
     return lines
@@ -125,7 +125,7 @@ def wan_section(perceptual_dirs: list[Path], pixel_dir: Path) -> list[str]:
     configs: dict = {}
     for directory in perceptual_dirs:
         configs.update(load(directory))
-    rows, floor, null_name = build(configs)
+    rows, floor, _null_name = build(configs)
     pixel = load_pixel(pixel_dir) if pixel_dir.exists() else {}
 
     def style(name: str) -> str:
@@ -134,11 +134,11 @@ def wan_section(perceptual_dirs: list[Path], pixel_dir: Path) -> list[str]:
         return f"{st.mean(values):.3f}" if values else ""
 
     lines = [
-        "Wan2.1-T2V-1.3B, 32 clips (16 prompts x 2 seeds), 2 s at 192x320, 30 steps. **There is no physics score for text-to-video here**: "
+        ("Wan2.1-T2V-1.3B, 32 clips (16 prompts x 2 seeds), 2 s at 192x320, 30 steps. **There is no physics score for text-to-video here**: "
         "quality is agreement with the unoptimized video for the same prompt and seed, measured with DINOv2 and CLIP "
         "(`worldoptbench/metrics/perceptual.py`). DINO similarity is sameness (1 = identical), not quality: read it with the "
         f"noise controls (a numerically equivalent change scores about 0.88; the floor, the controls' 5th percentile, is {floor:.2f}) "
-        "and with the CLIP and consistency columns. Pixel style deviation is a coarse screen (reliable only below about 0.1).",
+        "and with the CLIP and consistency columns. Pixel style deviation is a coarse screen (reliable only below about 0.1)."),
         "",
         "| configuration | speedup | DINO similarity | clips below floor | vs noise | CLIP delta | consistency delta | style deviation |",
         "|---|---|---|---|---|---|---|---|",
@@ -162,13 +162,14 @@ def main() -> int:
     ap.add_argument("--wan-pixel", type=Path, default=ROOT / "results" / "wan_all")
     args = ap.parse_args()
 
+    today = datetime.date.today().isoformat()  # noqa: DTZ011  (the local calendar date is what is wanted)
     lines = [
         "# WorldOptBench leaderboard",
         "",
-        f"Generated {datetime.date.today().isoformat()} by `scripts/make_leaderboard.py` from the result files in this repo. "
+        (f"Generated {today} by `scripts/make_leaderboard.py` from the result files in this repo. "
         f"Everything was measured on one machine ({hardware()}), so speedups say how configurations compare *here*; "
         "they are not predictions for other hardware. Two small models, not a general result across world models. "
-        "Every row is a configuration that was actually run; `OPTIMIZATION_CATALOG.md` lists what was not.",
+        "Every row is a configuration that was actually run; `OPTIMIZATION_CATALOG.md` lists what was not."),
         "",
         "## Dreamer (DreamerV3 walker, a real world model with simulator ground truth)",
         "",
