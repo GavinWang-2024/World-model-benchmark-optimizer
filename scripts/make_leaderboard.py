@@ -162,7 +162,7 @@ def main() -> int:
     ap.add_argument("--wan-pixel", type=Path, default=ROOT / "results" / "wan_all")
     args = ap.parse_args()
 
-    today = datetime.date.today().isoformat()  # noqa: DTZ011  (the local calendar date is what is wanted)
+    today = datetime.date.today().isoformat()
     lines = [
         "# WorldOptBench leaderboard",
         "",
