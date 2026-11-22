@@ -133,6 +133,17 @@ def test_the_tubelet_step_token_layout_is_time_major(tiny):
     assert np.allclose(rollout.metadata["context_last"], full[-4:].numpy(), atol=1e-5)
 
 
+def test_a_prepared_tensor_gives_the_same_forecast_as_raw_frames(tiny):
+    model = make(tiny)
+    frames = video(4, seed=5)
+    prepared = model.prepare(frames)
+    assert tuple(prepared.shape) == (1, 4, 3, 32, 32)
+    raw = model.generate(init_video=frames, future_steps=2)
+    fast = model.generate(init_video=prepared, future_steps=2)
+    assert all(np.array_equal(a, b) for a, b in zip(raw.frames, fast.frames))
+    assert np.array_equal(model.encode_clip(frames).numpy(), model.encode_clip(prepared).numpy())
+
+
 def test_encode_clip_covers_every_step_and_is_float32_cpu(tiny):
     out = make(tiny).encode_clip(video(8))
     assert tuple(out.shape) == (4 * 4, 96)

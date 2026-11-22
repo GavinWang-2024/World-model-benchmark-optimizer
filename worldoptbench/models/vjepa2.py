@@ -150,11 +150,22 @@ class VJEPA2Latent(WorldModelInterface):
             return contextlib.nullcontext()
         return torch.autocast(device_type=torch.device(self._resolve_device()).type, dtype=self.autocast_dtype)
 
-    def _pixels(self, frames: Any):
+    def prepare(self, frames: Any):
+        """Raw (T, H, W, 3) frames -> the model's input tensor (1, T, 3, crop, crop) on the model's device.
+
+        `generate` and `encode_clip` also accept this tensor directly, which lets a benchmark time the model
+        without the (CPU, constant, ~50 ms for 32 frames) resize-and-normalize.
+        """
         model = self.torch_module()
-        return preprocess_video(frames, model.config.crop_size).to(
-            device=next(model.parameters()).device, dtype=next(model.parameters()).dtype
-        )
+        param = next(model.parameters())
+        return preprocess_video(frames, model.config.crop_size).to(device=param.device, dtype=param.dtype)
+
+    def _pixels(self, frames: Any):
+        import torch
+
+        if isinstance(frames, torch.Tensor) and frames.ndim == 5:  # already prepared
+            return frames
+        return self.prepare(frames)
 
     def encode_clip(self, frames: Any):
         """Encoder latents for a whole clip: (n_steps * tokens_per_step, hidden), float32 on the CPU.
@@ -191,7 +202,8 @@ class VJEPA2Latent(WorldModelInterface):
         """Forecast the latents of the next `horizon` seconds from a context clip (Video2World).
 
         Args:
-            init_video: the context, (T, H, W, 3) frames; T must be a multiple of the tubelet size (2).
+            init_video: the context, (T, H, W, 3) frames; T must be a multiple of the tubelet size (2). A
+                tensor already returned by `prepare` (5-D) is used as is.
             horizon: seconds to forecast (converted to tubelet-steps at `fps`).
             future_steps: optional kwarg overriding the horizon with an exact number of tubelet-steps.
             prompt, init_frame, actions: unsupported. V-JEPA 2 has no text or image conditioning, and this is
