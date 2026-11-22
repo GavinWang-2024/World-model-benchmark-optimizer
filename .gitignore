@@ -25,6 +25,9 @@ htmlcov/
 checkpoints/
 weights/
 results/*.json
+# V-JEPA 2 sweep inputs: decoded Kinetics clips (third-party video, not ours to redistribute) and fp32 reference latents (~33 MB/clip)
+results/vjepa2_clips/
+results/vjepa2_refs/
 wandb/
 .cache/
 
