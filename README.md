@@ -82,7 +82,7 @@ curl -s localhost:8000/info ; curl -s localhost:8000/profile
 
 Standard-library HTTP server in front of one model plus an optimization stack: bounded request queue (429 when full),
 micro-batching for models with `generate_batch`, an optional result cache, latency/queue profile. Frames come back as
-base64 PNGs. No auth or TLS (put a proxy in front). The `Dockerfile` is untested. Details in `worldoptbench/serve.py`.
+base64 PNGs. No auth or TLS (put a proxy in front). The `Dockerfile` builds and the server tests pass inside the image on a GPU (2026-11-22); generating a video through the container was not tested. Details in `worldoptbench/serve.py`.
 
 ## Measuring and choosing
 
