@@ -1,6 +1,6 @@
 # Design: diffusion world models (Wan2.1 now, Cosmos later)
 
-Status: **design only; nothing below is implemented.** Written 2026-10-03. Every API fact here was read from the installed `diffusers 0.40.0` source, not recalled — the Cosmos wrapper written earlier was a pile of unverified guesses, and the lesson was to build against something we can run.
+Status: **the design below was written first (2026-10-03); it is now implemented and measured for Wan2.1 (see the results sections) and screened on Cosmos-Predict2.5-2B (4 clips). The paragraphs before "Measured results" are the original plan and are kept for context.** Every API fact here was read from the installed `diffusers 0.40.0` source, not recalled — the Cosmos wrapper written earlier was a pile of unverified guesses, and the lesson was to build against something we can run.
 
 ## Why Wan2.1-T2V-1.3B instead of waiting for Cosmos
 
@@ -302,6 +302,21 @@ What it settles:
 - **Quantization is slower on Wan**, measured on one clip per scheme (timings only): int8 weight-only 0.85x, fp8 weight-only 0.73x, fp8 dynamic 0.80x, int8 dynamic 0.23x, saving about 1.1 GB of peak memory; int4 needs the `mslk` package. Without `torch.compile` (no Triton or MSVC here) torchao's fused kernels are unavailable.
 
 Not built from the catalog, with reasons: `torch.compile` (no toolchain), SageAttention, xFormers and FlashAttention-3 (package-gated), token-wise and region caches, sparse attention, token merging (substantial new algorithms), speculative decoding, step distillation and every K-series (multi-GPU) and TRAIN item.
+
+### Cosmos-Predict2.5-2B screen (2026-10-06)
+
+`scripts/sweep_cosmos.py`, files in `results/cosmos/`. Cosmos-Predict2.5-2B, 480x832, 36 steps, guidance 7.0, 17 frames, 4 prompts (ball_ramp, water_pour, robot_arm, car_intersection), 12 GB laptop GPU. Quality is agreement with the unoptimized Cosmos video for the same prompt and seed (not physics). **This is a screen of 4 clips, not a result.**
+
+| configuration | latency | speedup | PSNR (vs unoptimized) | DINO sim |
+|---|---|---|---|---|
+| baseline | 112.5 s | 1.00 | identical | 1.000 |
+| perturb 1e-4 (noise-floor control) | ~112 s | 1.00 | 19.7 | 0.930 |
+| perturb 1e-2 (noise-floor control) | ~112.6 s | 1.00 | 20.7 | 0.950 |
+| CFG truncation 0.6 | ~90.7 s | 1.24x | 26.5 | 0.968 |
+
+- The controls matter: a numerically negligible perturbation already drops PSNR to ~20 dB and DINO to 0.93-0.95 because the sampler is chaotic, so CFG truncation's 26.5 dB / 0.968 is *inside the noise floor*. It is a free 1.24x on these 4 clips, nothing more.
+- The sweep stopped at `cfg_trunc_0.4`: the driver read child output with the Windows ANSI codec and crashed on a non-cp1252 byte (fixed: the sweep drivers now decode as UTF-8 with replacement). The caches (WorldCache, MagCache, etc.) were **not** run on Cosmos, so none of the Wan numbers above are claimed for it.
+- `sweep.log` was written by an earlier version of the script whose latency summary capped values at 60 s, so it prints "60.0s"; the JSON files hold the real latencies.
 
 ### Library gotchas found while doing this (all fixed or documented)
 
