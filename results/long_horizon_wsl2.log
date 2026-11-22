@@ -1,0 +1,19 @@
+# bench_long_horizon.py, WSL2 Ubuntu, RTX 5070 Ti Laptop, torch 2.11+cu128, TensorRT 11.5, 2026-11-22
+# checkpoint: 5,000-step smoke-trained Dreamer walker (speed does not depend on the checkpoint; no physics is computed here)
+median latency over 5 calls; frames returned; GPU memory held after warm-up
+eager (unoptimized)
+  horizon  steps  frames  latency ms  ms / sim second  held MB
+       2s     40      40        54.1            27.03       70
+       5s    100     100       215.9            43.18       70
+      10s    200     200       239.1            23.91       70
+      20s    400     400       429.8            21.49       70
+      60s   1200    1200      1859.6            30.99       70
+     120s   2400    2400      3221.2            26.84       70
+tensorrt fp16 + cuda_graphs
+  horizon  steps  frames  latency ms  ms / sim second  held MB
+       2s     40      40         8.8             4.42      149
+       5s    100     100        11.5             2.30      160
+      10s    200     200        16.3             1.63      171
+      20s    400     400        21.4             1.07      185
+      60s   1200    1200        56.4             0.94      209
+     120s   2400    2400       104.7             0.87      246

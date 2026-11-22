@@ -305,3 +305,15 @@ What it shows, and does not:
 | TensorRT fp16 + CUDA graphs | 2 / 5 / 10 / 20 s | 3.27 / 5.70 / 9.94 / 18.50 | 2.51 / 3.91 / 6.18 / 10.81 | 23% / 31% / 38% / 42% |
 
 The decoder's share grows once the dynamics step is fast, so the saving is largest on the best stack. The eager rows (noisy, with negative "savings" at long horizons) are within that path's known run-to-run noise and are not reported.
+
+## Long-horizon speed, reproduced on a clean machine (WSL2, 2026-11-22)
+
+`scripts/bench_long_horizon.py` re-run under WSL2 Ubuntu (torch 2.11+cu128, TensorRT 11.5, EGL rendering; `dreamerv3-torch` patched with `MUJOCO_GL` defaulting to `egl`, which works there without root) on a 5,000-step smoke-trained checkpoint. Speed does not depend on the checkpoint, and **no physics or drift is computed**: episodes end at 25 s, so there is no ground truth at 60 s or 120 s. Raw output: `results/long_horizon_wsl2.log`; the earlier Windows run is `results/long_horizon.log`.
+
+| horizon | frames returned | TensorRT fp16 + CUDA graphs | ms per simulated second | memory held |
+|---|---|---|---|---|
+| 20 s | 400 / 400 | 21-25 ms | 1.1-1.25 | 185 MB |
+| 60 s | 1200 / 1200 | 56-63 ms | 0.94-1.04 | 209 MB |
+| 120 s | 2400 / 2400 | 99-109 ms (three runs) | 0.83-0.90 | 246 MB |
+
+Cost grows linearly with the horizon and the held memory is identical to the Windows run. The eager baseline is again noisy (21-43 ms per simulated second across runs; 3.2 s at 120 s here, 2.6 s before), so quote the optimized absolute latencies, not a ratio.
