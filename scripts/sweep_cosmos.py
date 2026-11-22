@@ -193,7 +193,7 @@ def main() -> int:
         print(f"=== {name} ...", flush=True)
         row_file = args.out_dir / f".row_{name.replace(' ', '_')}.json"
         row_file.unlink(missing_ok=True)
-        proc = subprocess.run([py, me, "--single", name, *common], capture_output=True, text=True, check=False)
+        proc = subprocess.run([py, me, "--single", name, *common], capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
         if proc.returncode == 0 and row_file.exists():
             rows.append(json.loads(row_file.read_text(encoding="utf-8")))
         else:

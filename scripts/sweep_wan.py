@@ -270,7 +270,7 @@ def main() -> int:
         row_file = args.out_dir / f".row_{name.replace(' ', '_')}.json"
         row_file.unlink(missing_ok=True)
         cmd = [sys.executable, str(Path(__file__)), "--single", name, "--standard-set", str(args.standard_set), "--out-dir", str(args.out_dir)]
-        proc = subprocess.run(cmd, capture_output=True, text=True, check=False)  # a failed config is reported, not fatal
+        proc = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)  # a failed config is reported, not fatal
         if proc.returncode == 0 and row_file.exists():
             rows.append(json.loads(row_file.read_text(encoding="utf-8")))
         else:
