@@ -33,8 +33,8 @@ from worldoptbench.optimizations.base import OptimizationModule, register_module
 class TorchCompileModule(OptimizationModule):
     name = "torch_compile"
     requires = ("torch_module",)
-    maturity = "experimental"
-    summary = "torch.compile of the model (or named submodules) in place; compute-bound models only."
+    maturity = "measured"
+    summary = "torch.compile of the model (or named submodules) in place; compute-bound models only. Measured on V-JEPA 2 (ViT-L, 10 clips): 1.06x alone, 5.12x on top of bf16 autocast (1.33x over bf16 alone); the first call pays 35 s of compile. Not applied to the launch-bound Dreamer model."
     supported_architectures: tuple[Architecture, ...] = ("diffusion", "autoregressive", "jepa")
 
     def __init__(
