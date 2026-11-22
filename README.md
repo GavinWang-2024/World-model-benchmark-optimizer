@@ -5,6 +5,7 @@ Architecture-agnostic benchmarking and optimization framework for world model in
 - **Full spec / pitch doc:** [`world_model_project_outline.md`](world_model_project_outline.md)
 - **Execution checklist (what to build in what order):** [`build_plan.md`](build_plan.md)
 - **Every optimization we could add (125, with status):** [`OPTIMIZATION_CATALOG.md`](OPTIMIZATION_CATALOG.md)
+- **V-JEPA 2 (latent forecasting) results:** [`VJEPA2.md`](VJEPA2.md)
 
 ## Setup
 

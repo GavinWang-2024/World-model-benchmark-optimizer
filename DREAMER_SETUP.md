@@ -104,7 +104,7 @@ cd Documents\dreamerv3-torch
 6. **no_dist_validation:** a controlled in-process A/B measured **1.43x on the eager path** (431 -> 302 ms at 20 s; 53 -> 38 ms at 2 s), because torch.distributions' argument checks each cost a GPU->CPU sync. The sweep can't confirm it (eager noise 31%). No effect with graphs, which already disable validation during capture.
 7. **Memory:** graphs hold +128 MB (544 -> 672 MB; `vram_reserved_gb` shows it, `vram_peak_gb` doesn't). TensorRT also allocates a workspace outside PyTorch's allocator that no column here counts.
 8. **Where the time goes now (TensorRT + graphs, 20 s horizon):** the 400-step loop ~11 ms, decode ~5 ms (13 us/frame), context ~3 ms, copies/Python ~0.4 ms. The "~20 ms host-overhead floor" suggested earlier was a pre-fusion artifact; host overhead is negligible.
-9. **Not feasible here:** `torch.compile` (needs Triton + MSVC).
+9. **Not feasible on Windows:** `torch.compile` (needs Triton + MSVC). It does run under WSL2, where it is measured on V-JEPA 2 in `VJEPA2.md`; it is not applied to this launch-bound model.
 
 ### The world model itself is mediocre
 

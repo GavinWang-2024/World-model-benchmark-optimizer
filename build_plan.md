@@ -73,7 +73,7 @@
 - [ ] Not feasible here: `torch.compile` (no MSVC/Triton on this machine); custom CUDA kernels (no nvcc)
 - [ ] Remaining cost: host<->device copies + Python per call (~20 ms floor at short horizons); batching several rollouts per call is the next lever
 - [ ] Caveat to resolve: `compute_paes` penalizes |drift_rate|, so a model whose skill score *rises* with horizon (seen with the undertrained one) is penalized like one that decays. Probably want signed or decay-only drift
-- V-JEPA 2 deliberately **not** added as a model under test: it predicts latents, not frames, so visual/physics metrics don't apply. Possible later as a feature extractor for an embedding-based consistency score.
+- V-JEPA 2 was first left out of the frame-based harness because it predicts latents, not frames (visual/physics metrics do not apply). It was later added as a separate latent-forecast track (`VJEPA2.md`): speed, memory and latent-space fidelity, not on the PAES scale.
 
 **Skip for now:** Open-Sora, Genie 3, V-JEPA 2 — one model is enough to build everything else against. Add the second model only once the benchmark runner (Phase 2) exists, as a test that your abstraction is actually architecture-agnostic and not secretly Cosmos-shaped.
 
