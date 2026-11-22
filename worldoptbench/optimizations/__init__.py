@@ -47,6 +47,7 @@ from worldoptbench.optimizations.sparse_decode import SparseDecodeModule
 from worldoptbench.optimizations.tensorrt_backend import TensorRTModule
 from worldoptbench.optimizations.tensorrt_decoder import TensorRTDecoderModule
 from worldoptbench.optimizations.tf32 import Tf32Module
+from worldoptbench.optimizations.torch_compile import TorchCompileModule
 from worldoptbench.optimizations.worldcache import WorldCacheModule
 
 __all__ = [
@@ -80,6 +81,7 @@ __all__ = [
     "TensorRTDecoderModule",
     "TensorRTModule",
     "Tf32Module",
+    "TorchCompileModule",
     "UncondReuseModule",
     "VaeModule",
     "WorldCacheModule",
