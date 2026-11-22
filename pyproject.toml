@@ -25,11 +25,15 @@ dependencies = [
 # Phase 1+: model loading and inference
 ml = [
     "torch",
-    "diffusers",
+    # Pinned: the diffusion caches (adacache, worldcache, uncond_reuse) read diffusers' private
+    # StateManager._current_context, which 0.43 removed. All results were measured on 0.40.0.
+    "diffusers>=0.40,<0.41",
     "transformers",
     "accelerate",
     "torchmetrics",
     "torchao",
+    # metrics/fvd.py (matrix square root) and utility.py (rank correlations)
+    "scipy",
 ]
 # Phase 8: worldserve. The server (worldoptbench/serve.py) is standard-library only, so it needs no
 # extra packages beyond the model's own (`ml`); Pillow makes it return PNG frames instead of .npy.
