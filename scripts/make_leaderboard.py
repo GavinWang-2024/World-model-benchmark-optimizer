@@ -43,7 +43,7 @@ def dreamer_section(path: Path) -> list[str]:
     rows = sorted(summary.items(), key=lambda kv: kv[1]["speedup"])
     first = rows[0][1]
     lines = [
-        f"{first['n_scenarios']} held-out walking scenarios at 2 / 5 / 10 / 20 s (`scripts/sweep_dreamer.py`, medians of 3 runs). "
+        f"{first['n_scenarios']} held-out walking scenarios at 0.25 / 0.5 / 1 / 2 / 3 / 5 s (`scripts/sweep_dreamer.py`, medians of 3 runs). "
         "Skill is simulator fidelity against freezing the last context frame (0 = no better than a frozen scene). "
         f"The eager baseline's latency varies by about +-{first['noise_pct']:.0f}% between runs, so speedups against it are indicative; "
         "compare the absolute latencies. Rows that use the TensorRT or Gumbel sampler (`trt`, `tensorrt`, `latent_noise`) draw different random "
